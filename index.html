@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>AQUACORP SECURE SYSTEM v4.28</title>
+    <style>
+        body {
+            background-color: #050505;
+            color: #00ff66;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+        #terminal {
+            max-width: 900px;
+            margin: 0 auto;
+            border: 1px solid #00ff66;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+            min-height: 500px;
+        }
+        .input-line {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+        .prompt {
+            color: #00aaff;
+            margin-right: 10px;
+            white-space: nowrap;
+        }
+        input {
+            background: transparent;
+            border: none;
+            color: #00ff66;
+            font-family: inherit;
+            font-size: inherit;
+            outline: none;
+            width: 100%;
+        }
+        .error { color: #ff3333; }
+        .success { color: #ffff33; }
+        .system { color: #aaaaaa; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div id="terminal">
+    <div id="output">
+        <div class="system">[СИСТЕМА]: Инициализация терминала службы безопасности AQUACORP...</div>
+        <div class="system">[СТАТУС]: Подключение к подсети Ноктурнов: УСТАНОВЛЕНО.</div>
+        <div class="system">[ВНИМАНИЕ]: Зафиксирована повышенная сетевая активность в секторе криокамер.</div>
+        <br>
+        <div>Введите логин для авторизации в системе.</div>
+    </div>
+    
+    <div class="input-line">
+        <span id="prompt-text" class="prompt">AQUA_OS login:</span>
+        <input type="text" id="cmd-input" autofocus autocomplete="off">
+    </div>
+</div>
+
+<script>
+    const output = document.getElementById('output');
+    const input = document.getElementById('cmd-input');
+    const promptText = document.getElementById('prompt-text');
+
+    // Этапы ARG квеста
+    let currentStep = 'LOGIN'; 
+    
+    // Правильные ответы (можно менять под свой лор)
+    const ANSWERS = {
+        login: 'adrian_lamo', // Логин под прикрытием
+        pass_question: '14042024', // Дата исчезновения Артемиса (ДДММГГГГ)
+        key: 'cryo_break_99', // Ключ, найденный игроками по стеганографии
+        final_cmd: 'execute --target=cryo_chamber_b4 --reveal-coords' // Финальная команда
+    };
+
+    function print(text, className = '') {
+        const div = document.createElement('div');
+        div.className = className;
+        div.innerHTML = text;
+        output.appendChild(div);
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            const val = input.value.trim();
+            if (!val) return;
+            
+            print(`${promptText.innerText} ${val}`);
+            input.value = '';
+            
+            handleCommand(val);
+        }
+    });
+
+    function handleCommand(val) {
+        const lowerVal = val.toLowerCase();
+
+        switch(currentStep) {
+            case 'LOGIN':
+                if (lowerVal === ANSWERS.login) {
+                    print('[СИСТЕМА]: Логин подтвержден. Проверка уровня доступа...', 'system');
+                    print('<span class="error">ОШИБКА: Обнаружена аномалия в правах доступа учетной записи Guard_Lamo_A.</span>');
+                    print('Включен протокол восстановления. Ответьте на секретный вопрос Флин:');
+                    print('<b>ВВЕДИТЕ ДАТУ ИНИЦИАЛИЗАЦИИ/ИСЧЕЗНОВЕНИЯ СУБЪЕКТА [ARTEMIS] (Формат: ДДММГГГГ):</b>');
+                    promptText.innerText = 'SEC_QUESTION:';
+                    currentStep = 'PASSWORD_QUESTION';
+                } else {
+                    print('Неверный логин. Доступ запрещен.', 'error');
+                }
+                break;
+
+            case 'PASSWORD_QUESTION':
+                if (lowerVal === ANSWERS.pass_question) {
+                    print('[ДОСТУП ПРЕДОСТАВЛЕН]: Добро пожаловать, Адриан Ламо.', 'success');
+                    print('Загрузка скрытого дампа памяти Флин... Успешно.');
+                    print('<br>=== ДОСТУПНЫЕ ФАЙЛЫ ===');
+                    print('1. guard_schedule.dat (Расписание охраны)');
+                    print('2. nocturne_transfer_status.enc (ЗАШИФРОВАНО)');
+                    print('<br>Введите команду <b>ls</b> или <b>cat [имя_файла]</b> для чтения.');
+                    promptText.innerText = 'lamo_root@aqua_net:~$';
+                    currentStep = 'TERMINAL_FILES';
+                } else {
+                    print('Неверный ответ. Система блокировки активна.', 'error');
+                }
+                break;
+
+            case 'TERMINAL_FILES':
+                if (lowerVal === 'ls') {
+                    print('guard_schedule.dat<br><span class="error">nocturne_transfer_status.enc (Заблокировано AES-256)</span>');
+                } else if (lowerVal === 'cat guard_schedule.dat') {
+                    print('[LOG]: Смена 08:00 - А. Ламо (Сектор 3). Смена 16:00 - Перевод ноктурнов. Внимание: Командир ДИО приказал усилить посты у Криокамер.');
+                } else if (lowerVal === 'cat nocturne_transfer_status.enc') {
+                    print('Файл зашифрован. Требуется внешний ключ дешифрования.', 'error');
+                    print('<i>Подсказка Флин: "Ищите картинку на стене в моем убежище (Imgur). Ключ вшит в пиксели кода"</i>');
+                    print('Введите команду: <b>decrypt --key=[ваш_ключ]</b>');
+                } else if (lowerVal.startsWith('decrypt --key=')) {
+                    const enteredKey = lowerVal.split('--key=')[1];
+                    if (enteredKey === ANSWERS.key) {
+                        print('[ДЕШИФРОВАНИЕ УСПЕШНО]', 'success');
+                        print('<br><b>ПЕРЕХВАЧЕННОЕ СООБЩЕНИЕ ФЛИН:</b>');
+                        print('"Дио узнал о восстании до его начала! Они экстренно переводят всех ноктурнов в криокамеры. Я иду туда под видом Адриана, но меня, кажется, выследили. Если я попадусь Дио — этот терминал ваш единственный шанс. Чтобы сбросить блокировку дверей криоотсека и узнать координаты, введите финальную команду:"');
+                        print('<span class="success">execute --target=cryo_chamber_b4 --reveal-coords</span>');
+                        currentStep = 'FINAL';
+                    } else {
+                        print('Неверный ключ шифрования. Попробуйте еще раз или проверьте метаданные.', 'error');
+                    }
+                } else {
+                    print(`Команда не найдена: ${val}`, 'error');
+                }
+                break;
+
+            case 'FINAL':
+                if (val === ANSWERS.final_cmd) {
+                    print('[СИСТЕМНЫЙ СБРОС]: Блокировка криокамеры B4 снята!', 'success');
+                    print('[ДАННЫЕ ОБЪЕКТА ФЛИН]: Статус - Криозаморозка активна.', 'system');
+                    print('<br><b>=== КООРДИНАТЫ ДЛЯ ВЫСАДКИ В MINECRAFT ===</b>', 'success');
+                    print('<h2>X: -1420, Y: -52, Z: 884</h2>', 'success');
+                    print('Поторопитесь, пока Дио не стер логи!');
+                    input.disabled = true;
+                    promptText.innerText = 'TERMINAL_CLOSED';
+                } else {
+                    print('Ошибка синтаксиса команды. Скопируйте её точно, как указано выше.', 'error');
+                }
+                break;
+        }
+    }
+</script>
+
+</body>
+</html>
