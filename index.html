@@ -80,91 +80,105 @@
             color: #ffaa00;
         }
 
-    </style>
+   <style>
 
-</head>
+    body {
+        margin: 0;
+        background-color: #050505;
+        color: #00ff66;
 
+        font-family: "Courier New", Courier, monospace;
+        font-size: 16px;
+        line-height: 1.5;
 
-<body>
+        min-height: 100vh;
 
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-<div id="terminal">
-
-    <div id="output">
-
-        <div class="system">
-            [СИСТЕМА]: Инициализация терминала AKWA...
-        </div>
-
-        <div class="system">
-            [СИСТЕМА]: Проверка удалённого соединения...
-        </div>
-
-        <div class="success">
-            [СИСТЕМА]: СОЕДИНЕНИЕ УСТАНОВЛЕНО.
-        </div>
-
-        <br>
-
-        <div>
-            AKWA // REMOTE NODE 17
-        </div>
-
-        <div>
-            --------------------------------
-        </div>
-
-        <div>
-            SYSTEM STATUS ........ ONLINE
-        </div>
-
-        <div>
-            NETWORK .............. AKWA-INTERNAL
-        </div>
-
-        <div>
-            NODE ................. 17
-        </div>
-
-        <div>
-            SECURITY LEVEL ....... 03
-        </div>
-
-        <br>
-
-        <div>
-            Последний зарегистрированный пользователь:
-        </div>
-
-        <div>
-            ADRIAN LAMO
-        </div>
-
-        <br>
-
-        <div>
-            Введите команду <b>help</b> для получения списка доступных команд.
-        </div>
-
-    </div>
+        text-align: center;
+    }
 
 
-    <div class="input-line">
+    #terminal {
+        width: 90%;
+        max-width: 900px;
 
-        <span id="prompt-text" class="prompt">
-            AKWA_OS:
-        </span>
+        min-height: 500px;
 
-        <input
-            type="text"
-            id="cmd-input"
-            autofocus
-            autocomplete="off"
-        >
+        border: 1px solid #00ff66;
 
-    </div>
+        padding: 30px;
 
-</div>
+        box-sizing: border-box;
+
+        box-shadow:
+            0 0 15px rgba(0, 255, 102, 0.2);
+    }
+
+
+    #output {
+        text-align: center;
+    }
+
+
+    .input-line {
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+
+        margin-top: 20px;
+    }
+
+
+    .prompt {
+        color: #00aaff;
+
+        margin-right: 10px;
+
+        white-space: nowrap;
+    }
+
+
+    input {
+        background: transparent;
+
+        border: none;
+        outline: none;
+
+        color: #00ff66;
+
+        font-family: inherit;
+        font-size: inherit;
+
+        width: 300px;
+
+        text-align: center;
+    }
+
+
+    .error {
+        color: #ff3333;
+    }
+
+
+    .success {
+        color: #ffff33;
+    }
+
+
+    .system {
+        color: #aaaaaa;
+    }
+
+
+    .warning {
+        color: #ffaa00;
+    }
+
+</style>
 
 
 <script>
