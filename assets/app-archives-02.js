@@ -344,7 +344,7 @@ REF: BIO-CACHE / AQ-S17-441`
     help() {
       return [
         "AVAILABLE COMMANDS",
-        "help, whoami, status, ls, dir, cat <file>, history, cls, clear, date, ver, netstat, ps"
+        "help, whoami, status, ls, dir, cat <file>, open <file>, history, cls, clear, date, ver, netstat, ps"
       ];
     },
     whoami() {
@@ -726,14 +726,17 @@ REF: BIO-CACHE / AQ-S17-441`
 
     const [head, ...rest] = command.split(/\s+/);
     const cmd = head.toLowerCase();
-    const arg = rest.join(" ").toUpperCase();
+    const arg = rest.join(" ")
+      .trim()
+      .replace(/^["']|["']$/g, "")
+      .toUpperCase();
 
     if (cmd === "clear" || cmd === "cls") {
       $("#terminal-output").innerHTML = "";
       return;
     }
 
-    if (cmd === "cat" || cmd === "type") {
+    if (cmd === "cat" || cmd === "type" || cmd === "open") {
       const aliases = {
         "PROTOCOL_626.TXT": "protocol",
         "NOCTURNE_OBSERVATION.LOG": "nocturne",
@@ -933,8 +936,7 @@ REF: BIO-CACHE / AQ-S17-441`
     });
 
     $$(".file-row").forEach(row => {
-      row.addEventListener("dblclick", () => openFile(row.dataset.file));
-      row.addEventListener("click", () => clickTone());
+      row.addEventListener("click", () => openFile(row.dataset.file));
     });
 
     setupTerminal();
