@@ -17,9 +17,18 @@
 <body>
 
 
-<!-- =====================================================
+<!-- ===============================
+     STARTUP SOUND
+================================ -->
+
+<audio id="bootSound" src="welcome-computer-message.mp3"></audio>
+
+
+
+
+<!-- ===============================
      BOOT SCREEN
-     ===================================================== -->
+================================ -->
 
 
 <div id="bootScreen">
@@ -46,11 +55,25 @@
     </div>
 
 
-    <div class="boot-text">
 
-        INITIALIZING SYSTEM...
+    <div class="boot-status">
+
+        STARTING AKWA_OS...
 
     </div>
+
+
+
+    <div class="bios-text">
+
+
+        MEMORY TEST ........ OK<br>
+        CPU CHECK .......... OK<br>
+        NETWORK ............ CONNECTED<br>
+        LOADING SYSTEM .....
+
+    </div>
+
 
 
 </div>
@@ -58,253 +81,226 @@
 
 
 
-<!-- =====================================================
+
+
+
+<!-- ===============================
      DESKTOP
-     ===================================================== -->
+================================ -->
 
 
 <div class="desktop">
 
 
-    <!-- CRT EFFECTS -->
 
+<div class="scanline"></div>
 
-    <div class="scanline"></div>
+<div class="crt-lines"></div>
 
-    <div class="crt-lines"></div>
+<div class="crt-flicker"></div>
 
-    <div class="crt-flicker"></div>
 
 
 
-    <!-- BACKGROUND -->
 
 
-    <div class="binary left">
+<!-- ICONS -->
 
-101010101
-010101010
-110010101
-001101010
 
-    </div>
+<div class="desktop-icons">
 
 
-    <div class="binary right">
 
-010101010
-110101001
-001010101
-111010010
+<div class="icon"
+ondblclick="openWindow('computer')">
 
-    </div>
 
+<div class="computer-icon">
 
+</div>
 
-    <div class="cross cross-one">
-        ×
-    </div>
 
+<span>
 
-    <div class="cross cross-two">
-        ×
-    </div>
+MY COMPUTER
 
+</span>
 
 
-    <!-- =================================================
-         ICONS
-         ================================================= -->
+</div>
 
 
-    <div class="desktop-icons">
 
 
 
-        <div class="icon"
-        ondblclick="openWindow('computer')">
 
+<div class="icon"
+ondblclick="openWindow('console')">
 
-            <div class="computer-icon">
 
+<div class="terminal-icon">
 
-                <div></div>
+&gt;_
 
+</div>
 
-            </div>
 
+<span>
 
-            <span>
-                COMPUTER
-            </span>
+CONSOLE
 
+</span>
 
-        </div>
 
+</div>
 
 
 
 
-        <div class="icon"
-        ondblclick="openWindow('console')">
 
 
-            <div class="terminal-icon">
+<div class="icon"
+ondblclick="openWindow('game')">
 
-                &gt;_
 
-            </div>
+<div class="game-icon">
 
+◆
 
-            <span>
-                CONSOLE
-            </span>
+</div>
 
 
-        </div>
+<span>
 
+GAME 01
 
+</span>
 
 
+</div>
 
-        <div class="icon"
-        ondblclick="openWindow('game')">
 
 
-            <div class="game-icon">
 
-                ◆
+</div>
 
-            </div>
 
 
-            <span>
-                GAME 01
-            </span>
 
 
-        </div>
 
 
 
-    </div>
 
+<!-- ===============================
+     COMPUTER WINDOW
+================================ -->
 
 
+<div class="window" id="computer">
 
 
+<div class="window-header">
 
+MY COMPUTER
 
-    <!-- =================================================
-         COMPUTER WINDOW
-         ================================================= -->
 
+<button onclick="closeWindow('computer')">
 
-    <div class="window"
-    id="computer">
+X
 
+</button>
 
-        <div class="window-header">
 
+</div>
 
-            <span>
-                MY COMPUTER
-            </span>
 
 
-            <button onclick="closeWindow('computer')">
-                X
-            </button>
-
-
-        </div>
-
-
-
-        <div class="window-content">
+<div class="window-content">
 
 
 <pre>
 
 AKWA_OS COMPUTER
 
+
 SYSTEM:
 AkwaOS 0.7.13
 
+
 CPU:
-UNKNOWN PROCESSOR
+UNKNOWN
+
 
 MEMORY:
-640 KB + EXTENDED
+640 KB
+
 
 NETWORK:
-CONNECTED
+ONLINE
+
+
 
 DRIVES:
 
 [C:]
 SYSTEM
-CONFIG
-LOGS
 
 [D:]
-UNKNOWN DATA
+DATA
+
 
 </pre>
 
 
-        </div>
+
+</div>
 
 
-    </div>
-
-
-
-
+</div>
 
 
 
 
 
-    <!-- =================================================
-         CONSOLE WINDOW
-         ================================================= -->
-
-
-    <div class="window"
-    id="console">
-
-
-        <div class="window-header">
-
-
-            <span>
-                AKWA TERMINAL
-            </span>
-
-
-            <button onclick="closeWindow('console')">
-                X
-            </button>
-
-
-        </div>
 
 
 
 
-        <div class="window-content terminal">
+<!-- ===============================
+     TERMINAL
+================================ -->
+
+
+<div class="window" id="console">
+
+
+<div class="window-header">
+
+
+AKWA TERMINAL
+
+
+<button onclick="closeWindow('console')">
+
+X
+
+</button>
+
+
+</div>
+
+
+
+<div class="window-content terminal">
 
 
 <pre id="terminalOutput">
 
 
-AKWA_OS TERMINAL v0.7.13
-
+AKWA_OS TERMINAL
 
 TYPE "help"
-FOR COMMAND LIST
-
 
 
 </pre>
@@ -315,71 +311,73 @@ FOR COMMAND LIST
 
 
 <span>
+
 AKWA_OS&gt;
+
 </span>
 
 
-<input
-id="terminalInput"
-autocomplete="off"
->
+<input id="terminalInput">
 
 
 </div>
 
 
 
-        </div>
-
-
-    </div>
+</div>
 
 
 
-
+</div>
 
 
 
 
 
-    <!-- =================================================
-         GAME WINDOW
-         ================================================= -->
-
-
-    <div class="window"
-    id="game">
-
-
-        <div class="window-header">
-
-
-            <span>
-                GAME_01.EXE
-            </span>
-
-
-            <button onclick="closeWindow('game')">
-                X
-            </button>
-
-
-        </div>
 
 
 
 
-        <div class="window-content game">
+<!-- ===============================
+     GAME
+================================ -->
+
+
+<div class="window" id="game">
+
+
+<div class="window-header">
+
+
+GAME_01.EXE
+
+
+<button onclick="closeWindow('game')">
+
+X
+
+</button>
+
+
+</div>
+
+
+
+
+<div class="window-content game">
 
 
 <h1>
+
 GAME 01
+
 </h1>
+
 
 
 <p>
 
-CONNECTION TEST
+UNKNOWN PROGRAM
 
 </p>
 
@@ -393,49 +391,54 @@ START
 
 
 
-<div id="gameMessage">
+<p id="gameMessage">
+
+</p>
+
+
+
+</div>
+
+
 
 </div>
 
 
 
-        </div>
-
-
-    </div>
 
 
 
 
 
 
+<!-- TASKBAR -->
 
 
-
-    <!-- =================================================
-         TASKBAR
-         ================================================= -->
+<div class="taskbar">
 
 
-    <div class="taskbar">
+<span>
+
+AKWA_OS ONLINE
+
+</span>
 
 
-        <span>
-            AKWA_OS SYSTEM ONLINE
-        </span>
+<span id="clock">
+
+</span>
 
 
-        <span id="clock">
-
-        </span>
+</div>
 
 
-    </div>
 
 
 
 
 </div>
+
+
 
 
 
