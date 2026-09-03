@@ -2134,3 +2134,102 @@ body {
   94% { opacity: .28; transform: translate(-1px,-1px); }
   96% { opacity: 0; }
 }
+
+
+/* ===== ARG STAGE 2 / UPDATE 06 ===== */
+
+.arg-fragment-glitch--stage2 {
+  color: #fff0c6;
+  text-shadow:
+    2px 0 rgba(238,129,118,.5),
+    -2px 0 rgba(120,184,232,.42);
+  animation:
+    argStage2Shift 2.15s steps(2,end) infinite,
+    argStage2Blink 3.3s steps(1,end) infinite;
+}
+
+@keyframes argStage2Shift {
+  0%, 78%, 100% { transform: translate(0,0); filter: none; }
+  80% { transform: translate(2px,0); }
+  82% { transform: translate(-3px,1px); }
+  84% { transform: translate(3px,-1px); filter: blur(.25px) contrast(1.5); }
+  86% { transform: translate(-1px,0); }
+  88% { transform: translate(0,0); filter: none; }
+}
+
+@keyframes argStage2Blink {
+  0%, 64%, 69%, 100% { opacity: 1; }
+  65% { opacity: .18; }
+  66% { opacity: .86; }
+  67% { opacity: .28; }
+  68% { opacity: .96; }
+}
+
+.process-row--interactive {
+  cursor: pointer;
+  position: relative;
+}
+
+.process-row--interactive:hover {
+  outline: 1px solid rgba(228,189,112,.35);
+  background: rgba(228,189,112,.055);
+}
+
+#bio-override-process b {
+  color: #e4bd70;
+}
+
+#bio-override-process i {
+  color: #ee8176;
+}
+
+
+/* ===== SELF-CONTAINED ARG HELP / UPDATE 07 ===== */
+
+.arg-reference {
+  color: var(--text-dim);
+  font-size: 11px;
+  letter-spacing: .04em;
+  opacity: .78;
+}
+
+.arg-reference::before {
+  content: "> ";
+  color: #a6bac6;
+}
+
+
+/* ===== OPEN GLITCH FIX / UPDATE 08 ===== */
+
+.arg-fragment-glitch--open {
+  color: #f5ffe9;
+  background: rgba(145,227,125,.055);
+  border-left: 2px solid rgba(145,227,125,.45);
+  padding-left: 7px;
+  animation:
+    openFragmentGlitch .78s steps(2,end) infinite,
+    openFragmentBlink 2.1s steps(1,end) infinite !important;
+}
+
+.arg-fragment-glitch--open::before,
+.arg-fragment-glitch--open::after {
+  opacity: 0;
+  animation-duration: .92s !important;
+}
+
+@keyframes openFragmentGlitch {
+  0%, 58%, 100% { transform: translate(0,0); filter: none; }
+  62% { transform: translate(2px,0); }
+  66% { transform: translate(-3px,1px); }
+  70% { transform: translate(2px,-1px); filter: contrast(1.5); }
+  74% { transform: translate(-1px,0); }
+  78% { transform: translate(0,0); filter: none; }
+}
+
+@keyframes openFragmentBlink {
+  0%, 42%, 47%, 100% { opacity: 1; }
+  43% { opacity: .25; }
+  44% { opacity: .92; }
+  45% { opacity: .34; }
+  46% { opacity: 1; }
+}
