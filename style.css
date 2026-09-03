@@ -1,53 +1,67 @@
 *{
+
 box-sizing:border-box;
+
 }
+
+
 
 
 body{
 
 margin:0;
 
-background:#000;
-
-color:#39ff14;
-
-font-family:
-"Courier New",
-monospace;
+background:black;
 
 overflow:hidden;
+
+font-family:
+
+"Courier New",
+monospace;
 
 }
 
 
 
-/* ==========================
+
+
+
+
+/* =====================
 BOOT SCREEN
-========================== */
+===================== */
 
 
 #bootScreen{
 
+
 position:fixed;
+
 
 inset:0;
 
+
 background:#000;
+
 
 z-index:9999;
 
+
 display:flex;
+
 
 justify-content:center;
 
+
 align-items:center;
 
-flex-direction:column;
 
 
 animation:
 
-bootFade 1.5s forwards 14s;
+bootClose 1.5s forwards 11s;
+
 
 }
 
@@ -55,33 +69,14 @@ bootFade 1.5s forwards 14s;
 
 
 
-.bios-container{
-
-position:absolute;
-
-top:20%;
-
-left:12%;
-
-width:600px;
-
-}
+.akwa-start{
 
 
+text-align:center;
 
-
-
-#biosText{
-
-font-size:16px;
-
-line-height:28px;
 
 color:#39ff14;
 
-text-shadow:
-
-0 0 10px #39ff14;
 
 }
 
@@ -89,126 +84,16 @@ text-shadow:
 
 
 
-.cursor{
+.akwa-title{
 
-animation:
 
-blink .7s infinite;
-
-}
-
-
-
-@keyframes blink{
-
-50%{
-
-opacity:0;
-
-}
-
-}
-
-
-
-
-
-
-
-
-/* ==========================
-AKWAOS LOGO
-========================== */
-
-
-
-.akwa-logo{
-
-
-position:absolute;
-
-
-left:50%;
-
-
-top:60%;
-
-
-transform:
-
-translate(-50%,-50%);
-
-
-width:650px;
-
-
-height:130px;
-
-
-z-index:20;
-
-
-opacity:0;
-
-
-animation:
-
-logoAppear 1s forwards 5s;
-
-
-}
-
-
-
-
-
-
-
-.logo-main,
-.logo-glitch,
-.logo-scan{
-
-
-position:absolute;
-
-
-left:50%;
-
-
-top:50%;
-
-
-transform:
-
-translate(-50%,-50%);
-
-
-font-family:
-
-"Courier New";
-
-
-font-size:70px;
+font-size:90px;
 
 
 font-weight:bold;
 
 
-letter-spacing:12px;
-
-
-white-space:nowrap;
-
-
-}
-
-
-
-
-
-
-
-.logo-main{
+letter-spacing:20px;
 
 
 color:white;
@@ -220,13 +105,13 @@ text-shadow:
 0 0 10px white,
 
 
-0 0 25px white;
+0 0 35px #39ff14;
+
 
 
 animation:
 
-
-logoBuild 3s forwards 5s;
+akwaAppear 3s;
 
 
 }
@@ -236,21 +121,82 @@ logoBuild 3s forwards 5s;
 
 
 
-
-.logo-glitch{
-
-
-color:#39ff14;
+.console-loader{
 
 
-opacity:.5;
+margin-top:40px;
+
+
+text-align:left;
+
+
+font-size:16px;
+
+
+line-height:32px;
+
+
+}
+
+
+
+
+
+.console-loader p{
+
+
+opacity:0;
 
 
 animation:
 
+consoleLine .5s forwards;
 
-glitch .25s infinite 5s;
 
+}
+
+
+
+
+
+.console-loader p:nth-child(1){
+
+animation-delay:2s;
+
+}
+
+
+.console-loader p:nth-child(2){
+
+animation-delay:3s;
+
+}
+
+
+.console-loader p:nth-child(3){
+
+animation-delay:4s;
+
+}
+
+
+.console-loader p:nth-child(4){
+
+animation-delay:5s;
+
+}
+
+
+.console-loader p:nth-child(5){
+
+animation-delay:6s;
+
+}
+
+
+.console-loader p:nth-child(6){
+
+animation-delay:7s;
 
 }
 
@@ -260,19 +206,23 @@ glitch .25s infinite 5s;
 
 
 
-.logo-scan{
+.console-loader span{
 
 
 color:white;
 
 
-opacity:0;
+}
+
+
+
+
+.cursor{
 
 
 animation:
 
-
-scanLine 2s forwards 5s;
+blink .7s infinite!important;
 
 
 }
@@ -281,34 +231,7 @@ scanLine 2s forwards 5s;
 
 
 
-
-
-@keyframes logoAppear{
-
-
-from{
-
-opacity:0;
-
-}
-
-
-to{
-
-opacity:1;
-
-}
-
-}
-
-
-
-
-
-
-
-
-@keyframes logoBuild{
+@keyframes akwaAppear{
 
 
 0%{
@@ -319,10 +242,7 @@ opacity:0;
 
 transform:
 
-
-translate(-50%,-50%)
-
-scaleX(4);
+scale(5);
 
 
 filter:
@@ -333,17 +253,6 @@ blur(30px);
 }
 
 
-
-40%{
-
-
-opacity:1;
-
-
-}
-
-
-
 100%{
 
 
@@ -352,10 +261,7 @@ opacity:1;
 
 transform:
 
-
-translate(-50%,-50%)
-
-scaleX(1);
+scale(1);
 
 
 filter:
@@ -373,46 +279,7 @@ blur(0);
 
 
 
-
-@keyframes glitch{
-
-
-0%{
-
-transform:
-
-translate(-52%,-50%);
-
-}
-
-
-50%{
-
-transform:
-
-translate(-48%,-50%);
-
-}
-
-
-100%{
-
-transform:
-
-translate(-50%,-50%);
-
-}
-
-
-}
-
-
-
-
-
-
-
-@keyframes scanLine{
+@keyframes consoleLine{
 
 
 0%{
@@ -421,39 +288,62 @@ translate(-50%,-50%);
 opacity:0;
 
 
-clip-path:
+transform:
 
-inset(100% 0 0 0);
+translateX(-30px);
 
 
 }
 
 
-
-50%{
+100%{
 
 
 opacity:1;
 
 
-clip-path:
+transform:
 
-inset(0 0 0 0);
+translateX(0);
+
+
+}
 
 
 }
 
 
 
-100%{
+
+
+
+
+@keyframes blink{
+
+
+50%{
+
+opacity:0;
+
+}
+
+
+}
+
+
+
+
+
+@keyframes bootClose{
+
+
+to{
 
 
 opacity:0;
 
 
-clip-path:
-
-inset(0 0 100% 0);
+visibility:hidden;
 
 
 }
@@ -468,43 +358,10 @@ inset(0 0 100% 0);
 
 
 
-.boot-message{
 
-
-position:absolute;
-
-
-top:75%;
-
-
-font-size:16px;
-
-
-letter-spacing:5px;
-
-
-color:#39ff14;
-
-
-animation:
-
-blink 1s infinite;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================
-DESKTOP CRT
-========================== */
-
+/* =====================
+CRT DESKTOP
+===================== */
 
 
 .desktop{
@@ -523,14 +380,15 @@ radial-gradient(
 
 ellipse,
 
-#202020,
+#222,
 
 #000
 
 );
 
 
-border-radius:40px;
+
+border-radius:45px;
 
 
 overflow:hidden;
@@ -539,13 +397,13 @@ overflow:hidden;
 position:relative;
 
 
+
 box-shadow:
 
-inset 0 0 120px black;
+inset 0 0 100px black;
 
 
 }
-
 
 
 
@@ -558,20 +416,16 @@ inset 0 0 120px black;
 position:absolute;
 
 
-top:-120px;
-
-
-left:0;
-
-
 width:100%;
 
 
 height:120px;
 
 
-background:
+top:-120px;
 
+
+background:
 
 linear-gradient(
 
@@ -584,12 +438,10 @@ transparent
 );
 
 
+
 animation:
 
 scan 5s linear infinite;
-
-
-z-index:10;
 
 
 }
@@ -603,15 +455,11 @@ z-index:10;
 
 to{
 
-
 top:100%;
 
-
 }
 
 }
-
-
 
 
 
@@ -629,7 +477,6 @@ inset:0;
 
 background:
 
-
 repeating-linear-gradient(
 
 0deg,
@@ -644,8 +491,6 @@ transparent 3px
 
 
 }
-
-
 
 
 
@@ -667,10 +512,12 @@ rgba(255,255,255,.03);
 
 animation:
 
-flicker .15s infinite;
+flicker .2s infinite;
 
 
 }
+
+
 
 
 
@@ -683,6 +530,7 @@ opacity:.2;
 
 }
 
+
 }
 
 
@@ -692,10 +540,10 @@ opacity:.2;
 
 
 
-/* ==========================
-ICONS
-========================== */
 
+/* =====================
+ICONS
+===================== */
 
 
 .desktop-icons{
@@ -719,9 +567,6 @@ flex-direction:column;
 gap:30px;
 
 
-z-index:30;
-
-
 }
 
 
@@ -737,10 +582,10 @@ width:100px;
 text-align:center;
 
 
-font-size:12px;
-
-
 color:white;
+
+
+font-size:12px;
 
 
 cursor:pointer;
@@ -748,17 +593,6 @@ cursor:pointer;
 
 }
 
-
-
-
-
-.icon:hover{
-
-
-color:#39ff14;
-
-
-}
 
 
 
@@ -787,9 +621,7 @@ width:45px;
 height:35px;
 
 
-border:
-
-2px solid #39ff14;
+border:2px solid #39ff14;
 
 
 }
@@ -805,6 +637,7 @@ font-size:35px;
 
 
 }
+
 
 
 
@@ -825,9 +658,9 @@ font-size:40px;
 
 
 
-/* ==========================
+/* =====================
 WINDOWS
-========================== */
+===================== */
 
 
 .window{
@@ -848,16 +681,13 @@ height:400px;
 background:#050505;
 
 
-border:
-
-2px solid #39ff14;
+border:2px solid #39ff14;
 
 
 z-index:100;
 
 
 }
-
 
 
 
@@ -908,6 +738,9 @@ justify-content:space-between;
 padding:15px;
 
 
+color:#39ff14;
+
+
 }
 
 
@@ -918,10 +751,9 @@ padding:15px;
 
 
 
-/* ==========================
+/* =====================
 TASKBAR
-========================== */
-
+===================== */
 
 
 .taskbar{
@@ -931,9 +763,6 @@ position:absolute;
 
 
 bottom:0;
-
-
-left:0;
 
 
 width:100%;
