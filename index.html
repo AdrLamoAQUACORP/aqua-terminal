@@ -1,28 +1,73 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>AKWA // REMOTE NODE 17</title>
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+
+        body {
+            margin: 0;
+            background: #000;
+            color: #ccc;
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        #terminal {
+            padding: 30px;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        #output {
+            white-space: pre-wrap;
+        }
+
+        #input-line {
+            display: flex;
+            gap: 8px;
+        }
+
+        #command-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+
+            color: #ccc;
+
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
     <div id="terminal">
 
         <div id="output">
+
             <div>AKWA // REMOTE NODE 17</div>
             <div>--------------------------------</div>
             <div>SYSTEM STATUS ........ ONLINE</div>
             <div>NETWORK .............. AKWA-INTERNAL</div>
             <div>SECURITY LEVEL ....... 03</div>
+
             <br>
+
         </div>
 
+
         <div id="input-line">
+
             <span>&gt;</span>
 
             <input
@@ -31,11 +76,147 @@
                 autocomplete="off"
                 autofocus
             >
+
         </div>
 
     </div>
 
-    <script src="terminal.js"></script>
+
+    <script>
+
+        const output = document.getElementById("output");
+        const input = document.getElementById("command-input");
+
+
+        function print(text = "") {
+
+            const line = document.createElement("div");
+
+            line.textContent = text;
+
+            output.appendChild(line);
+
+            window.scrollTo(
+                0,
+                document.body.scrollHeight
+            );
+
+        }
+
+
+        function showHelp() {
+
+            print("AVAILABLE COMMANDS");
+            print("");
+            print("help");
+            print("status");
+            print("login");
+            print("clear");
+
+        }
+
+
+        function showStatus() {
+
+            print("SYSTEM STATUS ........ ONLINE");
+            print("NETWORK .............. AKWA-INTERNAL");
+            print("NODE ................. 17");
+
+        }
+
+
+        function clearTerminal() {
+
+            output.innerHTML = "";
+
+        }
+
+
+        function startLogin() {
+
+            print("AUTHENTICATION REQUIRED");
+            print("");
+            print("USER ID:");
+            print("");
+            print("ENTER USER ID TO CONTINUE.");
+
+        }
+
+
+        function handleCommand(command) {
+
+            const cmd = command.trim().toLowerCase();
+
+
+            print("> " + command);
+            print("");
+
+
+            switch (cmd) {
+
+                case "help":
+
+                    showHelp();
+
+                    break;
+
+
+                case "status":
+
+                    showStatus();
+
+                    break;
+
+
+                case "login":
+
+                    startLogin();
+
+                    break;
+
+
+                case "clear":
+
+                    clearTerminal();
+
+                    break;
+
+
+                case "":
+
+                    break;
+
+
+                default:
+
+                    print("ERROR: UNKNOWN COMMAND");
+
+            }
+
+
+            print("");
+
+        }
+
+
+        input.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Enter") {
+
+                    const command = input.value;
+
+                    input.value = "";
+
+                    handleCommand(command);
+
+                }
+
+            }
+        );
+
+    </script>
 
 </body>
 </html>
