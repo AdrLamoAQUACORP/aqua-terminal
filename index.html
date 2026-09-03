@@ -1,11 +1,7 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>AkwaOS</title>
 
@@ -17,430 +13,52 @@
 <body>
 
 
-<!-- ===============================
-     STARTUP SOUND
-================================ -->
-
-<audio id="bootSound" src="welcome-computer-message.mp3"></audio>
-
-
-
-
-<!-- ===============================
-     BOOT SCREEN
-================================ -->
+<audio id="bootSound"
+src="welcome-computer-message.mp3">
+</audio>
 
 
 <div id="bootScreen">
 
+    <pre>
 
-    <div class="boot-logo-container">
-
-
-        <div class="boot-logo ghost-one">
-            AkwaOS
-        </div>
+AKWA BIOS v1.04
 
 
-        <div class="boot-logo ghost-two">
-            AkwaOS
-        </div>
+CPU ........ OK
+MEMORY ..... OK
+NETWORK .... ONLINE
 
 
-        <div class="boot-logo main-logo">
-            AkwaOS
-        </div>
+LOADING AKWA_OS_
 
-
-    </div>
-
-
-
-    <div class="boot-status">
-
-        STARTING AKWA_OS...
-
-    </div>
-
-
-
-    <div class="bios-text">
-
-
-        MEMORY TEST ........ OK<br>
-        CPU CHECK .......... OK<br>
-        NETWORK ............ CONNECTED<br>
-        LOADING SYSTEM .....
-
-    </div>
-
-
+    </pre>
 
 </div>
 
 
-
-
-
-
-
-<!-- ===============================
-     DESKTOP
-================================ -->
 
 
 <div class="desktop">
 
 
-
-<div class="scanline"></div>
-
-<div class="crt-lines"></div>
-
-<div class="crt-flicker"></div>
+    <div class="icon">
+        MY COMPUTER
+    </div>
 
 
+    <div class="icon">
+        CONSOLE
+    </div>
 
 
-
-
-<!-- ICONS -->
-
-
-<div class="desktop-icons">
-
-
-
-<div class="icon"
-ondblclick="openWindow('computer')">
-
-
-<div class="computer-icon">
-
-</div>
-
-
-<span>
-
-MY COMPUTER
-
-</span>
-
-
-</div>
-
-
-
-
-
-
-<div class="icon"
-ondblclick="openWindow('console')">
-
-
-<div class="terminal-icon">
-
-&gt;_
-
-</div>
-
-
-<span>
-
-CONSOLE
-
-</span>
-
-
-</div>
-
-
-
-
-
-
-<div class="icon"
-ondblclick="openWindow('game')">
-
-
-<div class="game-icon">
-
-◆
-
-</div>
-
-
-<span>
-
-GAME 01
-
-</span>
-
-
-</div>
-
+    <div class="icon">
+        GAME 01
+    </div>
 
 
 
 </div>
-
-
-
-
-
-
-
-
-
-<!-- ===============================
-     COMPUTER WINDOW
-================================ -->
-
-
-<div class="window" id="computer">
-
-
-<div class="window-header">
-
-MY COMPUTER
-
-
-<button onclick="closeWindow('computer')">
-
-X
-
-</button>
-
-
-</div>
-
-
-
-<div class="window-content">
-
-
-<pre>
-
-AKWA_OS COMPUTER
-
-
-SYSTEM:
-AkwaOS 0.7.13
-
-
-CPU:
-UNKNOWN
-
-
-MEMORY:
-640 KB
-
-
-NETWORK:
-ONLINE
-
-
-
-DRIVES:
-
-[C:]
-SYSTEM
-
-[D:]
-DATA
-
-
-</pre>
-
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- ===============================
-     TERMINAL
-================================ -->
-
-
-<div class="window" id="console">
-
-
-<div class="window-header">
-
-
-AKWA TERMINAL
-
-
-<button onclick="closeWindow('console')">
-
-X
-
-</button>
-
-
-</div>
-
-
-
-<div class="window-content terminal">
-
-
-<pre id="terminalOutput">
-
-
-AKWA_OS TERMINAL
-
-TYPE "help"
-
-
-</pre>
-
-
-
-<div class="input-line">
-
-
-<span>
-
-AKWA_OS&gt;
-
-</span>
-
-
-<input id="terminalInput">
-
-
-</div>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- ===============================
-     GAME
-================================ -->
-
-
-<div class="window" id="game">
-
-
-<div class="window-header">
-
-
-GAME_01.EXE
-
-
-<button onclick="closeWindow('game')">
-
-X
-
-</button>
-
-
-</div>
-
-
-
-
-<div class="window-content game">
-
-
-<h1>
-
-GAME 01
-
-</h1>
-
-
-
-<p>
-
-UNKNOWN PROGRAM
-
-</p>
-
-
-
-<button onclick="startGame()">
-
-START
-
-</button>
-
-
-
-<p id="gameMessage">
-
-</p>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- TASKBAR -->
-
-
-<div class="taskbar">
-
-
-<span>
-
-AKWA_OS ONLINE
-
-</span>
-
-
-<span id="clock">
-
-</span>
-
-
-</div>
-
-
-
-
-
-
-</div>
-
-
-
-
 
 
 
