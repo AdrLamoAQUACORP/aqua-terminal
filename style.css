@@ -1,10 +1,6 @@
 *{
-
 box-sizing:border-box;
-
 }
-
-
 
 
 body{
@@ -13,57 +9,50 @@ margin:0;
 
 background:black;
 
-overflow:hidden;
-
 font-family:
 
 "Courier New",
 monospace;
 
+overflow:hidden;
+
+color:#39ff14;
+
 }
 
 
 
-
-
-
-
-/* =====================
+/* ==========================
 BOOT SCREEN
-===================== */
+========================== */
 
 
 #bootScreen{
 
-
 position:fixed;
-
 
 inset:0;
 
-
 background:#000;
-
 
 z-index:9999;
 
 
 display:flex;
 
-
 justify-content:center;
-
 
 align-items:center;
 
 
-
 animation:
 
-bootClose 1.5s forwards 11s;
+bootClose 1.5s forwards 15s;
 
 
 }
+
+
 
 
 
@@ -72,10 +61,21 @@ bootClose 1.5s forwards 11s;
 .akwa-start{
 
 
+position:absolute;
+
+
+top:45%;
+
+
+left:50%;
+
+
+transform:
+
+translate(-50%,-50%);
+
+
 text-align:center;
-
-
-color:#39ff14;
 
 
 }
@@ -84,16 +84,24 @@ color:#39ff14;
 
 
 
+
+
+
+/* ==========================
+AKWAOS LOGO
+========================== */
+
+
 .akwa-title{
 
 
-font-size:90px;
+font-size:120px;
 
 
 font-weight:bold;
 
 
-letter-spacing:20px;
+letter-spacing:25px;
 
 
 color:white;
@@ -104,14 +112,53 @@ text-shadow:
 
 0 0 10px white,
 
+0 0 30px white,
 
-0 0 35px #39ff14;
+0 0 60px #39ff14;
+
+
+
+opacity:0;
 
 
 
 animation:
 
-akwaAppear 3s;
+
+akwaAppear 3s forwards;
+
+
+
+}
+
+
+
+
+
+.akwa-title::after{
+
+
+content:"AKWAOS";
+
+
+position:absolute;
+
+
+left:0;
+
+
+top:0;
+
+
+color:#39ff14;
+
+
+opacity:.4;
+
+
+animation:
+
+glitch 0.3s infinite;
 
 
 }
@@ -121,10 +168,135 @@ akwaAppear 3s;
 
 
 
+
+@keyframes akwaAppear{
+
+
+0%{
+
+
+opacity:0;
+
+
+transform:
+
+scale(5);
+
+
+filter:
+
+blur(40px);
+
+
+
+}
+
+
+40%{
+
+
+opacity:1;
+
+
+}
+
+
+
+70%{
+
+
+transform:
+
+scale(.9);
+
+
+}
+
+
+
+100%{
+
+
+opacity:1;
+
+
+transform:
+
+scale(1);
+
+
+filter:
+
+blur(0);
+
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+@keyframes glitch{
+
+
+0%{
+
+
+transform:
+
+translateX(-3px);
+
+
+}
+
+
+50%{
+
+
+transform:
+
+translateX(3px);
+
+
+}
+
+
+100%{
+
+
+transform:
+
+translateX(0);
+
+
+}
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+CONSOLE
+========================== */
+
+
+
 .console-loader{
 
 
-margin-top:40px;
+margin-top:60px;
 
 
 text-align:left;
@@ -136,9 +308,10 @@ font-size:16px;
 line-height:32px;
 
 
+width:600px;
+
+
 }
-
-
 
 
 
@@ -154,7 +327,6 @@ consoleLine .5s forwards;
 
 
 }
-
 
 
 
@@ -205,7 +377,6 @@ animation-delay:7s;
 
 
 
-
 .console-loader span{
 
 
@@ -217,72 +388,13 @@ color:white;
 
 
 
-.cursor{
-
-
-animation:
-
-blink .7s infinite!important;
-
-
-}
-
-
-
-
-
-@keyframes akwaAppear{
-
-
-0%{
-
-
-opacity:0;
-
-
-transform:
-
-scale(5);
-
-
-filter:
-
-blur(30px);
-
-
-}
-
-
-100%{
-
-
-opacity:1;
-
-
-transform:
-
-scale(1);
-
-
-filter:
-
-blur(0);
-
-
-}
-
-
-}
-
-
-
 
 
 
 @keyframes consoleLine{
 
 
-0%{
+from{
 
 
 opacity:0;
@@ -290,13 +402,13 @@ opacity:0;
 
 transform:
 
-translateX(-30px);
+translateX(-40px);
 
 
 }
 
 
-100%{
+to{
 
 
 opacity:1;
@@ -318,17 +430,114 @@ translateX(0);
 
 
 
+.cursor{
+
+
+animation:
+
+blink .7s infinite!important;
+
+
+}
+
+
+
+
 @keyframes blink{
 
 
 50%{
 
+
 opacity:0;
 
+
 }
 
 
 }
+
+
+
+
+
+
+
+
+/* ==========================
+PROGRESS BAR
+========================== */
+
+
+.progress{
+
+
+width:500px;
+
+
+height:14px;
+
+
+border:
+
+1px solid #39ff14;
+
+
+margin-top:30px;
+
+
+}
+
+
+
+.progress-bar{
+
+
+height:100%;
+
+
+width:0;
+
+
+background:#39ff14;
+
+
+box-shadow:
+
+
+0 0 20px #39ff14;
+
+
+
+animation:
+
+
+loading 6s forwards 3s;
+
+
+
+}
+
+
+
+
+@keyframes loading{
+
+
+to{
+
+
+width:85%;
+
+
+}
+
+
+}
+
+
+
+
 
 
 
@@ -359,9 +568,9 @@ visibility:hidden;
 
 
 
-/* =====================
-CRT DESKTOP
-===================== */
+/* ==========================
+DESKTOP CRT
+========================== */
 
 
 .desktop{
@@ -371,6 +580,9 @@ height:100vh;
 
 
 width:100vw;
+
+
+position:relative;
 
 
 background:
@@ -387,23 +599,20 @@ ellipse,
 );
 
 
-
 border-radius:45px;
 
 
 overflow:hidden;
 
 
-position:relative;
-
-
-
 box-shadow:
 
-inset 0 0 100px black;
+
+inset 0 0 120px black;
 
 
 }
+
 
 
 
@@ -416,16 +625,21 @@ inset 0 0 100px black;
 position:absolute;
 
 
-width:100%;
+top:-120px;
+
+
+left:0;
 
 
 height:120px;
 
 
-top:-120px;
+width:100%;
+
 
 
 background:
+
 
 linear-gradient(
 
@@ -441,12 +655,12 @@ transparent
 
 animation:
 
+
 scan 5s linear infinite;
 
 
+
 }
-
-
 
 
 
@@ -455,11 +669,16 @@ scan 5s linear infinite;
 
 to{
 
+
 top:100%;
 
-}
 
 }
+
+
+}
+
+
 
 
 
@@ -477,6 +696,7 @@ inset:0;
 
 background:
 
+
 repeating-linear-gradient(
 
 0deg,
@@ -490,8 +710,8 @@ transparent 3px
 );
 
 
-}
 
+}
 
 
 
@@ -510,9 +730,12 @@ background:
 rgba(255,255,255,.03);
 
 
+
 animation:
 
+
 flicker .2s infinite;
+
 
 
 }
@@ -526,14 +749,14 @@ flicker .2s infinite;
 
 50%{
 
+
 opacity:.2;
 
-}
-
 
 }
 
 
+}
 
 
 
@@ -541,9 +764,11 @@ opacity:.2;
 
 
 
-/* =====================
+
+
+/* ==========================
 ICONS
-===================== */
+========================== */
 
 
 .desktop-icons{
@@ -582,17 +807,16 @@ width:100px;
 text-align:center;
 
 
-color:white;
-
-
 font-size:12px;
+
+
+color:white;
 
 
 cursor:pointer;
 
 
 }
-
 
 
 
@@ -610,8 +834,6 @@ margin-bottom:10px;
 
 
 
-
-
 .computer{
 
 
@@ -621,12 +843,12 @@ width:45px;
 height:35px;
 
 
-border:2px solid #39ff14;
+border:
+
+2px solid #39ff14;
 
 
 }
-
-
 
 
 
@@ -637,7 +859,6 @@ font-size:35px;
 
 
 }
-
 
 
 
@@ -658,9 +879,9 @@ font-size:40px;
 
 
 
-/* =====================
+/* ==========================
 WINDOWS
-===================== */
+========================== */
 
 
 .window{
@@ -681,15 +902,16 @@ height:400px;
 background:#050505;
 
 
-border:2px solid #39ff14;
+border:
+
+2px solid #39ff14;
 
 
 z-index:100;
 
 
+
 }
-
-
 
 
 
@@ -700,8 +922,6 @@ display:block;
 
 
 }
-
-
 
 
 
@@ -738,9 +958,6 @@ justify-content:space-between;
 padding:15px;
 
 
-color:#39ff14;
-
-
 }
 
 
@@ -751,9 +968,9 @@ color:#39ff14;
 
 
 
-/* =====================
+/* ==========================
 TASKBAR
-===================== */
+========================== */
 
 
 .taskbar{
