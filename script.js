@@ -1,32 +1,81 @@
-/* =====================================================
-   AKWAOS SCRIPT.JS
-   ===================================================== */
+/* =====================================
+   AKWAOS SCRIPT
+===================================== */
 
 
 
-/* =====================================================
-   BOOT SEQUENCE
-   ===================================================== */
+/* =====================================
+   BOOT + SOUND
+===================================== */
 
 
 window.addEventListener("load",()=>{
 
 
-    setTimeout(()=>{
+const sound =
+document.getElementById("bootSound");
 
 
-        const boot =
-        document.getElementById("bootScreen");
+
+setTimeout(()=>{
 
 
-        if(boot){
-
-            boot.remove();
-
-        }
+if(sound){
 
 
-    },6000);
+sound.volume = 0.7;
+
+
+sound.play()
+.catch(()=>{
+
+console.log(
+"Browser blocked autoplay"
+);
+
+
+});
+
+
+}
+
+
+},1200);
+
+
+
+
+
+setTimeout(()=>{
+
+
+const boot =
+document.getElementById(
+"bootScreen"
+);
+
+
+
+if(boot){
+
+
+boot.style.opacity="0";
+
+
+setTimeout(()=>{
+
+
+boot.remove();
+
+
+},1000);
+
+
+}
+
+
+},6000);
+
 
 
 });
@@ -37,39 +86,49 @@ window.addEventListener("load",()=>{
 
 
 
-/* =====================================================
+
+
+/* =====================================
    WINDOWS
-   ===================================================== */
+===================================== */
 
 
-let topLayer = 50;
+
+let layer = 100;
+
 
 
 
 function openWindow(id){
 
 
-    const win =
-    document.getElementById(id);
-
-
-    if(!win)
-        return;
+const win =
+document.getElementById(id);
 
 
 
-    win.classList.add("active");
+if(!win)
+return;
 
 
-    topLayer++;
+
+win.classList.add(
+"active"
+);
 
 
-    win.style.zIndex =
-    topLayer;
+
+layer++;
+
+
+win.style.zIndex =
+layer;
 
 
 
 }
+
+
 
 
 
@@ -78,15 +137,18 @@ function openWindow(id){
 function closeWindow(id){
 
 
-    const win =
-    document.getElementById(id);
+const win =
+document.getElementById(id);
 
 
-    if(win){
 
-        win.classList.remove("active");
+if(win){
 
-    }
+win.classList.remove(
+"active"
+);
+
+}
 
 
 }
@@ -98,9 +160,10 @@ function closeWindow(id){
 
 
 
-/* =====================================================
-   DRAG WINDOWS
-   ===================================================== */
+
+/* =====================================
+   WINDOW MOVE
+===================================== */
 
 
 document
@@ -108,65 +171,79 @@ document
 .forEach(win=>{
 
 
-let dragging=false;
+let move=false;
 
-let offsetX=0;
-let offsetY=0;
+let x=0;
+
+let y=0;
+
 
 
 const header =
-win.querySelector(".window-header");
+win.querySelector(
+".window-header"
+);
+
 
 
 
 header.addEventListener(
 "mousedown",
-e=>{
+(e)=>{
 
 
-dragging=true;
+move=true;
 
 
-offsetX =
+x =
 e.clientX -
 win.offsetLeft;
 
 
-offsetY =
+y =
 e.clientY -
 win.offsetTop;
 
 
-topLayer++;
+
+layer++;
+
 
 win.style.zIndex =
-topLayer;
+layer;
 
 
 });
+
+
 
 
 
 
 document.addEventListener(
 "mousemove",
-e=>{
+(e)=>{
 
 
-if(!dragging)
+if(!move)
 return;
 
 
 
 win.style.left =
-(e.clientX-offsetX)+"px";
+(e.clientX-x)
++"px";
+
 
 
 win.style.top =
-(e.clientY-offsetY)+"px";
+(e.clientY-y)
++"px";
 
 
 });
+
+
 
 
 
@@ -175,54 +252,62 @@ document.addEventListener(
 "mouseup",
 ()=>{
 
-dragging=false;
 
-});
-
+move=false;
 
 
 });
 
 
 
+});
 
 
 
 
 
 
-/* =====================================================
+
+
+
+/* =====================================
    CLOCK
-   ===================================================== */
+===================================== */
 
 
-function updateClock(){
+function clock(){
 
 
-const now =
-new Date();
-
-
-
+let c =
 document.getElementById(
 "clock"
-).textContent =
+);
 
 
-now.toLocaleTimeString();
+
+if(c){
+
+
+c.innerHTML =
+new Date()
+.toLocaleTimeString();
 
 
 
 }
 
 
+}
+
+
+
 setInterval(
-updateClock,
+clock,
 1000
 );
 
 
-updateClock();
+clock();
 
 
 
@@ -231,19 +316,19 @@ updateClock();
 
 
 
-/* =====================================================
+
+/* =====================================
    TERMINAL
-   ===================================================== */
+===================================== */
 
 
-const terminalInput =
+const input =
 document.getElementById(
 "terminalInput"
 );
 
 
-
-const terminalOutput =
+const output =
 document.getElementById(
 "terminalOutput"
 );
@@ -251,45 +336,63 @@ document.getElementById(
 
 
 
-if(terminalInput){
+
+function terminalWrite(text){
+
+
+output.textContent +=
+"\n"+text;
 
 
 
-terminalInput.addEventListener(
+output.scrollTop =
+output.scrollHeight;
+
+
+}
+
+
+
+
+
+if(input){
+
+
+input.addEventListener(
 "keydown",
-e=>{
+(e)=>{
 
 
-if(e.key !== "Enter")
-return;
+if(e.key==="Enter"){
 
 
-
-let command =
-terminalInput.value
+let cmd =
+input.value
 .trim()
 .toLowerCase();
 
 
 
-terminalInput.value="";
+input.value="";
 
 
 
-writeTerminal(
-"AKWA_OS> "+command
+terminalWrite(
+"AKWA_OS> "+cmd
 );
 
 
 
-executeCommand(command);
+runCommand(cmd);
 
+
+
+}
 
 
 });
 
 
-
 }
 
 
@@ -297,60 +400,34 @@ executeCommand(command);
 
 
 
-function writeTerminal(text){
 
 
-terminalOutput.textContent +=
-"\n"+text;
-
-
-
-terminalOutput.scrollTop =
-terminalOutput.scrollHeight;
-
-
-}
-
-
-
-
-
-function executeCommand(cmd){
+function runCommand(cmd){
 
 
 
 switch(cmd){
 
 
+
 case "help":
 
 
-writeTerminal(
-`
-AVAILABLE COMMANDS:
+terminalWrite(`
+
+COMMANDS:
 
 help
- - command list
-
 clear
- - clear terminal
-
 status
- - system information
-
 whoami
- - current user
-
 scan
- - network scan
-
+logs
 boot
- - restart system
-`
-);
+
+`);
 
 break;
-
 
 
 
@@ -359,11 +436,10 @@ break;
 case "clear":
 
 
-terminalOutput.textContent="";
+output.textContent="";
 
 
 break;
-
 
 
 
@@ -372,20 +448,18 @@ break;
 case "status":
 
 
-writeTerminal(
-`
+terminalWrite(`
+
 SYSTEM STATUS
 
-CPU: OK
-MEMORY: OK
-NETWORK: ONLINE
-AKWA_CORE: RUNNING
-`
-);
+CPU : OK
+RAM : OK
+CORE : RUNNING
+NETWORK : ONLINE
 
+`);
 
 break;
-
 
 
 
@@ -394,13 +468,14 @@ break;
 case "whoami":
 
 
-writeTerminal(
-"USER: UNKNOWN"
+terminalWrite(
+
+"LAST USER: Adrian_lamo"
+
 );
 
 
 break;
-
 
 
 
@@ -409,21 +484,38 @@ break;
 case "scan":
 
 
-writeTerminal(
-`
-SCANNING...
+terminalWrite(`
 
-NODE 01 FOUND
-NODE 02 FOUND
-NODE 07 FOUND
+NETWORK SCAN
 
-UNKNOWN DEVICE DETECTED
-`
-);
+NODE_01 FOUND
+NODE_04 FOUND
+NODE_07 FOUND
 
+UNKNOWN SIGNAL DETECTED
+
+`);
 
 break;
 
+
+
+
+
+case "logs":
+
+
+terminalWrite(`
+
+SYSTEM LOG:
+
+03:41 BOOT
+03:42 NETWORK START
+03:43 USER LOGIN
+
+`);
+
+break;
 
 
 
@@ -441,54 +533,55 @@ break;
 
 
 
-
 default:
 
 
-writeTerminal(
-"COMMAND NOT FOUND"
+terminalWrite(
+"ERROR: COMMAND NOT FOUND"
 );
 
 
-}
-
-
 
 }
 
 
 
+}
 
 
 
 
 
 
-/* =====================================================
+
+
+
+/* =====================================
    GAME 01
-   ===================================================== */
+===================================== */
 
 
 function startGame(){
 
 
-const msg =
+let msg =
 document.getElementById(
 "gameMessage"
 );
 
 
 
-msg.textContent =
+msg.innerHTML =
 "CONNECTING...";
+
 
 
 
 setTimeout(()=>{
 
 
-msg.textContent =
-"SEARCHING CHANNEL";
+msg.innerHTML =
+"SEARCHING SERVER";
 
 
 },1000);
@@ -499,11 +592,12 @@ msg.textContent =
 setTimeout(()=>{
 
 
-msg.textContent =
-"CHANNEL 07 FOUND";
+msg.innerHTML =
+"ACCESS GRANTED";
 
 
-},2200);
+},2500);
+
 
 
 
@@ -511,11 +605,11 @@ msg.textContent =
 setTimeout(()=>{
 
 
-msg.textContent =
-"ACCESS GRANTED";
+msg.innerHTML =
+"GAME STARTED";
 
 
-},3500);
+},4000);
 
 
 
@@ -529,14 +623,13 @@ msg.textContent =
 
 
 
-
-/* =====================================================
+/* =====================================
    OLD PC HUM
-   ===================================================== */
+===================================== */
 
 
+let started=false;
 
-let audioStarted=false;
 
 
 
@@ -545,63 +638,50 @@ document.addEventListener(
 ()=>{
 
 
-if(audioStarted)
+if(started)
 return;
 
 
-audioStarted=true;
+started=true;
 
 
 
-const AudioContext =
-window.AudioContext ||
-window.webkitAudioContext;
+try{
 
 
-
-if(!AudioContext)
-return;
-
-
-
-
-const ctx =
+let ctx =
 new AudioContext();
 
 
 
-
-
-
-const osc =
+let osc =
 ctx.createOscillator();
 
 
-
-const gain =
+let gain =
 ctx.createGain();
 
 
 
-osc.type =
-"sine";
+
+osc.type="sine";
 
 
-osc.frequency.value =
-55;
+osc.frequency.value=55;
 
 
 
-gain.gain.value =
-0.025;
+gain.gain.value=.03;
 
 
 
 osc.connect(gain);
 
+
 gain.connect(
 ctx.destination
 );
+
 
 
 osc.start();
@@ -610,31 +690,31 @@ osc.start();
 
 
 
-const fan =
+let fan =
 ctx.createOscillator();
 
 
-
-const fanGain =
+let fanGain =
 ctx.createGain();
 
 
 
-fan.type =
-"sine";
+fan.type="sine";
 
 
-fan.frequency.value =
-120;
-
-
-
-fanGain.gain.value =
-0.008;
+fan.frequency.value=120;
 
 
 
-fan.connect(fanGain);
+fanGain.gain.value=.008;
+
+
+
+fan.connect(
+fanGain
+);
+
+
 
 fanGain.connect(
 ctx.destination
@@ -646,10 +726,13 @@ fan.start();
 
 
 
+}
+
+catch(e){}
+
+
 
 },
-
-
 {
 once:true
 }
