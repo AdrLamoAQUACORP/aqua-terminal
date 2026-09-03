@@ -11,34 +11,116 @@
     <style>
 
         body {
-            background-color: #050505;
+            margin: 0;
+
+            background: #050505;
             color: #00ff66;
+
             font-family: "Courier New", Courier, monospace;
-            padding: 20px;
             font-size: 16px;
-            line-height: 1.4;
+            line-height: 1.5;
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
         }
 
-        #terminal {
-            max-width: 900px;
-            margin: 0 auto;
+
+        /* =========================================
+           ЭКРАН ЗАПУСКА
+           ========================================= */
+
+        #startup {
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            gap: 25px;
+        }
+
+
+        #startup-title {
+            font-size: 24px;
+            letter-spacing: 3px;
+        }
+
+
+        #startup-subtitle {
+            color: #777;
+            font-size: 14px;
+        }
+
+
+        #start-button {
+            background: transparent;
 
             border: 1px solid #00ff66;
 
-            padding: 20px;
+            color: #00ff66;
+
+            font-family: "Courier New", Courier, monospace;
+            font-size: 16px;
+
+            padding: 14px 35px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        #start-button:hover {
+            background: #00ff66;
+            color: #050505;
+
+            box-shadow:
+                0 0 15px rgba(0, 255, 102, 0.4);
+        }
+
+
+        /* =========================================
+           ТЕРМИНАЛ
+           ========================================= */
+
+        #terminal {
+            width: 90%;
+            max-width: 900px;
+
+            min-height: 500px;
+
+            border: 1px solid #00ff66;
+
+            padding: 30px;
+
+            box-sizing: border-box;
 
             box-shadow:
                 0 0 15px rgba(0, 255, 102, 0.2);
 
-            min-height: 500px;
+            display: none;
         }
+
+
+        #output {
+            text-align: center;
+        }
+
 
         .input-line {
             display: flex;
+
+            justify-content: center;
             align-items: center;
 
-            margin-top: 15px;
+            margin-top: 20px;
         }
+
 
         .prompt {
             color: #00aaff;
@@ -48,172 +130,174 @@
             white-space: nowrap;
         }
 
+
         input {
             background: transparent;
 
             border: none;
+            outline: none;
 
             color: #00ff66;
 
             font-family: inherit;
-
             font-size: inherit;
 
-            outline: none;
+            width: 300px;
 
-            width: 100%;
+            text-align: center;
         }
+
 
         .error {
             color: #ff3333;
         }
 
+
         .success {
             color: #ffff33;
         }
+
 
         .system {
             color: #aaaaaa;
         }
 
+
         .warning {
             color: #ffaa00;
         }
 
-   <style>
 
-    body {
-        margin: 0;
-        background-color: #050505;
-        color: #00ff66;
-
-        font-family: "Courier New", Courier, monospace;
-        font-size: 16px;
-        line-height: 1.5;
-
-        min-height: 100vh;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        text-align: center;
-    }
+        .cursor {
+            animation: blink 1s infinite;
+        }
 
 
-    #terminal {
-        width: 90%;
-        max-width: 900px;
+        @keyframes blink {
 
-        min-height: 500px;
+            0% {
+                opacity: 1;
+            }
 
-        border: 1px solid #00ff66;
+            50% {
+                opacity: 0;
+            }
 
-        padding: 30px;
+            100% {
+                opacity: 1;
+            }
 
-        box-sizing: border-box;
+        }
 
-        box-shadow:
-            0 0 15px rgba(0, 255, 102, 0.2);
-    }
+    </style>
 
-
-    #output {
-        text-align: center;
-    }
-
-
-    .input-line {
-        display: flex;
-
-        justify-content: center;
-        align-items: center;
-
-        margin-top: 20px;
-    }
+</head>
 
 
-    .prompt {
-        color: #00aaff;
-
-        margin-right: 10px;
-
-        white-space: nowrap;
-    }
+<body>
 
 
-    input {
-        background: transparent;
+<!-- =========================================
+     ЭКРАН ДО ЗАПУСКА
+     ========================================= -->
 
-        border: none;
-        outline: none;
+<div id="startup">
 
-        color: #00ff66;
+    <div id="startup-title">
+        AKWA // REMOTE NODE 17
+    </div>
 
-        font-family: inherit;
-        font-size: inherit;
+    <div id="startup-subtitle">
+        REMOTE COMPUTER TERMINAL
+    </div>
 
-        width: 300px;
+    <button id="start-button">
+        ЗАПУСТИТЬ ПК
+    </button>
 
-        text-align: center;
-    }
-
-
-    .error {
-        color: #ff3333;
-    }
-
-
-    .success {
-        color: #ffff33;
-    }
+</div>
 
 
-    .system {
-        color: #aaaaaa;
-    }
 
+<!-- =========================================
+     ТЕРМИНАЛ
+     ========================================= -->
 
-    .warning {
-        color: #ffaa00;
-    }
+<div id="terminal">
 
-</style>
+    <div id="output"></div>
+
+    <div
+        class="input-line"
+        id="input-line"
+    >
+
+        <span
+            id="prompt-text"
+            class="prompt"
+        >
+            AKWA_OS:
+        </span>
+
+        <input
+            type="text"
+            id="cmd-input"
+            autofocus
+            autocomplete="off"
+        >
+
+    </div>
+
+</div>
+
 
 
 <script>
 
 
-    // =========================================================
-    // ОСНОВНЫЕ ЭЛЕМЕНТЫ ТЕРМИНАЛА
-    // =========================================================
+    /* =========================================
+       ЭЛЕМЕНТЫ
+       ========================================= */
 
-    const output = document.getElementById("output");
+    const startup =
+        document.getElementById("startup");
 
-    const input = document.getElementById("cmd-input");
+    const startButton =
+        document.getElementById("start-button");
 
-    const promptText = document.getElementById("prompt-text");
+    const terminal =
+        document.getElementById("terminal");
+
+    const output =
+        document.getElementById("output");
+
+    const input =
+        document.getElementById("cmd-input");
+
+    const inputLine =
+        document.getElementById("input-line");
+
+    const promptText =
+        document.getElementById("prompt-text");
 
 
-    // =========================================================
-    // СОСТОЯНИЕ ТЕРМИНАЛА
-    // =========================================================
 
-    let currentStep = "COMMAND";
+    /* =========================================
+       СОСТОЯНИЕ
+       ========================================= */
 
-    let registrationData = {
-        login: "",
-        password: ""
-    };
+    let systemReady = false;
 
 
-    // =========================================================
-    // ВЫВОД ТЕКСТА
-    // =========================================================
+
+    /* =========================================
+       ВЫВОД СТРОКИ
+       ========================================= */
 
     function print(text = "", className = "") {
 
-        const div = document.createElement("div");
+        const div =
+            document.createElement("div");
 
         div.className = className;
 
@@ -229,9 +313,314 @@
     }
 
 
-    // =========================================================
-    // HELP
-    // =========================================================
+
+    /* =========================================
+       ЗАДЕРЖКА
+       ========================================= */
+
+    function wait(ms) {
+
+        return new Promise(
+            resolve => setTimeout(resolve, ms)
+        );
+
+    }
+
+
+
+    /* =========================================
+       АНИМАЦИЯ ПЕЧАТИ
+       ========================================= */
+
+    async function typeLine(
+        text,
+        className = "",
+        speed = 25
+    ) {
+
+        const div =
+            document.createElement("div");
+
+        div.className = className;
+
+        output.appendChild(div);
+
+
+        for (
+            let i = 0;
+            i < text.length;
+            i++
+        ) {
+
+            div.textContent =
+                text.substring(0, i + 1);
+
+            await wait(speed);
+
+        }
+
+
+        window.scrollTo(
+            0,
+            document.body.scrollHeight
+        );
+
+    }
+
+
+
+    /* =========================================
+       ЗАГРУЗКА ПК
+       ========================================= */
+
+    async function bootComputer() {
+
+        inputLine.style.display = "none";
+
+
+        await typeLine(
+            "AKWA BIOS v4.28",
+            "system",
+            20
+        );
+
+
+        await typeLine(
+            "--------------------------------",
+            "system",
+            10
+        );
+
+
+        await wait(300);
+
+
+        await typeLine(
+            "MEMORY CHECK ............ OK"
+        );
+
+
+        await wait(180);
+
+
+        await typeLine(
+            "CPU CHECK ............... OK"
+        );
+
+
+        await wait(180);
+
+
+        await typeLine(
+            "STORAGE CHECK ........... OK"
+        );
+
+
+        await wait(300);
+
+
+        await typeLine(
+            "NODE 17"
+        );
+
+
+        await typeLine(
+            "BOOT DEVICE ............. LOCAL"
+        );
+
+
+        await wait(500);
+
+
+        print("");
+
+
+        await typeLine(
+            "LOADING AKWA OS...",
+            "success",
+            40
+        );
+
+
+        await wait(700);
+
+
+        print("");
+
+
+        await typeLine(
+            "[СИСТЕМА]: Запуск операционной системы...",
+            "system",
+            20
+        );
+
+
+        await wait(400);
+
+
+        await typeLine(
+            "[СИСТЕМА]: Проверка локального оборудования...",
+            "system",
+            20
+        );
+
+
+        await wait(400);
+
+
+        await typeLine(
+            "[СИСТЕМА]: Проверка сетевого модуля...",
+            "system",
+            20
+        );
+
+
+        await wait(600);
+
+
+        await typeLine(
+            "[СИСТЕМА]: Поиск AKWA-INTERNAL...",
+            "system",
+            20
+        );
+
+
+        await wait(800);
+
+
+        await typeLine(
+            "[СИСТЕМА]: СЕТЬ НАЙДЕНА.",
+            "success",
+            25
+        );
+
+
+        await wait(300);
+
+
+        await typeLine(
+            "[СИСТЕМА]: Подключение к REMOTE NODE 17...",
+            "system",
+            20
+        );
+
+
+        await wait(900);
+
+
+        await typeLine(
+            "[СИСТЕМА]: СОЕДИНЕНИЕ УСТАНОВЛЕНО.",
+            "success",
+            25
+        );
+
+
+        await wait(500);
+
+
+        print("");
+
+
+        await typeLine(
+            "AKWA // REMOTE NODE 17",
+            "",
+            30
+        );
+
+
+        await typeLine(
+            "--------------------------------",
+            "",
+            10
+        );
+
+
+        await typeLine(
+            "SYSTEM STATUS ........ ONLINE"
+        );
+
+
+        await typeLine(
+            "NETWORK .............. AKWA-INTERNAL"
+        );
+
+
+        await typeLine(
+            "NODE ................. 17"
+        );
+
+
+        await typeLine(
+            "SECURITY LEVEL ....... 03"
+        );
+
+
+        await wait(500);
+
+
+        print("");
+
+
+        await typeLine(
+            "Последний зарегистрированный пользователь:"
+        );
+
+
+        await typeLine(
+            "ADRIAN LAMO",
+            "success",
+            35
+        );
+
+
+        await wait(500);
+
+
+        print("");
+
+
+        await typeLine(
+            "Введите команду help для получения списка доступных команд."
+        );
+
+
+        await wait(300);
+
+
+        inputLine.style.display = "flex";
+
+        input.focus();
+
+        systemReady = true;
+
+    }
+
+
+
+    /* =========================================
+       КНОПКА ЗАПУСКА
+       ========================================= */
+
+    startButton.addEventListener(
+        "click",
+        async function() {
+
+            startButton.disabled = true;
+
+            startup.style.display = "none";
+
+            terminal.style.display = "block";
+
+            await bootComputer();
+
+        }
+    );
+
+
+
+    /* =========================================
+       HELP
+       ========================================= */
 
     function showHelp() {
 
@@ -252,32 +641,46 @@
     }
 
 
-    // =========================================================
-    // STATUS
-    // =========================================================
+
+    /* =========================================
+       STATUS
+       ========================================= */
 
     function showStatus() {
 
-        print("SYSTEM STATUS ........ ONLINE");
+        print(
+            "SYSTEM STATUS ........ ONLINE"
+        );
 
-        print("NETWORK .............. AKWA-INTERNAL");
+        print(
+            "NETWORK .............. AKWA-INTERNAL"
+        );
 
-        print("NODE ................. 17");
+        print(
+            "NODE ................. 17"
+        );
 
-        print("SECURITY LEVEL ....... 03");
+        print(
+            "SECURITY LEVEL ....... 03"
+        );
 
         print("");
 
-        print("LAST USER ............ ADRIAN LAMO");
+        print(
+            "LAST USER ............ ADRIAN LAMO"
+        );
 
-        print("ACCOUNT STATUS ....... ACTIVE");
+        print(
+            "ACCOUNT STATUS ....... ACTIVE"
+        );
 
     }
 
 
-    // =========================================================
-    // ОЧИСТКА
-    // =========================================================
+
+    /* =========================================
+       CLEAR
+       ========================================= */
 
     function clearTerminal() {
 
@@ -286,342 +689,155 @@
     }
 
 
-    // =========================================================
-    // LOGIN
-    // =========================================================
+
+    /* =========================================
+       LOGIN
+       ========================================= */
 
     function startLogin() {
 
-        print("AUTHENTICATION REQUIRED", "system");
+        print(
+            "AUTHENTICATION REQUIRED",
+            "system"
+        );
 
         print("");
 
-        print("USER ID:");
+        print(
+            "USER ID:"
+        );
 
-        promptText.innerText = "USER ID:";
-
-        currentStep = "LOGIN";
+        promptText.innerText =
+            "USER ID:";
 
     }
 
 
-    // =========================================================
-    // РЕГИСТРАЦИЯ
-    // =========================================================
+
+    /* =========================================
+       REGИСТРАЦИЯ
+       ========================================= */
 
     function startRegistration() {
 
-        print("ACCOUNT REGISTRATION", "system");
+        print(
+            "ACCOUNT REGISTRATION",
+            "system"
+        );
 
         print("");
 
-        print("Новая учётная запись не получает доступ к закрытым разделам.");
+        print(
+            "Введите желаемый USER ID:"
+        );
 
-        print("После регистрации данные будут отправлены руководству на рассмотрение.");
-
-        print("");
-
-        print("Введите желаемый USER ID:");
-
-        promptText.innerText = "NEW USER ID:";
-
-        currentStep = "REGISTER_LOGIN";
+        promptText.innerText =
+            "NEW USER ID:";
 
     }
 
 
-    // =========================================================
-    // ОБРАБОТКА КОМАНД
-    // =========================================================
+
+    /* =========================================
+       ОБРАБОТКА КОМАНД
+       ========================================= */
 
     function handleCommand(value) {
 
-        const lowerValue = value.trim().toLowerCase();
+        const command =
+            value.trim().toLowerCase();
 
 
-        // -----------------------------------------------------
-        // ОБЫЧНЫЕ КОМАНДЫ
-        // -----------------------------------------------------
+        print(
+            `${promptText.innerText} ${value}`
+        );
 
-        if (currentStep === "COMMAND") {
-
-            switch (lowerValue) {
-
-                case "help":
-
-                    showHelp();
-
-                    break;
+        print("");
 
 
-                case "status":
-
-                    showStatus();
-
-                    break;
+        switch (command) {
 
 
-                case "login":
+            case "help":
 
-                    startLogin();
+                showHelp();
 
-                    break;
-
-
-                case "register":
-
-                    startRegistration();
-
-                    break;
+                break;
 
 
-                case "clear":
+            case "status":
 
-                    clearTerminal();
+                showStatus();
 
-                    break;
-
-
-                case "":
-
-                    break;
+                break;
 
 
-                default:
+            case "clear":
 
-                    print(
-                        "ERROR: UNKNOWN COMMAND",
-                        "error"
-                    );
+                clearTerminal();
 
-            }
-
-            return;
-
-        }
+                break;
 
 
-        // -----------------------------------------------------
-        // LOGIN
-        // -----------------------------------------------------
+            case "login":
 
-        if (currentStep === "LOGIN") {
+                startLogin();
 
-            if (lowerValue === "adrian_lamo") {
+                break;
+
+
+            case "register":
+
+                startRegistration();
+
+                break;
+
+
+            case "":
+
+                break;
+
+
+            default:
 
                 print(
-                    "[СИСТЕМА]: USER ID ACCEPTED.",
-                    "success"
-                );
-
-                print("");
-
-                print(
-                    "Введите пароль:"
-                );
-
-                promptText.innerText = "PASSWORD:";
-
-                currentStep = "PASSWORD";
-
-            }
-
-            else {
-
-                print(
-                    "ERROR: USER NOT FOUND.",
+                    "ERROR: UNKNOWN COMMAND",
                     "error"
                 );
-
-                print(
-                    "Если у вас нет учётной записи, используйте команду register."
-                );
-
-                promptText.innerText = "AKWA_OS:";
-
-                currentStep = "COMMAND";
-
-            }
-
-            return;
-
-        }
-
-
-        // -----------------------------------------------------
-        // ПАРОЛЬ
-        // -----------------------------------------------------
-
-        if (currentStep === "PASSWORD") {
-
-            /*
-                ВАЖНО:
-
-                Настоящий пароль здесь пока НЕ создаём.
-
-                Эта часть будет подключена к серверной
-                системе авторизации.
-
-                Сейчас мы только создаём правильную
-                структуру терминала.
-            */
-
-            print(
-                "AUTHENTICATION SERVICE UNAVAILABLE.",
-                "error"
-            );
-
-            print("");
-
-            print(
-                "REMOTE AUTHENTICATION MODULE REQUIRED.",
-                "system"
-            );
-
-            print("");
-
-            promptText.innerText = "AKWA_OS:";
-
-            currentStep = "COMMAND";
-
-            return;
-
-        }
-
-
-        // -----------------------------------------------------
-        // РЕГИСТРАЦИЯ — USER ID
-        // -----------------------------------------------------
-
-        if (currentStep === "REGISTER_LOGIN") {
-
-            if (value.trim().length < 3) {
-
-                print(
-                    "ERROR: USER ID TOO SHORT.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            registrationData.login = value.trim();
-
-
-            print(
-                "USER ID ACCEPTED.",
-                "success"
-            );
-
-            print("");
-
-            print(
-                "Введите пароль:"
-            );
-
-            promptText.innerText = "NEW PASSWORD:";
-
-            currentStep = "REGISTER_PASSWORD";
-
-            return;
-
-        }
-
-
-        // -----------------------------------------------------
-        // РЕГИСТРАЦИЯ — ПАРОЛЬ
-        // -----------------------------------------------------
-
-        if (currentStep === "REGISTER_PASSWORD") {
-
-            if (value.length < 4) {
-
-                print(
-                    "ERROR: PASSWORD TOO SHORT.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            registrationData.password = value;
-
-
-            print(
-                "Регистрация завершена.",
-                "success"
-            );
-
-            print("");
-
-            print(
-                "Ваши данные были отправлены для ознакомления и подтверждения руководству.",
-                "system"
-            );
-
-            print("");
-
-            print(
-                "ACCOUNT STATUS: PENDING"
-            );
-
-            print(
-                "ACCESS LEVEL: NONE"
-            );
-
-            print("");
-
-            print(
-                "Доступ к закрытым разделам отсутствует.",
-                "warning"
-            );
-
-
-            registrationData = {
-                login: "",
-                password: ""
-            };
-
-
-            promptText.innerText = "AKWA_OS:";
-
-            currentStep = "COMMAND";
-
-            return;
 
         }
 
     }
 
 
-    // =========================================================
-    // НАЖАТИЕ ENTER
-    // =========================================================
+
+    /* =========================================
+       ENTER
+       ========================================= */
 
     input.addEventListener(
         "keydown",
         function(event) {
 
-            if (event.key !== "Enter") {
+            if (
+                event.key !== "Enter"
+                || !systemReady
+            ) {
+
                 return;
+
             }
 
 
-            const value = input.value;
+            const value =
+                input.value;
 
 
             if (!value.trim()) {
+
                 return;
+
             }
-
-
-            print(
-                `${promptText.innerText} ${value}`
-            );
 
 
             input.value = "";
