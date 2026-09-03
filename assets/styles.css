@@ -3019,3 +3019,34 @@ body.arg3-prealarm-adrian #arg3-error-layer::after {
     0 0 30px rgba(244,207,101,.13),
     10px 10px 0 rgba(0,0,0,.42) !important;
 }
+
+
+/* =========================================================
+   ARG3 COPY PROTECTION / UPDATE 18
+   ========================================================= */
+
+/* Во время ARG3 служебный текст нельзя выделить мышью. */
+body.arg-stage-3 .ixion-personnel-record,
+body.arg-stage-3-ready .ixion-personnel-record,
+body.arg3-prealarm .arg3-error-layer,
+body.arg3-defense-active .arg3-defense {
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
+
+/* Поле ввода остаётся полностью рабочим для набора команд. */
+body.arg3-defense-active #arg3-defense-input {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+  -webkit-touch-callout: default !important;
+}
+
+/* Визуальный курсор у невыделяемого текста не намекает на возможность копирования. */
+body.arg3-defense-active .arg3-command-box__prompt,
+body.arg3-defense-active .arg3-adrian-hint,
+body.arg3-prealarm .arg3-error-window,
+body.arg-stage-3 .arg-clue-stage3,
+body.arg-stage-3-ready .arg3-recovered-only {
+  cursor: default !important;
+}
