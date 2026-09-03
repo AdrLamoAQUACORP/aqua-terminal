@@ -18,85 +18,56 @@
 
 
 <audio id="bootSound">
-    <source src="welcome-computer-message.mp3" type="audio/mpeg">
+
+<source src="welcome-computer-message.mp3" type="audio/mpeg">
+
 </audio>
 
 
 
-<!-- BOOT SCREEN -->
+
+
+<!-- =====================
+     AKWAOS BOOT
+===================== -->
+
 
 <div id="bootScreen">
 
 
-<div class="bios-container">
-
-<pre id="biosText">
-
-AKWA BIOS v1.04
-----------------------------
-
-INITIALIZING HARDWARE...
+<div class="akwa-start">
 
 
-CPU ................. OK
+<div class="akwa-title">
 
-MEMORY .............. 640 KB OK
-
-STORAGE ............. FOUND
-
-NETWORK ............. ONLINE
-
-
-CHECKING SYSTEM FILES...
-
-
-SYSTEM CORE ......... OK
-
-SECURITY ............ ACTIVE
-
-
-LOADING AKWA_OS
-
-
-<span class="cursor">_</span>
-
-
-</pre>
-
-</div>
-
-
-
-
-<!-- AKWAOS ANIMATION -->
-
-
-<div class="akwa-logo">
-
-
-<div class="logo-glitch">
 AKWAOS
-</div>
-
-
-<div class="logo-main">
-AKWAOS
-</div>
-
-
-<div class="logo-scan">
-AKWAOS
-</div>
-
 
 </div>
 
 
 
+<div class="console-loader">
 
-<div class="boot-message">
 
-WELCOME TO AKWA_OS
+<p>> INITIALIZING CORE ............ <span>OK</span></p>
+
+<p>> CHECKING MEMORY ............. <span>OK</span></p>
+
+<p>> LOADING SYSTEM FILES ........ <span>OK</span></p>
+
+<p>> STARTING NETWORK ............ <span>ONLINE</span></p>
+
+<p>> ACCESSING USERSPACE ......... <span>OK</span></p>
+
+<p>> RUNNING AKWA_KERNEL ......... <span>OK</span></p>
+
+
+<p class="cursor">
+
+_
+
+</p>
+
 
 </div>
 
@@ -104,12 +75,17 @@ WELCOME TO AKWA_OS
 </div>
 
 
+</div>
 
 
 
 
 
-<!-- DESKTOP -->
+
+
+<!-- =====================
+     DESKTOP
+===================== -->
 
 
 <div class="desktop">
@@ -124,7 +100,10 @@ WELCOME TO AKWA_OS
 
 
 
+
+
 <div class="desktop-icons">
+
 
 
 <div class="icon"
@@ -134,11 +113,14 @@ ondblclick="openWindow('computer')">
 <div class="computer icon-image"></div>
 
 <span>
+
 MY COMPUTER
+
 </span>
 
 
 </div>
+
 
 
 
@@ -148,16 +130,21 @@ ondblclick="openWindow('console')">
 
 
 <div class="terminal icon-image">
-&gt;_
+
+>_
+
 </div>
 
 
 <span>
+
 CONSOLE
+
 </span>
 
 
 </div>
+
 
 
 
@@ -167,12 +154,16 @@ ondblclick="openWindow('game')">
 
 
 <div class="game icon-image">
+
 ◆
+
 </div>
 
 
 <span>
+
 GAME 01
+
 </span>
 
 
@@ -181,6 +172,8 @@ GAME 01
 
 
 </div>
+
+
 
 
 
@@ -195,11 +188,16 @@ GAME 01
 
 MY COMPUTER
 
+
 <button onclick="closeWindow('computer')">
+
 X
+
 </button>
 
+
 </div>
+
 
 
 <div class="window-content">
@@ -210,26 +208,34 @@ AKWA_OS COMPUTER
 
 
 SYSTEM:
-AkwaOS 0.7.13
+
+AKWAOS 0.7.13
 
 
 CPU:
-UNKNOWN
+
+UNKNOWN PROCESSOR
 
 
-RAM:
+MEMORY:
+
 640 KB
 
 
 NETWORK:
-ONLINE
+
+CONNECTED
 
 
 </pre>
 
-</div>
 
 </div>
+
+
+</div>
+
+
 
 
 
@@ -242,10 +248,14 @@ ONLINE
 
 <div class="window-header">
 
+
 AKWA TERMINAL
 
+
 <button onclick="closeWindow('console')">
+
 X
+
 </button>
 
 
@@ -265,11 +275,9 @@ TYPE "help"
 </pre>
 
 
-<div class="input-line">
+<div>
 
-<span>
 AKWA_OS&gt;
-</span>
 
 <input id="terminalInput">
 
@@ -287,31 +295,42 @@ AKWA_OS&gt;
 
 
 
+
+
 <div class="window" id="game">
 
 
 <div class="window-header">
 
+
 GAME_01.EXE
 
+
 <button onclick="closeWindow('game')">
+
 X
+
 </button>
 
 
 </div>
 
 
+
 <div class="window-content">
 
 
 <h1>
+
 GAME 01
+
 </h1>
 
 
 <button onclick="startGame()">
+
 START
+
 </button>
 
 
@@ -329,11 +348,17 @@ START
 
 
 
+
+
 <div class="taskbar">
 
+
 <span>
+
 AKWA_OS ONLINE
+
 </span>
+
 
 
 <span id="clock"></span>
@@ -343,7 +368,10 @@ AKWA_OS ONLINE
 
 
 
+
+
 </div>
+
 
 
 
@@ -352,5 +380,6 @@ AKWA_OS ONLINE
 
 
 </body>
+
 
 </html>
