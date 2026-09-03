@@ -1971,3 +1971,87 @@ body {
   box-shadow: inset 0 0 0 1px rgba(238,129,118,.28);
 }
 
+
+
+/* ===== MAY WONDERS NO / PERSONNEL UPDATE 04 ===== */
+
+.file-row--may {
+  position: relative;
+  color: var(--text);
+}
+
+.file-row--may::after {
+  content: "";
+  position: absolute;
+  left: 28%;
+  right: 9%;
+  bottom: 5px;
+  height: 1px;
+  background: rgba(180,154,232,.36);
+  opacity: .34;
+  pointer-events: none;
+}
+
+.file-row--may:hover {
+  border-color: rgba(180,154,232,.35);
+  background: rgba(180,154,232,.055);
+}
+
+.file-row--may .file-row__icon {
+  color: #b49ae8;
+}
+
+.may-vanishing {
+  pointer-events: none;
+  animation:
+    mayRowDislocate .17s steps(2, end) infinite,
+    mayRowFade 2.35s linear forwards;
+  transform-origin: center left;
+}
+
+.may-vanishing::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 4px,
+      rgba(180,154,232,.11) 4px 5px
+    );
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.may-vanishing--phase2 {
+  filter: blur(.7px) contrast(1.35);
+}
+
+@keyframes mayRowDislocate {
+  0%   { transform: translate(0,0); }
+  25%  { transform: translate(2px,0); }
+  50%  { transform: translate(-2px,1px); }
+  75%  { transform: translate(1px,-1px); }
+  100% { transform: translate(0,0); }
+}
+
+@keyframes mayRowFade {
+  0%   { opacity: 1; max-height: 64px; }
+  20%  { opacity: .92; }
+  36%  { opacity: .38; }
+  48%  { opacity: .82; }
+  63%  { opacity: .19; }
+  76%  { opacity: .52; }
+  91%  { opacity: .05; }
+  100% { opacity: 0; max-height: 0; padding-top: 0; padding-bottom: 0; border-width: 0; }
+}
+
+.may-system-stutter .crt-overlay {
+  animation: mayCrtStutter .14s steps(2,end) infinite;
+}
+
+@keyframes mayCrtStutter {
+  0%   { transform: translateY(0); opacity: .35; }
+  50%  { transform: translateY(1px); opacity: .52; }
+  100% { transform: translateY(-1px); opacity: .35; }
+}
