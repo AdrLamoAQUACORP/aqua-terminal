@@ -15,25 +15,60 @@
         body {
             margin: 0;
             padding: 0;
-
             width: 100%;
             height: 100%;
-
-            background: #050505;
-            color: #00ff66;
-
+            background: #020302;
+            color: #d8d69a;
             font-family: "Courier New", monospace;
         }
 
         body {
             min-height: 100vh;
             overflow: hidden;
-
             display: flex;
             justify-content: center;
             align-items: center;
-
             text-align: center;
+            position: relative;
+            background: radial-gradient(ellipse at center, #10140e 0%, #030403 62%, #000 100%);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 50;
+            background: repeating-linear-gradient(to bottom, rgba(220,220,150,.035) 0 1px, transparent 1px 4px);
+            mix-blend-mode: screen;
+            animation: scanlines .12s linear infinite;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: -10%;
+            pointer-events: none;
+            z-index: 51;
+            background: radial-gradient(ellipse at center, transparent 48%, rgba(0,0,0,.72) 100%);
+            animation: crtFlicker .18s infinite;
+        }
+
+        @keyframes scanlines {
+            from { transform: translateY(0); }
+            to { transform: translateY(4px); }
+        }
+
+        @keyframes crtFlicker {
+            0%,100% { opacity:.82; }
+            50% { opacity:.88; }
+        }
+
+        @keyframes screenJitter {
+            0%,100% { transform:translate(-50%,-50%); }
+            25% { transform:translate(calc(-50% + .5px),calc(-50% - .3px)); }
+            50% { transform:translate(calc(-50% - .4px),calc(-50% + .4px)); }
+            75% { transform:translate(calc(-50% + .3px),calc(-50% + .2px)); }
         }
 
         /* ================================
@@ -55,34 +90,31 @@
         #startup-title {
             font-size: 28px;
             letter-spacing: 4px;
+            color: #d8d69a;
+            text-shadow: 0 0 8px rgba(210,210,150,.35);
         }
 
         #startup-subtitle {
-            color: #777;
+            color: #77775f;
             font-size: 14px;
             letter-spacing: 2px;
         }
 
         #start-button {
             margin-top: 20px;
-
             padding: 15px 40px;
-
-            background: transparent;
-
-            border: 1px solid #00ff66;
-
-            color: #00ff66;
-
+            background: rgba(0,0,0,.35);
+            border: 1px solid #bdbd80;
+            color: #d8d69a;
             font-family: "Courier New", monospace;
             font-size: 16px;
-
             cursor: pointer;
+            box-shadow: 0 0 14px rgba(190,190,120,.08);
         }
 
         #start-button:hover {
-            background: #00ff66;
-            color: #050505;
+            background: rgba(190,190,120,.12);
+            box-shadow: 0 0 20px rgba(190,190,120,.18);
         }
 
         /* ================================
@@ -91,26 +123,50 @@
 
         #terminal {
             display: none;
-
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-
-            width: 90vw;
-            max-width: 900px;
-            height: 70vh;
+            transform: translate(-50%,-50%);
+            width: min(94vw,1100px);
+            height: min(82vh,760px);
             min-height: 400px;
-
-            padding: 30px;
-
-            border: 1px solid #00ff66;
-
-            box-shadow:
-                0 0 20px rgba(0, 255, 102, 0.2);
-
+            padding: 34px 42px;
+            border: 10px solid #171a14;
+            border-radius: 24px;
+            background: #050704;
+            box-shadow: 0 0 0 2px #3a3b2b, 0 0 35px rgba(190,190,120,.12), inset 0 0 70px rgba(0,0,0,.95);
             flex-direction: column;
             overflow: hidden;
+            animation: screenJitter .16s steps(2,end) infinite;
+        }
+
+        #terminal::before {
+            content:"";
+            position:absolute;
+            inset:0;
+            pointer-events:none;
+            border-radius:14px;
+            background: linear-gradient(rgba(255,255,210,.025),rgba(0,0,0,.08)), repeating-linear-gradient(0deg,transparent 0 3px,rgba(220,220,150,.035) 4px);
+            box-shadow:inset 0 0 90px rgba(0,0,0,.8);
+            z-index:2;
+        }
+
+        #terminal::after {
+            content:"";
+            position:absolute;
+            left:0; right:0;
+            height:3px;
+            top:30%;
+            background:rgba(220,220,150,.045);
+            box-shadow:0 0 12px rgba(220,220,150,.08);
+            pointer-events:none;
+            z-index:3;
+            animation:beam 5s linear infinite;
+        }
+
+        @keyframes beam {
+            from {top:-5%;}
+            to {top:105%;}
         }
 
         #output {
@@ -120,26 +176,20 @@
             overflow-y: auto;
             overflow-x: hidden;
 
-            text-align: center;
-
+            text-align: left;
+            padding: 10px 8px 15px;
+            color: #d8d69a;
+            text-shadow: 0 0 5px rgba(215,210,145,.25);
+            position: relative;
+            z-index: 4;
             padding-bottom: 15px;
         }
 
-        .system {
-            color: #999;
-        }
-
-        .success {
-            color: #ffff33;
-        }
-
-        .error {
-            color: #ff3333;
-        }
-
-        .warning {
-            color: #ffaa00;
-        }
+        .system { color:#85856d; }
+        .success { color:#e4e39a; text-shadow:0 0 8px rgba(225,225,145,.35); }
+        .error { color:#c37d62; }
+        .warning { color:#c1ae67; }
+        .command { color:#b8a8c8; text-shadow:0 0 5px rgba(184,168,200,.22); }
 
         #input-line {
             display: none;
@@ -154,13 +204,14 @@
             margin-top: 15px;
             padding-top: 15px;
 
-            border-top: 1px solid rgba(0, 255, 102, 0.25);
-
-            background: #050505;
+            border-top: 1px solid rgba(190,190,120,.16);
+            background: rgba(2,3,2,.92);
+            position: relative;
+            z-index: 5;
         }
 
         #prompt {
-            color: #00aaff;
+            color: #a9a86f;
             margin-right: 10px;
         }
 
@@ -172,7 +223,9 @@
             border: none;
             outline: none;
 
-            color: #00ff66;
+            color: #d7d2aa;
+            caret-color: #d7d2aa;
+            text-shadow: 0 0 5px rgba(215,210,170,.28);
 
             font-family: "Courier New", monospace;
             font-size: 16px;
@@ -270,6 +323,132 @@
             });
         }
 
+
+        /* ================================
+           ЗВУК СТАРОГО ПК / ЭЛТ
+           ================================ */
+
+        let audioContext = null;
+        let masterGain = null;
+        let humOscillator = null;
+        let humGain = null;
+        let fanSource = null;
+        let fanGain = null;
+        let keyBuffer = null;
+        let powerBuffer = null;
+
+        function createNoiseBuffer(duration = 0.5) {
+            const length = Math.floor(audioContext.sampleRate * duration);
+            const buffer = audioContext.createBuffer(1, length, audioContext.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < length; i++) {
+                data[i] = Math.random() * 2 - 1;
+            }
+            return buffer;
+        }
+
+        function initAudio() {
+            if (audioContext) {
+                if (audioContext.state === "suspended") audioContext.resume();
+                return;
+            }
+
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+            masterGain = audioContext.createGain();
+            masterGain.gain.value = 0.32;
+            masterGain.connect(audioContext.destination);
+
+            // Низкое постоянное гудение старого блока питания / трансформатора.
+            humOscillator = audioContext.createOscillator();
+            humGain = audioContext.createGain();
+            humOscillator.type = "sine";
+            humOscillator.frequency.value = 58;
+            humGain.gain.value = 0.028;
+            humOscillator.connect(humGain);
+            humGain.connect(masterGain);
+            humOscillator.start();
+
+            // Вторичная гармоника делает гудение менее синтетическим.
+            const hum2 = audioContext.createOscillator();
+            const hum2Gain = audioContext.createGain();
+            hum2.type = "sine";
+            hum2.frequency.value = 116;
+            hum2Gain.gain.value = 0.008;
+            hum2.connect(hum2Gain);
+            hum2Gain.connect(masterGain);
+            hum2.start();
+
+            // Тихий шум вентилятора / электроники.
+            const fan = audioContext.createBufferSource();
+            fan.buffer = createNoiseBuffer(1);
+            fan.loop = true;
+            const filter = audioContext.createBiquadFilter();
+            filter.type = "lowpass";
+            filter.frequency.value = 850;
+            fanGain = audioContext.createGain();
+            fanGain.gain.value = 0.018;
+            fan.connect(filter);
+            filter.connect(fanGain);
+            fanGain.connect(masterGain);
+            fan.start();
+            fanSource = fan;
+
+            keyBuffer = createNoiseBuffer(0.08);
+            powerBuffer = createNoiseBuffer(0.35);
+        }
+
+        function keySound() {
+            if (!audioContext || !keyBuffer) return;
+
+            const source = audioContext.createBufferSource();
+            const filter = audioContext.createBiquadFilter();
+            const gain = audioContext.createGain();
+            source.buffer = keyBuffer;
+            filter.type = "bandpass";
+            filter.frequency.value = 1700 + Math.random() * 900;
+            filter.Q.value = 0.7;
+            gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.07, audioContext.currentTime + 0.002);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.045);
+            source.connect(filter);
+            filter.connect(gain);
+            gain.connect(masterGain);
+            source.start();
+            source.stop(audioContext.currentTime + 0.05);
+        }
+
+        function powerOnSound() {
+            if (!audioContext || !powerBuffer) return;
+
+            const source = audioContext.createBufferSource();
+            const filter = audioContext.createBiquadFilter();
+            const gain = audioContext.createGain();
+            source.buffer = powerBuffer;
+            filter.type = "lowpass";
+            filter.frequency.value = 900;
+            gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.16, audioContext.currentTime + 0.04);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.7);
+            source.connect(filter);
+            filter.connect(gain);
+            gain.connect(masterGain);
+            source.start();
+            source.stop(audioContext.currentTime + 0.75);
+
+            const bootOsc = audioContext.createOscillator();
+            const bootGain = audioContext.createGain();
+            bootOsc.type = "sawtooth";
+            bootOsc.frequency.setValueAtTime(90, audioContext.currentTime);
+            bootOsc.frequency.exponentialRampToValueAtTime(42, audioContext.currentTime + 0.8);
+            bootGain.gain.setValueAtTime(0.0001, audioContext.currentTime);
+            bootGain.gain.exponentialRampToValueAtTime(0.035, audioContext.currentTime + 0.12);
+            bootGain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.9);
+            bootOsc.connect(bootGain);
+            bootGain.connect(masterGain);
+            bootOsc.start();
+            bootOsc.stop(audioContext.currentTime + 0.95);
+        }
 
         /* ================================
            ЗАГРУЗКА ПК
@@ -386,7 +565,7 @@
                 "Последний зарегистрированный пользователь:"
             );
 
-            print("ADRIAN LAMO", "success");
+            print("Adrian_lamo", "system");
 
             await sleep(500);
 
@@ -410,6 +589,9 @@
 
         button.addEventListener("click", function() {
 
+            initAudio();
+            powerOnSound();
+
             startup.style.display = "none";
 
             terminal.style.display = "flex";
@@ -432,6 +614,7 @@ const API_URL = "https://akwa-terminal-api.moskinasasa32.workers.dev";
         let loggedInAccessLevel = 0;
 
         input.addEventListener("keydown", async function(event) {
+            if (event.key.length === 1 || event.key === "Enter" || event.key === "Backspace") keySound();
             if (event.key !== "Enter") return;
 
             const value = input.value.trim();
@@ -527,7 +710,7 @@ const API_URL = "https://akwa-terminal-api.moskinasasa32.workers.dev";
 
             const command = value.toLowerCase();
 
-            print("AKWA_OS: " + value);
+            print("AKWA_OS: " + value, "command");
 
             if (command === "help") {
                 print("");
@@ -585,34 +768,21 @@ const API_URL = "https://akwa-terminal-api.moskinasasa32.workers.dev";
 
                 try {
                     const response = await fetch(API_URL + "/personnel", {
-                        method: "GET",
+                        method: "POST",
                         headers: {
+                            "Content-Type": "application/json",
                             "Authorization": "Bearer " + sessionToken
                         }
                     });
 
                     const data = await response.json();
 
-                    if (data.success) {
+                    if (data.ok) {
                         print("ACCESS GRANTED", "success");
                         print("");
-                        print("PERSONNEL DATABASE");
-                        print("");
 
-                        if (Array.isArray(data.records)) {
-                            data.records.forEach(record => {
-                                print("--------------------------------");
-                                print("EMPLOYEE ID ......... " + record.employee_id);
-                                print("NAME ................ " + record.name);
-                                print("POSITION ............ " + record.position);
-                                print("STATUS .............. " + record.status);
-                                print("CLEARANCE ........... " + String(record.clearance).padStart(2, "0"));
-                                print("BIOMETRIC ........... " + (record.biometric_status || "N/A"));
-                                print("");
-                                print("NOTES:");
-                                print(record.notes || "NONE");
-                            });
-                            print("--------------------------------");
+                        if (Array.isArray(data.data)) {
+                            data.data.forEach(line => print(line));
                         }
                     } else {
                         print(data.error || "ACCESS DENIED", "error");
