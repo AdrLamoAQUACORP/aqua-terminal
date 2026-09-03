@@ -2233,3 +2233,489 @@ body {
   45% { opacity: .34; }
   46% { opacity: 1; }
 }
+
+
+/* ===== ARG STAGE-AWARE HIGHLIGHTING / UPDATE 11 ===== */
+
+/* Все ARG-фрагменты по умолчанию выглядят как обычный текст. */
+.arg-clue-stage1,
+.arg-clue-stage2 {
+  animation: none !important;
+  transform: none !important;
+  filter: none !important;
+  text-shadow: none !important;
+  background: transparent !important;
+  border-left-color: transparent !important;
+  color: inherit !important;
+  opacity: 1 !important;
+}
+
+.arg-clue-stage1::before,
+.arg-clue-stage1::after,
+.arg-clue-stage2::before,
+.arg-clue-stage2::after {
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+/* ЭТАП 1: глючат только OPEN / A17 / PREVIOUS_SESSION / .LOG */
+body.arg-stage-1 .arg-clue-stage1 {
+  position: relative;
+  display: inline-block;
+  width: max-content;
+  max-width: 100%;
+  color: #d7fff1 !important;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-shadow:
+    1px 0 rgba(238,129,118,.38),
+    -1px 0 rgba(120,184,232,.32) !important;
+  animation:
+    argFragmentShift 2.8s steps(2,end) infinite,
+    argFragmentBlink 4.4s steps(1,end) infinite !important;
+}
+
+/* OPEN остаётся чуть заметнее остальных подсказок первого этапа. */
+body.arg-stage-1 .arg-clue-stage1.arg-fragment-glitch--open {
+  color: #f5ffe9 !important;
+  background: rgba(145,227,125,.055) !important;
+  border-left: 2px solid rgba(145,227,125,.45) !important;
+  padding-left: 7px;
+  animation:
+    openFragmentGlitch .78s steps(2,end) infinite,
+    openFragmentBlink 2.1s steps(1,end) infinite !important;
+}
+
+body.arg-stage-1 .arg-clue-stage1::before {
+  animation: argFragmentGhostA 3.1s steps(2,end) infinite !important;
+}
+
+body.arg-stage-1 .arg-clue-stage1::after {
+  animation: argFragmentGhostB 2.7s steps(2,end) infinite !important;
+}
+
+/* ЭТАП 2: первый набор погас, глючат только BIO / ID / .CHK */
+body.arg-stage-2 .arg-clue-stage2 {
+  position: relative;
+  display: inline-block;
+  width: max-content;
+  max-width: 100%;
+  color: #fff0c6 !important;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-shadow:
+    2px 0 rgba(238,129,118,.5),
+    -2px 0 rgba(120,184,232,.42) !important;
+  animation:
+    argStage2Shift 2.15s steps(2,end) infinite,
+    argStage2Blink 3.3s steps(1,end) infinite !important;
+}
+
+body.arg-stage-2 .arg-clue-stage2::before {
+  animation: argFragmentGhostA 2.2s steps(2,end) infinite !important;
+}
+
+body.arg-stage-2 .arg-clue-stage2::after {
+  animation: argFragmentGhostB 2.0s steps(2,end) infinite !important;
+}
+
+/* После решения второго ARG никакие командные фрагменты больше не глючат. */
+body.arg-stage-complete .arg-clue-stage1,
+body.arg-stage-complete .arg-clue-stage2 {
+  animation: none !important;
+  text-shadow: none !important;
+  color: inherit !important;
+}
+
+
+/* =========================================================
+   ARG 3 / IXION REQUEST + DEFENSE SEQUENCE / UPDATE 12
+   ========================================================= */
+
+.arg3-only,
+.arg3-recovered-only {
+  display: none;
+}
+
+body.arg-stage-3 .arg3-only {
+  display: block;
+}
+
+body.arg-stage-3-ready .arg3-recovered-only,
+body.arg-stage-complete .arg3-recovered-only {
+  display: block;
+}
+
+/* Stage 3 clues are normal unless Stage 3 is active */
+.arg-clue-stage3 {
+  animation: none !important;
+  transform: none !important;
+  filter: none !important;
+  text-shadow: none !important;
+  color: inherit !important;
+  opacity: 1 !important;
+}
+
+.arg-clue-stage3::before,
+.arg-clue-stage3::after {
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+body.arg-stage-3 .arg-clue-stage3 {
+  position: relative;
+  display: inline-block;
+  width: max-content;
+  max-width: 100%;
+  color: #ffe6a8 !important;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-shadow:
+    2px 0 rgba(238,129,118,.55),
+    -2px 0 rgba(180,154,232,.52) !important;
+  animation:
+    arg3ClueShift 1.8s steps(2,end) infinite,
+    arg3ClueBlink 2.7s steps(1,end) infinite !important;
+}
+
+@keyframes arg3ClueShift {
+  0%, 72%, 100% { transform: translate(0,0); }
+  75% { transform: translate(3px,0); }
+  78% { transform: translate(-2px,1px); }
+  81% { transform: translate(2px,-1px); }
+  84% { transform: translate(0,0); }
+}
+
+@keyframes arg3ClueBlink {
+  0%, 56%, 62%, 100% { opacity: 1; }
+  57% { opacity: .18; }
+  59% { opacity: .8; }
+  61% { opacity: .26; }
+}
+
+.file-row--generated {
+  border-color: rgba(228,189,112,.3);
+  background: rgba(228,189,112,.035);
+}
+
+/* Pre-alarm chaos */
+body.arg3-prealarm #desktop {
+  animation: arg3DesktopBreak .13s steps(2,end) infinite;
+}
+
+@keyframes arg3DesktopBreak {
+  0% { transform: translate(0,0); filter: none; }
+  25% { transform: translate(2px,0); filter: contrast(1.08); }
+  50% { transform: translate(-2px,1px); }
+  75% { transform: translate(1px,-1px); filter: contrast(1.15); }
+  100% { transform: translate(0,0); }
+}
+
+.arg3-error-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 9800;
+  pointer-events: none;
+}
+
+.arg3-error-window {
+  position: absolute;
+  width: min(290px, 34vw);
+  min-width: 210px;
+  border: 1px solid #ee8176;
+  background: #050907;
+  box-shadow: 0 0 0 1px #111, 7px 7px 0 rgba(0,0,0,.4);
+  color: #e8f7ef;
+  animation: arg3ErrorSpawn .17s steps(2,end) both, arg3ErrorJitter .42s steps(2,end) infinite .18s;
+}
+
+.arg3-error-window__bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  background: #431917;
+  color: #ffd7d1;
+  padding: 5px 7px;
+  font-weight: 700;
+  letter-spacing: .05em;
+}
+
+.arg3-error-window__body {
+  display: grid;
+  gap: 5px;
+  padding: 12px;
+  font-size: 12px;
+}
+
+.arg3-error-window__body b {
+  color: #ee8176;
+}
+
+@keyframes arg3ErrorSpawn {
+  from { opacity: 0; transform: scale(.78) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes arg3ErrorJitter {
+  0%, 100% { transform: translate(0,0); }
+  33% { transform: translate(1px,0); }
+  66% { transform: translate(-1px,1px); }
+}
+
+/* Full-screen purge challenge */
+.arg3-defense {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  background:
+    radial-gradient(circle at center, rgba(48,12,12,.38), transparent 55%),
+    #020403;
+  color: #eef9f3;
+  overflow: hidden;
+}
+
+.arg3-defense__scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,.025) 0 1px,
+      transparent 1px 4px
+    );
+  animation: arg3DefenseScan 5s linear infinite;
+}
+
+@keyframes arg3DefenseScan {
+  from { transform: translateY(-10px); }
+  to { transform: translateY(10px); }
+}
+
+.arg3-defense__warning {
+  position: absolute;
+  top: 6vh;
+  left: 5vw;
+  right: 5vw;
+  text-align: center;
+  z-index: 2;
+}
+
+.arg3-defense__headline {
+  margin: .12em 0;
+  font-size: clamp(29px, 5.3vw, 78px);
+  line-height: .98;
+  font-weight: 900;
+  letter-spacing: .04em;
+  color: #ff9288;
+  text-shadow: 3px 0 #46110e, -2px 0 rgba(120,184,232,.22);
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+.arg3-defense__headline.is-dim {
+  opacity: .08;
+  transform: scale(.97);
+}
+
+.arg3-defense__workspace {
+  position: absolute;
+  inset: 32vh 7vw 7vh;
+  display: grid;
+  grid-template-columns: minmax(110px, 16vw) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 80px);
+  align-items: stretch;
+  z-index: 2;
+}
+
+.arg3-purge {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 8px;
+  min-height: 330px;
+}
+
+.arg3-purge__track {
+  position: relative;
+  border: 2px solid #ee8176;
+  background: rgba(0,0,0,.72);
+  overflow: hidden;
+}
+
+.arg3-purge__fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0%;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(238,129,118,.86) 0 8px,
+      rgba(108,24,21,.9) 8px 13px
+    );
+  box-shadow: 0 -8px 22px rgba(238,129,118,.28);
+  transition: height .16s linear;
+}
+
+.arg3-purge__grid {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0 9%,
+    rgba(255,255,255,.12) 9% 9.4%
+  );
+}
+
+.arg3-purge__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: #ffb1aa;
+  font-size: 12px;
+}
+
+.arg3-command-box {
+  align-self: center;
+  border: 1px solid rgba(238,129,118,.66);
+  background: rgba(2,8,5,.9);
+  box-shadow: 9px 9px 0 rgba(0,0,0,.32);
+  padding: clamp(18px, 3vw, 38px);
+}
+
+.arg3-command-box__source {
+  color: #e4bd70;
+  font-size: 12px;
+  letter-spacing: .09em;
+}
+
+.arg3-command-box__instruction {
+  margin-top: 8px;
+  color: #a6bac6;
+  font-size: 11px;
+}
+
+.arg3-command-box__prompt {
+  margin: clamp(20px, 4vh, 46px) 0;
+  color: #fff0c6;
+  font-size: clamp(22px, 4vw, 48px);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: .06em;
+  word-break: break-word;
+  animation: arg3PromptPulse 1.1s steps(2,end) infinite;
+}
+
+@keyframes arg3PromptPulse {
+  0%, 74%, 100% { opacity: 1; transform: translate(0,0); }
+  78% { opacity: .45; transform: translate(2px,0); }
+  82% { opacity: .88; transform: translate(-2px,1px); }
+}
+
+.arg3-defense-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(145,227,125,.45);
+  background: #000;
+  padding: 10px 12px;
+  color: #91e37d;
+}
+
+.arg3-defense-form input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #d9ffe0;
+  font: inherit;
+  text-transform: uppercase;
+}
+
+.arg3-defense-form input.is-error {
+  background: rgba(238,129,118,.16);
+}
+
+.arg3-defense__status {
+  margin-top: 10px;
+  color: #a6bac6;
+  font-size: 11px;
+  min-height: 1.4em;
+}
+
+body.arg3-defense-active .taskbar,
+body.arg3-defense-active .desktop-icons,
+body.arg3-defense-active .os-window {
+  pointer-events: none;
+}
+
+body.arg3-defense-failed .arg3-defense {
+  animation: arg3FailFlash .12s steps(2,end) infinite;
+}
+
+@keyframes arg3FailFlash {
+  0%,100% { filter: none; }
+  50% { filter: invert(.15) contrast(1.5); }
+}
+
+@media (max-width: 760px) {
+  .arg3-defense__workspace {
+    inset: 31vh 5vw 5vh;
+    grid-template-columns: 70px minmax(0,1fr);
+    gap: 18px;
+  }
+
+  .arg3-defense__headline {
+    font-size: clamp(24px, 8vw, 45px);
+  }
+
+  .arg3-command-box {
+    padding: 15px;
+  }
+}
+
+
+/* ===== ADRIAN RECOVERY NOTE / UPDATE 13 ===== */
+
+.arg3-adrian-hint {
+  margin-top: 14px;
+  padding: 10px 12px;
+  border-left: 2px solid rgba(228,189,112,.65);
+  background: rgba(228,189,112,.045);
+  color: #d8e2dc;
+  font-size: 12px;
+  line-height: 1.45;
+  position: relative;
+  overflow: hidden;
+}
+
+.arg3-adrian-hint::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -40%;
+  height: 28%;
+  background: rgba(255,255,255,.035);
+  animation: adrianHintScan 3.4s linear infinite;
+  pointer-events: none;
+}
+
+.arg3-adrian-hint span {
+  display: block;
+  color: #e4bd70;
+  font-size: 10px;
+  letter-spacing: .11em;
+  margin-bottom: 5px;
+}
+
+.arg3-adrian-hint p {
+  margin: 0;
+  color: #eef4f0;
+}
+
+@keyframes adrianHintScan {
+  from { transform: translateY(0); }
+  to { transform: translateY(520%); }
+}
