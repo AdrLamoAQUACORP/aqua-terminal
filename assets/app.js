@@ -11,6 +11,9 @@
     terminalHistory: [],
     historyIndex: 0,
     trace: 0,
+    entropy: Number(localStorage.getItem("akwaos.entropy") || 0),
+    corruptionStage: Number(localStorage.getItem("akwaos.corruptionStage") || 0),
+    lastReason: "",
     secretFlags: {
       ghostIndex: false
     }
@@ -95,6 +98,45 @@ route: SECURITY / A-17 / NIGHT
 значит они смотрят не туда."
 
 fragment ends.`
+    },
+    mail_shift: {
+      title: "MAIL // SECURITY DESK",
+      body: `FROM: SECURITY DESK
+TO: AQ-S17-441
+TIME: 02:31
+
+Пересменка задерживается на 18 минут.
+До прибытия смены сохранить пост A-17 и не покидать сектор без подтверждения.
+
+Отдельно:
+камера C-12 снова регистрирует движение при пустом коридоре.
+Техслужба считает это остаточной ошибкой сенсора.`
+    },
+    mail_archive: {
+      title: "MAIL // ARCHIVE CONTROL",
+      body: `FROM: ARCHIVE CONTROL
+TO: AQ-S17-441
+TIME: 02:53
+
+Ваш профиль повторно запросил старую схему лабораторного комплекса.
+
+Запрос отклонён:
+SEC-MAP / clearance 4 required.
+
+Если запрос создавался автоматически, сообщите системному администратору.`
+    },
+    mail_service: {
+      title: "MAIL // SYSTEM SERVICE",
+      body: `FROM: SYSTEM SERVICE
+TO: AQ-S17-441
+TIME: 03:09
+
+Плановая проверка локального профиля обнаружила расхождение одной биометрической контрольной суммы.
+
+Работа терминала разрешена.
+Повторная проверка назначена автоматически.
+
+REF: BIO-CACHE / AQ-S17-441`
     }
   };
 
@@ -102,7 +144,7 @@ fragment ends.`
     help() {
       return [
         "AVAILABLE COMMANDS",
-        "help, whoami, status, ls, dir, cat <file>, history, cls, clear, date, ver"
+        "help, whoami, status, ls, dir, cat <file>, history, cls, clear, date, ver, netstat, ps"
       ];
     },
     whoami() {
@@ -132,6 +174,27 @@ fragment ends.`
     },
     dir() {
       return commandTable.ls();
+    },
+    netstat() {
+      const rows = [
+        "LOCAL ROUTING TABLE",
+        "A-17     127.0.0.1     ACTIVE",
+        "ARCH-2   10.4.2.12     DEGRADED",
+        "SEC-C    10.4.7.03     PASSIVE",
+        "UPLINK   ---           DISABLED"
+      ];
+      if (state.corruptionStage >= 2) rows.push("???      10.4.?.??     UNRESOLVED");
+      return rows;
+    },
+    ps() {
+      const rows = [
+        "001 KERNEL.SYS       ACTIVE",
+        "014 WATCHDOG.EXE     ACTIVE",
+        "027 AQ_INDEXER       IDLE",
+        "041 SEC_CACHE        ACTIVE"
+      ];
+      if (state.corruptionStage >= 2) rows.push("0?? USER_SYNC         WAIT");
+      return rows;
     },
     history() {
       return state.terminalHistory.length ? state.terminalHistory : ["history empty"];
@@ -254,6 +317,10 @@ fragment ends.`
       terminal: "ТЕРМИНАЛ",
       personnel: "ПЕРСОНАЛ",
       research: "ИССЛЕДОВАНИЯ",
+      security: "SECURITY",
+      mail: "MAIL",
+      system: "SYSTEM",
+      network: "NETWORK",
       game: "CALIBRATE.EXE",
       trash: "УДАЛЁННОЕ",
       viewer: "FILE VIEWER"
@@ -284,8 +351,83 @@ fragment ends.`
     });
   }
 
+  function appendSystemEvent(message) {
+    const log = $("#system-event-log");
+    if (!log) return;
+    const p = document.createElement("p");
+    p.textContent = message;
+    log.appendChild(p);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function applyCorruptionStage(stage, announce = false) {
+    state.corruptionStage = Math.max(state.corruptionStage, stage);
+    localStorage.setItem("akwaos.corruptionStage", String(state.corruptionStage));
+
+    document.body.classList.toggle("system-corruption-1", state.corruptionStage >= 1);
+    document.body.classList.toggle("system-corruption-2", state.corruptionStage >= 2);
+    document.body.classList.toggle("system-corruption-3", state.corruptionStage >= 3);
+
+    const integrity = state.corruptionStage >= 3 ? 94.1 : state.corruptionStage >= 2 ? 96.2 : state.corruptionStage >= 1 ? 97.1 : 97.8;
+    const integrityValue = $("#integrity-value");
+    const integrityMeter = $("#integrity-meter");
+    const desktopIntegrity = $("#desktop-integrity-status");
+    if (integrityValue) integrityValue.textContent = `${integrity.toFixed(1)}%`;
+    if (integrityMeter) integrityMeter.style.width = `${integrity}%`;
+    if (desktopIntegrity) desktopIntegrity.textContent = `INTEGRITY: ${integrity.toFixed(1)}%`;
+
+    if (state.corruptionStage >= 2) {
+      const processList = $("#process-list");
+      if (processList && !$("#anomaly-process")) {
+        const row = document.createElement("div");
+        row.id = "anomaly-process";
+        row.innerHTML = `<span>0??</span><b>USER_SYNC</b><i>WAIT</i>`;
+        processList.appendChild(row);
+      }
+      $("#ghost-route-line")?.classList.remove("is-hidden");
+      $("#ghost-node")?.classList.remove("is-hidden");
+      const net = $("#desktop-net-status");
+      if (net) net.textContent = "NET: ISOLATED / TABLE DEGRADED";
+    }
+
+    if (state.corruptionStage >= 3) {
+      const security = $("#desktop-security-status");
+      if (security) security.textContent = "SECURITY: LEVEL 3 / CACHE MISMATCH";
+    }
+
+    if (announce) {
+      if (stage === 1) {
+        toast("RTC variance detected. System clock resynchronized.", true);
+        appendSystemEvent("[--:--] RTC variance corrected by WATCHDOG");
+      } else if (stage === 2) {
+        toast("Routing table variance. Local node count changed.", true);
+        appendSystemEvent("[--:--] unresolved local route added to cache");
+      } else if (stage === 3) {
+        toast("Profile cache validation failed. Session retained.", true);
+        appendSystemEvent("[--:--] BIO-CACHE checksum mismatch / session retained");
+      }
+      document.body.classList.add("glitch");
+      setTimeout(() => document.body.classList.remove("glitch"), 260);
+    }
+  }
+
+  function registerInteraction(reason = "generic") {
+    state.lastReason = reason;
+    state.entropy += 1;
+    localStorage.setItem("akwaos.entropy", String(state.entropy));
+
+    if (state.entropy >= 4 && state.corruptionStage < 1) {
+      applyCorruptionStage(1, true);
+    } else if (state.entropy >= 9 && state.corruptionStage < 2) {
+      applyCorruptionStage(2, true);
+    } else if (state.entropy >= 15 && state.corruptionStage < 3) {
+      applyCorruptionStage(3, true);
+    }
+  }
+
   function openWindow(id) {
     clickTone();
+    registerInteraction(`open:${id}`);
     const win = $(`[data-window="${id}"]`);
     if (!win) return;
     win.classList.remove("is-hidden");
@@ -345,6 +487,7 @@ fragment ends.`
   }
 
   function openFile(key) {
+    registerInteraction(`file:${key}`);
     const item = fileContents[key];
     if (!item) return;
     const viewer = $("#file-viewer");
@@ -376,6 +519,7 @@ fragment ends.`
 
     state.terminalHistory.push(command);
     state.historyIndex = state.terminalHistory.length;
+    registerInteraction(`cmd:${command.split(/\s+/)[0].toLowerCase()}`);
     terminalPrint([`A:\\USERS\\ALAMO>${command}`], "term-dim");
 
     const [head, ...rest] = command.split(/\s+/);
@@ -516,6 +660,51 @@ fragment ends.`
     });
   }
 
+  function setupSecurity() {
+    $("#security-map-button")?.addEventListener("click", () => {
+      registerInteraction("security:map");
+      errorTone();
+      toast("SEC-MAP: clearance 4 required. Request written to audit cache.");
+      appendSystemEvent("[--:--] denied SEC-MAP request by AQ-S17-441");
+    });
+  }
+
+  function setupMail() {
+    $$(".mail-row").forEach(row => {
+      row.addEventListener("click", () => {
+        openFile(row.dataset.file);
+        row.querySelector(".mail-row__flag").textContent = "○";
+      });
+    });
+  }
+
+  function setupNetwork() {
+    $$(".network-node").forEach(node => {
+      node.addEventListener("click", () => {
+        registerInteraction(`network:${node.dataset.node}`);
+        const detail = $("#network-detail");
+        const key = node.dataset.node;
+        const details = {
+          "A-17": "A-17 // local workstation // current session AQ-S17-441",
+          "ARCH-2": "ARCH-2 // archival index // degraded response / read-only",
+          "SEC-C": "SEC-C // security cache // passive routing only",
+          "UNKNOWN": "Route entry has no registered hostname. Source field is blank."
+        };
+        if (detail) detail.textContent = details[key] || "No node data.";
+        if (key === "UNKNOWN") {
+          errorTone();
+          appendSystemEvent("[--:--] unresolved route queried from A-17");
+        } else {
+          clickTone();
+        }
+      });
+    });
+  }
+
+  function restoreCorruptionState() {
+    applyCorruptionStage(state.corruptionStage, false);
+  }
+
   function init() {
     updateClock();
     setInterval(updateClock, 1000);
@@ -548,6 +737,10 @@ fragment ends.`
     setupCalibration();
     setupHiddenTrace();
     setupMenu();
+    setupSecurity();
+    setupMail();
+    setupNetwork();
+    restoreCorruptionState();
   }
 
   init();

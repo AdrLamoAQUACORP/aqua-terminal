@@ -1,15 +1,15 @@
 :root {
-  --bg: #050a09;
-  --panel: #0a1513;
-  --panel-2: #0d1d1a;
-  --line: rgba(139, 255, 218, 0.22);
-  --line-strong: rgba(139, 255, 218, 0.48);
-  --text: #b9ffe8;
-  --text-dim: #6eaa99;
-  --accent: #7fffd4;
-  --amber: #d8b267;
-  --danger: #e87b6f;
-  --shadow: 0 18px 70px rgba(0, 0, 0, 0.55);
+  --bg: #d9d2bc;
+  --panel: #e2dcc8;
+  --panel-2: #cdc6b0;
+  --line: rgba(44, 48, 57, 0.18);
+  --line-strong: rgba(44, 48, 57, 0.78);
+  --text: #2a2f38;
+  --text-dim: #5b5e67;
+  --accent: #20252d;
+  --amber: #7d6040;
+  --danger: #7d4c47;
+  --shadow: 0 18px 70px rgba(0, 0, 0, 0.22);
   --mono: "Courier New", "Lucida Console", monospace;
 }
 
@@ -23,7 +23,7 @@ body {
   height: 100%;
   margin: 0;
   overflow: hidden;
-  background: #020504;
+  background: #d2cab4;
   color: var(--text);
   font-family: var(--mono);
 }
@@ -42,8 +42,8 @@ button {
   width: 100%;
   height: 100%;
   background:
-    radial-gradient(circle at 50% 40%, rgba(24, 88, 72, 0.12), transparent 42%),
-    linear-gradient(180deg, #07100e 0%, #020504 100%);
+    radial-gradient(circle at 50% 40%, rgba(255,255,255,0.18), transparent 35%),
+    linear-gradient(180deg, #d9d2bc 0%, #cfc7b0 100%);
   isolation: isolate;
 }
 
@@ -69,8 +69,8 @@ button {
     linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.18) 50%),
     linear-gradient(90deg, rgba(255, 0, 0, 0.018), rgba(0, 255, 0, 0.008), rgba(0, 0, 255, 0.018));
   background-size: 100% 4px, 6px 100%;
-  mix-blend-mode: screen;
-  opacity: 0.8;
+  mix-blend-mode: multiply;
+  opacity: 0.35;
 }
 
 .noise-overlay {
@@ -94,16 +94,16 @@ button {
   place-items: center;
   padding: 24px;
   background:
-    linear-gradient(rgba(4, 11, 10, 0.83), rgba(1, 4, 4, 0.96)),
-    repeating-linear-gradient(90deg, transparent 0 28px, rgba(127,255,212,.025) 28px 29px),
-    repeating-linear-gradient(0deg, transparent 0 28px, rgba(127,255,212,.025) 28px 29px);
+    linear-gradient(rgba(226, 220, 200, 0.98), rgba(214, 206, 184, 0.98)),
+    repeating-linear-gradient(90deg, transparent 0 28px, rgba(42,47,56,.035) 28px 29px),
+    repeating-linear-gradient(0deg, transparent 0 28px, rgba(42,47,56,.035) 28px 29px);
 }
 
 .boot-gate__frame {
   width: min(960px, 100%);
   min-height: min(680px, calc(100vh - 48px));
   border: 1px solid var(--line-strong);
-  box-shadow: inset 0 0 45px rgba(64, 255, 193, 0.035), var(--shadow);
+  box-shadow: inset 0 0 0 2px rgba(44,48,57,.08), var(--shadow);
   display: flex;
   flex-direction: column;
   padding: 18px;
@@ -151,7 +151,7 @@ button {
 
 .boot-gate__sigil::after {
   inset: 31px;
-  border-color: var(--accent);
+  border-color: #1e232b;
   opacity: 0.7;
 }
 
@@ -197,19 +197,19 @@ button {
 
 .system-button {
   border: 1px solid var(--line-strong);
-  background: rgba(11, 28, 24, 0.75);
+  background: #2a2f38;
   padding: 15px 24px;
   min-width: 260px;
   cursor: pointer;
   letter-spacing: 0.12em;
-  box-shadow: inset 0 0 20px rgba(127, 255, 212, 0.04);
+  box-shadow: inset 0 -3px 0 rgba(0,0,0,.18);
   transition: 0.2s ease;
 }
 
 .system-button:hover,
 .system-button:focus-visible {
-  border-color: var(--accent);
-  background: rgba(20, 53, 45, 0.78);
+  border-color: #1e232b;
+  background: #404552;
   outline: none;
   transform: translateY(-1px);
 }
@@ -220,12 +220,12 @@ button {
   height: 7px;
   margin-right: 10px;
   background: var(--accent);
-  box-shadow: 0 0 10px var(--accent);
+  box-shadow: 0 0 0 transparent;
   vertical-align: 1px;
 }
 
 .boot-screen {
-  background: #020504;
+  background: #d2cab4;
   padding: clamp(28px, 5vw, 72px);
   display: grid;
   grid-template-rows: 1fr auto;
@@ -300,7 +300,7 @@ button {
   min-height: 154px;
   font-size: 12px;
   line-height: 1.55;
-  color: #8ce8c8;
+  color: #2a2f38;
 }
 
 .boot-line {
@@ -310,11 +310,11 @@ button {
 }
 
 .boot-line__code {
-  color: #4e796d;
+  color: #666a73;
 }
 
 .boot-line__status {
-  color: var(--accent);
+  color: #1e232b;
 }
 
 .boot-line__status.warn {
@@ -323,7 +323,7 @@ button {
 
 .boot-console__progress {
   height: 3px;
-  background: rgba(127,255,212,.09);
+  background: rgba(42,47,56,.12);
   margin-top: 12px;
   overflow: hidden;
 }
@@ -339,8 +339,8 @@ button {
 
 .desktop {
   background:
-    radial-gradient(circle at 64% 32%, rgba(26, 115, 91, .13), transparent 27%),
-    linear-gradient(135deg, #07100e 0%, #091411 42%, #020504 100%);
+    radial-gradient(circle at 68% 24%, rgba(255,255,255,.1), transparent 18%),
+    linear-gradient(135deg, #2d313b 0%, #343843 42%, #262b33 100%);
   overflow: hidden;
   opacity: 0;
 }
@@ -371,13 +371,14 @@ button {
   top: 47%;
   transform: translate(-50%, -50%);
   text-align: center;
-  opacity: 0.055;
+  opacity: 0.11;
   user-select: none;
 }
 
 .desktop__watermark span {
   display: block;
   font-size: clamp(120px, 22vw, 320px);
+  color: rgba(232, 225, 205, .28);
   letter-spacing: -0.08em;
 }
 
@@ -395,51 +396,56 @@ button {
 }
 
 .desktop-icon {
-  width: 98px;
-  min-height: 86px;
-  border: 1px solid transparent;
-  background: transparent;
+  width: 102px;
+  min-height: 96px;
+  border: 2px solid rgba(233, 226, 206, 0.95);
+  background: rgba(231, 224, 204, 0.98);
   cursor: pointer;
-  padding: 8px 5px;
+  padding: 10px 6px 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  color: var(--text);
+  color: #1f242c;
   font-size: 11px;
   text-align: center;
+  box-shadow: 4px 4px 0 rgba(15, 17, 21, 0.45);
 }
 
 .desktop-icon:hover,
 .desktop-icon:focus-visible {
-  border-color: rgba(127,255,212,.25);
-  background: rgba(127,255,212,.06);
+  border-color: #ffffff;
+  background: #f0ead8;
   outline: none;
+  transform: translate(-1px, -1px);
+  box-shadow: 6px 6px 0 rgba(15, 17, 21, 0.55);
 }
 
 .desktop-icon img {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   image-rendering: pixelated;
-  opacity: 0.88;
+  opacity: 1;
+  filter: drop-shadow(0 1px 0 rgba(255,255,255,.32));
 }
 
 .desktop-icon--muted {
-  opacity: 0.68;
+  opacity: 0.88;
+  background: rgba(213, 205, 183, 0.92);
 }
 
 .desktop-status {
   position: absolute;
   top: 28px;
   right: 28px;
-  width: 230px;
-  border: 1px solid var(--line);
-  background: rgba(3, 11, 9, 0.58);
+  width: 240px;
+  border: 2px solid rgba(233, 226, 206, 0.95);
+  background: rgba(231, 224, 204, 0.95);
   padding: 12px 14px;
   font-size: 10px;
-  color: var(--text-dim);
+  color: #2a2f38;
   line-height: 1.8;
-  backdrop-filter: blur(4px);
+  box-shadow: 6px 6px 0 rgba(15,17,21,.35);
 }
 
 .status-dot,
@@ -458,12 +464,12 @@ button {
   right: 0;
   bottom: 0;
   height: 44px;
-  border-top: 1px solid var(--line-strong);
-  background: rgba(3, 10, 9, 0.94);
+  border-top: 2px solid rgba(233, 226, 206, .95);
+  background: #d8d0b8;
   display: flex;
   align-items: center;
   z-index: 900;
-  backdrop-filter: blur(8px);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.45);
 }
 
 .taskbar__start {
@@ -471,13 +477,13 @@ button {
   width: 92px;
   border: 0;
   border-right: 1px solid var(--line);
-  background: rgba(127,255,212,.05);
+  background: #2c3139;
   cursor: pointer;
   letter-spacing: 0.1em;
 }
 
 .taskbar__start:hover {
-  background: rgba(127,255,212,.12);
+  background: #3c4150;
 }
 
 .taskbar__divider {
@@ -495,8 +501,8 @@ button {
 }
 
 .taskbar-app {
-  border: 1px solid var(--line);
-  background: rgba(127,255,212,.04);
+  border: 1px solid rgba(44,48,57,.45);
+  background: rgba(233,226,206,.88);
   padding: 6px 10px;
   font-size: 10px;
   max-width: 140px;
@@ -504,6 +510,7 @@ button {
   overflow: hidden;
   text-overflow: ellipsis;
   cursor: pointer;
+  color: #1f242c;
 }
 
 .taskbar__clock {
@@ -530,9 +537,9 @@ button {
   width: min(680px, calc(100vw - 80px));
   min-width: 310px;
   max-height: calc(100vh - 90px);
-  border: 1px solid var(--line-strong);
-  background: rgba(5, 14, 12, 0.96);
-  box-shadow: 10px 16px 45px rgba(0,0,0,.55);
+  border: 2px solid rgba(38, 42, 50, 0.96);
+  background: rgba(230, 223, 202, 0.98);
+  box-shadow: 8px 8px 0 rgba(18,20,24,.52);
   z-index: 100;
   overflow: hidden;
 }
@@ -552,8 +559,8 @@ button {
 
 .os-window__bar {
   height: 34px;
-  border-bottom: 1px solid var(--line);
-  background: rgba(127,255,212,.055);
+  border-bottom: 2px solid rgba(38,42,50,.95);
+  background: #d9d2bc;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -562,6 +569,7 @@ button {
   letter-spacing: 0.08em;
   cursor: move;
   user-select: none;
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,.34);
 }
 
 .window-close {
@@ -575,8 +583,8 @@ button {
 }
 
 .window-close:hover {
-  background: rgba(232,123,111,.14);
-  color: #ffafa6;
+  background: rgba(42,47,56,.1);
+  color: #11161d;
 }
 
 .os-window__toolbar {
@@ -585,9 +593,10 @@ button {
   justify-content: space-between;
   align-items: center;
   padding: 0 11px;
-  color: var(--text-dim);
-  border-bottom: 1px solid rgba(127,255,212,.12);
+  color: #565962;
+  border-bottom: 1px solid rgba(42,47,56,.14);
   font-size: 9px;
+  background: rgba(255,255,255,.16);
 }
 
 .os-window__content {
@@ -617,8 +626,8 @@ button {
 }
 
 .file-row:hover {
-  background: rgba(127,255,212,.06);
-  border-color: rgba(127,255,212,.14);
+  background: rgba(42,47,56,.07);
+  border-color: rgba(42,47,56,.18);
 }
 
 .file-row small {
@@ -635,7 +644,7 @@ button {
 }
 
 .file-row__icon {
-  color: var(--accent);
+  color: #1e232b;
 }
 
 .terminal-body {
@@ -644,8 +653,8 @@ button {
   display: flex;
   flex-direction: column;
   background:
-    linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,.2)),
-    #020604;
+    linear-gradient(rgba(30,34,41,.04), rgba(30,34,41,.04)),
+    #f0ead6;
 }
 
 .terminal-output {
@@ -687,7 +696,7 @@ button {
   border: 0;
   outline: 0;
   background: transparent;
-  color: var(--accent);
+  color: #1e232b;
   min-width: 0;
 }
 
@@ -809,13 +818,13 @@ button {
 
 .mini-button {
   border: 1px solid var(--line-strong);
-  background: rgba(127,255,212,.06);
+  background: rgba(42,47,56,.07);
   padding: 9px 14px;
   cursor: pointer;
 }
 
 .mini-button:hover {
-  background: rgba(127,255,212,.12);
+  background: #3c4150;
 }
 
 .calibration__result {
@@ -849,13 +858,14 @@ button {
   right: 22px;
   bottom: 62px;
   width: min(370px, calc(100vw - 44px));
-  border: 1px solid var(--line-strong);
-  background: rgba(4, 13, 11, 0.97);
+  border: 2px solid rgba(233, 226, 206, .95);
+  background: rgba(234, 227, 208, 0.98);
   padding: 13px 15px;
   font-size: 11px;
-  box-shadow: var(--shadow);
+  box-shadow: 6px 6px 0 rgba(18,20,24,.34);
   z-index: 1000;
   animation: toastIn .22s ease;
+  color: #1f242c;
 }
 
 @keyframes toastIn {
@@ -916,5 +926,947 @@ button {
 
   .taskbar__clock {
     width: 68px;
+  }
+}
+
+
+/* ===== AKWAOS V2 MODULES ===== */
+
+.security-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  margin-bottom: 18px;
+}
+
+.security-summary article {
+  border: 1px solid var(--line);
+  padding: 12px;
+  background: rgba(127,255,212,.025);
+}
+
+.security-summary span,
+.security-summary small {
+  display: block;
+  color: var(--text-dim);
+  font-size: 9px;
+}
+
+.security-summary strong {
+  display: block;
+  margin: 8px 0 5px;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.section-label {
+  color: var(--text-dim);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: .12em;
+  border-bottom: 1px solid rgba(127,255,212,.12);
+  padding-bottom: 7px;
+  margin: 20px 0 8px;
+}
+
+.access-log > div,
+.process-list > div {
+  display: grid;
+  grid-template-columns: 76px 1fr 1fr auto;
+  gap: 9px;
+  padding: 8px 6px;
+  border-bottom: 1px solid rgba(127,255,212,.08);
+  font-size: 10px;
+}
+
+.access-log span,
+.process-list span {
+  color: var(--text-dim);
+}
+
+.access-log em,
+.access-log i,
+.process-list i {
+  font-style: normal;
+  color: var(--text-dim);
+}
+
+.access-log__warn {
+  color: var(--amber);
+}
+
+.mail-list {
+  padding: 7px;
+}
+
+.mail-row {
+  width: 100%;
+  border: 1px solid transparent;
+  border-bottom-color: rgba(127,255,212,.1);
+  background: transparent;
+  display: grid;
+  grid-template-columns: 20px 1fr auto;
+  gap: 9px;
+  align-items: center;
+  text-align: left;
+  padding: 12px 8px;
+  cursor: pointer;
+}
+
+.mail-row:hover {
+  border-color: rgba(127,255,212,.18);
+  background: rgba(42,47,56,.06);
+}
+
+.mail-row span {
+  display: block;
+}
+
+.mail-row small {
+  display: block;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+.mail-row time {
+  color: var(--text-dim);
+  font-size: 9px;
+}
+
+.mail-row__flag {
+  color: #1e232b;
+}
+
+.system-meter {
+  display: grid;
+  grid-template-columns: 150px 1fr 92px;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0;
+  font-size: 10px;
+}
+
+.system-meter > div {
+  height: 6px;
+  background: rgba(127,255,212,.08);
+  overflow: hidden;
+}
+
+.system-meter > div i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  opacity: .72;
+  transition: width .6s ease;
+}
+
+.system-meter b {
+  font-weight: 400;
+  color: var(--text-dim);
+  text-align: right;
+}
+
+.system-event-log {
+  border: 1px solid rgba(127,255,212,.12);
+  padding: 10px;
+  max-height: 130px;
+  overflow: auto;
+  background: rgba(0,0,0,.12);
+}
+
+.system-event-log p {
+  margin: 0 0 6px;
+  font-size: 10px;
+  color: var(--text-dim);
+}
+
+.system-event-log p:last-child {
+  margin-bottom: 0;
+}
+
+.network-banner {
+  border: 1px solid var(--line);
+  padding: 9px 11px;
+  color: var(--text-dim);
+  font-size: 10px;
+}
+
+.network-banner strong {
+  color: var(--amber);
+  font-weight: 400;
+}
+
+.network-map {
+  min-height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.network-node {
+  flex: 0 0 auto;
+  width: 105px;
+  min-height: 64px;
+  border: 1px solid var(--line-strong);
+  background: rgba(127,255,212,.035);
+  cursor: pointer;
+}
+
+.network-node b,
+.network-node span {
+  display: block;
+}
+
+.network-node b {
+  font-size: 12px;
+}
+
+.network-node span {
+  color: var(--text-dim);
+  font-size: 8px;
+  margin-top: 5px;
+}
+
+.network-node.is-current {
+  box-shadow: inset 0 0 20px rgba(127,255,212,.08);
+}
+
+.network-node--ghost {
+  border-style: dashed;
+  color: var(--amber);
+  opacity: .82;
+}
+
+.network-line {
+  flex: 0 0 42px;
+  height: 1px;
+  background: var(--line-strong);
+}
+
+.network-line--faint {
+  opacity: .35;
+}
+
+.network-line--ghost {
+  background: var(--amber);
+  opacity: .45;
+}
+
+.network-detail {
+  min-height: 48px;
+  border-top: 1px solid rgba(127,255,212,.12);
+  padding-top: 12px;
+  color: var(--text-dim);
+  font-size: 10px;
+}
+
+.system-corruption-1 .taskbar__clock {
+  animation: clockPulse 6s infinite;
+}
+
+@keyframes clockPulse {
+  0%, 88%, 100% { opacity: 1; }
+  90% { opacity: .15; }
+  92% { opacity: 1; }
+  94% { opacity: .3; }
+  96% { opacity: 1; }
+}
+
+.system-corruption-2 .desktop__watermark {
+  opacity: .075;
+}
+
+.system-corruption-3 .crt-overlay {
+  opacity: .9;
+}
+
+@media (max-width: 720px) {
+  .security-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .access-log > div,
+  .process-list > div {
+    grid-template-columns: 72px 1fr;
+  }
+
+  .access-log em,
+  .access-log i,
+  .process-list i {
+    grid-column: 2;
+  }
+
+  .system-meter {
+    grid-template-columns: 1fr 74px;
+  }
+
+  .system-meter > div {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+
+
+/* ===== AKWAOS V3 VISUAL RETRO TUNE ===== */
+
+.desktop-icon span {
+  display: block;
+  width: 100%;
+  padding: 1px 2px;
+  line-height: 1.2;
+  letter-spacing: .04em;
+  word-break: break-word;
+}
+
+.boot-gate h1,
+.akwa-logo,
+.desktop__watermark span,
+.os-window__bar,
+.taskbar__start,
+.window-close,
+.section-label,
+.system-button {
+  font-weight: 700;
+}
+
+.taskbar__start,
+.system-button,
+.window-close,
+.mini-button,
+.desktop-icon,
+.taskbar-app,
+.mail-row,
+.file-row {
+  transition: .14s ease;
+}
+
+.research-grid article,
+.security-summary article,
+.calibration__score,
+.network-banner,
+.system-event-log,
+.dossier__photo {
+  background: rgba(255,255,255,.16);
+  border-width: 2px;
+}
+
+.viewer-content,
+.os-window__content,
+.terminal-output,
+.terminal-input-row input {
+  color: #232831;
+}
+
+.status-dot,
+.window-led,
+.system-button__lamp {
+  background: #2a2f38;
+  box-shadow: none;
+}
+
+
+/* ===== AKWAOS V4B — READABILITY ONLY ===== */
+
+/* Keep V3 window/icon appearance intact. Only improve text readability. */
+html,
+body {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.boot-gate__meta,
+.boot-gate__footer {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.eyebrow,
+.akwa-logo__sub,
+.boot-console__header {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.boot-gate__warning {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.system-button {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.boot-console__lines,
+.boot-line {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.desktop-icon {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.desktop-status {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.taskbar__start,
+.taskbar-app,
+.taskbar__clock {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.taskbar__clock small {
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.os-window__bar {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.os-window__toolbar {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.os-window__content {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.62;
+}
+
+.file-row {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.file-row small {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.terminal-output,
+.terminal-input-row {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.terminal-input-row input {
+  font-weight: 700;
+}
+
+.dossier__data {
+  font-size: 14px;
+}
+
+.research-grid h3 {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.research-grid p,
+.access-log > div,
+.process-list > div,
+.system-meter,
+.network-banner,
+.network-detail {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.research-code,
+.security-summary span,
+.security-summary small,
+.mail-row small,
+.mail-row time,
+.system-event-log p,
+.calibration__score span {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.section-label,
+.mail-row,
+.network-node b,
+.mini-button {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.security-summary strong {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.calibration__score strong {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.system-toast {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Restore a clean V3-style desktop. No photo/illustration. */
+.desktop::after {
+  display: none !important;
+}
+
+/* Replace the old subtle AKWA watermark with a clearer AKWA OS mark. */
+.desktop__watermark {
+  opacity: 0.105;
+  z-index: 1;
+}
+
+.desktop__watermark span {
+  font-size: 0 !important;
+  color: rgba(232, 225, 205, .55);
+  letter-spacing: .04em;
+}
+
+.desktop__watermark span::before {
+  content: "AKWA OS";
+  display: block;
+  font-size: clamp(92px, 17vw, 245px);
+  font-weight: 700;
+  letter-spacing: -.06em;
+  white-space: nowrap;
+}
+
+.desktop__watermark small {
+  opacity: .8;
+  font-size: clamp(9px, 1.1vw, 15px);
+  letter-spacing: .34em;
+}
+
+@media (max-width: 720px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+
+  .desktop-icon {
+    font-size: 12px;
+  }
+
+  .os-window__content {
+    font-size: 13px;
+  }
+
+  .desktop__watermark span::before {
+    font-size: clamp(70px, 20vw, 140px);
+  }
+}
+
+
+/* ==========================================================
+   AKWAOS — ALTERNATE THEME B
+   Original dark-green palette + differentiated window accents
+   ========================================================== */
+
+:root {
+  --bg: #050a09;
+  --panel: #0a1513;
+  --panel-2: #0d1d1a;
+  --line: rgba(139, 255, 218, 0.22);
+  --line-strong: rgba(139, 255, 218, 0.48);
+  --text: #c8ffec;
+  --text-dim: #82b7a7;
+  --accent: #7fffd4;
+  --amber: #e4bd70;
+  --danger: #ee8176;
+  --cold-blue: #78b8e8;
+  --violet: #b49ae8;
+  --teal: #62d6cf;
+  --steel: #9eafbd;
+  --orange: #e7a76b;
+  --shadow: 0 18px 70px rgba(0, 0, 0, 0.55);
+}
+
+/* Restore original dark AKWA environment */
+html,
+body {
+  background: #020504;
+  color: var(--text);
+}
+
+.app-shell {
+  background:
+    radial-gradient(circle at 50% 40%, rgba(24, 88, 72, 0.12), transparent 42%),
+    linear-gradient(180deg, #07100e 0%, #020504 100%);
+}
+
+.boot-gate {
+  background:
+    linear-gradient(rgba(4, 11, 10, 0.83), rgba(1, 4, 4, 0.96)),
+    repeating-linear-gradient(90deg, transparent 0 28px, rgba(127,255,212,.025) 28px 29px),
+    repeating-linear-gradient(0deg, transparent 0 28px, rgba(127,255,212,.025) 28px 29px);
+}
+
+.boot-screen {
+  background: #020504;
+}
+
+.boot-console__lines {
+  color: #91e9cc;
+}
+
+.boot-line__code {
+  color: #557e72;
+}
+
+.boot-line__status {
+  color: var(--accent);
+}
+
+.system-button {
+  color: var(--text);
+  background: rgba(11, 28, 24, 0.82);
+  border-color: var(--line-strong);
+  box-shadow: inset 0 0 20px rgba(127,255,212,.045);
+}
+
+.system-button:hover,
+.system-button:focus-visible {
+  background: rgba(20, 53, 45, 0.82);
+  border-color: var(--accent);
+}
+
+/* Desktop */
+.desktop {
+  background:
+    radial-gradient(circle at 64% 32%, rgba(26, 115, 91, .13), transparent 27%),
+    linear-gradient(135deg, #07100e 0%, #091411 42%, #020504 100%);
+}
+
+.desktop__watermark span,
+.desktop__watermark span::before {
+  color: rgba(127, 255, 212, .45);
+}
+
+.desktop__watermark {
+  opacity: .10;
+}
+
+.desktop__watermark span::before {
+  content: "AKWA OS";
+}
+
+.desktop__watermark small {
+  color: rgba(155, 221, 200, .68);
+}
+
+/* Icons return to dark transparent desktop style */
+.desktop-icon {
+  width: 102px;
+  min-height: 94px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text);
+  box-shadow: none;
+}
+
+.desktop-icon:hover,
+.desktop-icon:focus-visible {
+  border-color: rgba(127,255,212,.28);
+  background: rgba(127,255,212,.065);
+  transform: none;
+  box-shadow: inset 0 0 18px rgba(127,255,212,.025);
+}
+
+.desktop-icon img {
+  filter: none;
+}
+
+/* Original SVGs may be dark from V3. Make them readable on dark background
+   without altering the actual icon files. */
+.desktop-icon img {
+  filter:
+    brightness(0)
+    saturate(100%)
+    invert(87%)
+    sepia(27%)
+    saturate(733%)
+    hue-rotate(102deg)
+    brightness(103%)
+    contrast(101%);
+}
+
+.desktop-icon--muted {
+  opacity: .62;
+  background: transparent;
+}
+
+/* Status panel */
+.desktop-status {
+  border: 1px solid var(--line);
+  background: rgba(3, 11, 9, .68);
+  color: var(--text-dim);
+  box-shadow: none;
+  backdrop-filter: blur(4px);
+}
+
+/* Taskbar */
+.taskbar {
+  border-top: 1px solid var(--line-strong);
+  background: rgba(3, 10, 9, .95);
+  box-shadow: none;
+}
+
+.taskbar__start {
+  color: var(--text);
+  background: rgba(127,255,212,.055);
+}
+
+.taskbar__start:hover {
+  background: rgba(127,255,212,.12);
+}
+
+.taskbar-app {
+  color: var(--text);
+  border: 1px solid var(--line);
+  background: rgba(127,255,212,.04);
+}
+
+/* Base window style */
+.os-window {
+  border: 1px solid var(--window-accent, var(--line-strong));
+  background: rgba(5, 14, 12, .965);
+  box-shadow:
+    10px 16px 45px rgba(0,0,0,.55),
+    0 0 0 1px color-mix(in srgb, var(--window-accent, var(--accent)) 12%, transparent);
+  color: var(--text);
+}
+
+/* Fallback for browsers without color-mix */
+@supports not (color: color-mix(in srgb, black, white)) {
+  .os-window {
+    box-shadow: 10px 16px 45px rgba(0,0,0,.55);
+  }
+}
+
+.os-window__bar {
+  color: var(--window-accent, var(--text));
+  border-bottom: 1px solid var(--window-accent, var(--line));
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--window-accent, var(--accent)) 14%, #07100e) 0%,
+      rgba(127,255,212,.025) 72%
+    );
+  box-shadow: none;
+}
+
+@supports not (color: color-mix(in srgb, black, white)) {
+  .os-window__bar {
+    background: rgba(127,255,212,.055);
+  }
+}
+
+.os-window__toolbar {
+  color: var(--text-dim);
+  background: rgba(127,255,212,.018);
+  border-bottom: 1px solid rgba(127,255,212,.10);
+}
+
+.window-close {
+  color: var(--window-accent, var(--text));
+  border-left: 1px solid var(--window-accent, var(--line));
+}
+
+.window-close:hover {
+  background: rgba(255,255,255,.055);
+  color: #fff;
+}
+
+.window-led {
+  background: var(--window-accent, var(--accent));
+  box-shadow: 0 0 8px var(--window-accent, var(--accent));
+}
+
+/* ----------------------------------------------------------
+   DIFFERENTIATED WINDOW ACCENTS
+   ---------------------------------------------------------- */
+
+/* Archive: cyan */
+[data-window="files"],
+[data-window="viewer"] {
+  --window-accent: #7fffd4;
+}
+
+/* Terminal: bright green */
+[data-window="terminal"] {
+  --window-accent: #91e37d;
+}
+
+/* Personnel: amber */
+[data-window="personnel"] {
+  --window-accent: #e4bd70;
+}
+
+/* Research: muted violet */
+[data-window="research"] {
+  --window-accent: #b49ae8;
+}
+
+/* Security: restrained red / coral */
+[data-window="security"] {
+  --window-accent: #ee8176;
+}
+
+/* Mail: cold blue */
+[data-window="mail"] {
+  --window-accent: #78b8e8;
+}
+
+/* System: steel */
+[data-window="system"] {
+  --window-accent: #a6bac6;
+}
+
+/* Network: teal */
+[data-window="network"] {
+  --window-accent: #62d6cf;
+}
+
+/* Game: orange */
+[data-window="game"] {
+  --window-accent: #e7a76b;
+}
+
+/* Deleted: desaturated grey */
+[data-window="trash"] {
+  --window-accent: #8e9895;
+}
+
+/* Content areas stay dark; accents only guide the eye */
+.os-window__content {
+  color: var(--text);
+}
+
+.file-row,
+.mail-row {
+  color: var(--text);
+}
+
+.file-row:hover,
+.mail-row:hover {
+  background: rgba(127,255,212,.055);
+  border-color: rgba(127,255,212,.15);
+}
+
+.file-row small,
+.mail-row small,
+.mail-row time,
+.muted,
+.dossier__photo,
+.research-grid p,
+.system-meter b,
+.network-detail,
+.system-event-log p {
+  color: var(--text-dim);
+}
+
+/* Terminal remains recognizably dark even among other windows */
+.terminal-body {
+  background:
+    linear-gradient(rgba(0,0,0,.15), rgba(0,0,0,.15)),
+    #020604;
+  color: #baffdf;
+}
+
+.terminal-output,
+.terminal-input-row input {
+  color: #baffdf;
+}
+
+.terminal-output .term-dim {
+  color: #75998e;
+}
+
+.terminal-output .term-error {
+  color: var(--danger);
+}
+
+.terminal-output .term-warn {
+  color: var(--amber);
+}
+
+/* Cards / panels: preserve green base with subtle local accents */
+.research-grid article,
+.security-summary article,
+.calibration__score,
+.network-banner,
+.system-event-log,
+.dossier__photo {
+  background: rgba(127,255,212,.025);
+  border: 1px solid rgba(127,255,212,.16);
+}
+
+/* Window-specific secondary highlights */
+[data-window="research"] .research-code {
+  color: var(--violet);
+}
+
+[data-window="security"] .access-log__warn,
+[data-window="security"] .warning-line {
+  color: var(--danger);
+}
+
+[data-window="mail"] .mail-row__flag {
+  color: var(--cold-blue);
+}
+
+[data-window="network"] .network-node {
+  border-color: rgba(98,214,207,.45);
+}
+
+[data-window="network"] .network-node.is-current {
+  box-shadow: inset 0 0 20px rgba(98,214,207,.10);
+}
+
+[data-window="game"] .calibration__marker {
+  background: var(--orange);
+  box-shadow: 0 0 10px rgba(231,167,107,.52);
+}
+
+/* Small controls */
+.mini-button {
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+  background: rgba(127,255,212,.055);
+  box-shadow: none;
+}
+
+.mini-button:hover {
+  background: rgba(127,255,212,.12);
+}
+
+/* Toasts */
+.system-toast {
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+  background: rgba(4, 13, 11, .97);
+  box-shadow: var(--shadow);
+}
+
+/* Accent taskbar entries based on open app text isn't dependable,
+   so keep taskbar calm and let window headers carry the color distinction. */
+
+@media (max-width: 720px) {
+  .desktop-icon {
+    width: 94px;
+    min-height: 88px;
   }
 }

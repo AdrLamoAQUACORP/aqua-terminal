@@ -88,6 +88,26 @@
           <span>ИССЛЕДОВАНИЯ</span>
         </button>
 
+        <button class="desktop-icon" data-open="security" type="button">
+          <img src="./assets/icons/security.svg" alt="" />
+          <span>SECURITY</span>
+        </button>
+
+        <button class="desktop-icon" data-open="mail" type="button">
+          <img src="./assets/icons/mail.svg" alt="" />
+          <span>MAIL</span>
+        </button>
+
+        <button class="desktop-icon" data-open="system" type="button">
+          <img src="./assets/icons/system.svg" alt="" />
+          <span>SYSTEM</span>
+        </button>
+
+        <button id="network-icon" class="desktop-icon desktop-icon--muted" data-open="network" type="button">
+          <img src="./assets/icons/network.svg" alt="" />
+          <span>NETWORK</span>
+        </button>
+
         <button class="desktop-icon" data-open="game" type="button">
           <img src="./assets/icons/game.svg" alt="" />
           <span>CALIBRATE.EXE</span>
@@ -104,8 +124,9 @@
           <span class="status-dot"></span>
           LOCAL NODE
         </div>
-        <div>NET: ISOLATED</div>
-        <div>SECURITY: LEVEL 3</div>
+        <div id="desktop-net-status">NET: ISOLATED</div>
+        <div id="desktop-security-status">SECURITY: LEVEL 3</div>
+        <div id="desktop-integrity-status">INTEGRITY: 97.8%</div>
       </section>
 
       <section id="window-files" class="os-window is-hidden" data-window="files">
@@ -209,6 +230,132 @@
             <p>Статус: неизвестен</p>
             <p>Доступность: индекс отсутствует</p>
           </article>
+        </div>
+      </section>
+
+      <section id="window-security" class="os-window is-hidden" data-window="security">
+        <header class="os-window__bar drag-handle">
+          <div><span class="window-led"></span> SECURITY CONTROL / A-17</div>
+          <button class="window-close" data-close="security" type="button">×</button>
+        </header>
+        <div class="os-window__toolbar">
+          <span>PROFILE: AQ-S17-441</span>
+          <span>CLEARANCE: 3</span>
+        </div>
+        <div class="os-window__content security-panel">
+          <div class="security-summary">
+            <article><span>CAMERAS</span><strong>08 / 12</strong><small>4 feeds unavailable</small></article>
+            <article><span>DOORS</span><strong>17 / 17</strong><small>local control</small></article>
+            <article><span>ALARMS</span><strong>01</strong><small>unresolved archival flag</small></article>
+          </div>
+          <h3 class="section-label">ACCESS LOG // RECENT CACHE</h3>
+          <div class="access-log">
+            <div><span>02:47:19</span><b>AQ-S17-441</b><em>SECTOR A</em><i>GRANTED</i></div>
+            <div><span>02:58:42</span><b>AQ-S17-441</b><em>ARCHIVE NODE</em><i>GRANTED</i></div>
+            <div class="access-log__warn"><span>03:11:03</span><b>NO ID</b><em>CORRIDOR C-4</em><i>UNRESOLVED</i></div>
+            <div><span>03:14:07</span><b>AQ-S17-441</b><em>TERMINAL A-17</em><i>GRANTED</i></div>
+          </div>
+          <button id="security-map-button" class="mini-button" type="button">ОТКРЫТЬ КАРТУ СЕКТОРОВ</button>
+          <p class="muted">Топология карты вынесена в защищённый индекс SEC-MAP.</p>
+        </div>
+      </section>
+
+      <section id="window-mail" class="os-window is-hidden" data-window="mail">
+        <header class="os-window__bar drag-handle">
+          <div><span class="window-led"></span> AKWA INTERNAL MAIL</div>
+          <button class="window-close" data-close="mail" type="button">×</button>
+        </header>
+        <div class="os-window__toolbar">
+          <span>LOCAL CACHE</span>
+          <span id="mail-count">3 MESSAGES</span>
+        </div>
+        <div class="os-window__content mail-list">
+          <button class="mail-row" data-file="mail_shift">
+            <span class="mail-row__flag">●</span>
+            <span><b>SECURITY DESK</b><small>Пересменка / сектор C</small></span>
+            <time>02:31</time>
+          </button>
+          <button class="mail-row" data-file="mail_archive">
+            <span class="mail-row__flag">○</span>
+            <span><b>ARCHIVE CONTROL</b><small>Повторный запрос к старому индексу</small></span>
+            <time>02:53</time>
+          </button>
+          <button class="mail-row" data-file="mail_service">
+            <span class="mail-row__flag">○</span>
+            <span><b>SYSTEM SERVICE</b><small>Проверка профиля AQ-S17-441</small></span>
+            <time>03:09</time>
+          </button>
+        </div>
+      </section>
+
+      <section id="window-system" class="os-window is-hidden" data-window="system">
+        <header class="os-window__bar drag-handle">
+          <div><span class="window-led"></span> SYSTEM MONITOR</div>
+          <button class="window-close" data-close="system" type="button">×</button>
+        </header>
+        <div class="os-window__content system-monitor">
+          <div class="system-meter">
+            <span>CORE LOAD</span>
+            <div><i style="width:24%"></i></div>
+            <b>24%</b>
+          </div>
+          <div class="system-meter">
+            <span>MEMORY</span>
+            <div><i style="width:61%"></i></div>
+            <b>392K / 640K</b>
+          </div>
+          <div class="system-meter">
+            <span>ARCHIVE INTEGRITY</span>
+            <div><i id="integrity-meter" style="width:97.8%"></i></div>
+            <b id="integrity-value">97.8%</b>
+          </div>
+
+          <h3 class="section-label">ACTIVE PROCESSES</h3>
+          <div id="process-list" class="process-list">
+            <div><span>001</span><b>KERNEL.SYS</b><i>ACTIVE</i></div>
+            <div><span>014</span><b>WATCHDOG.EXE</b><i>ACTIVE</i></div>
+            <div><span>027</span><b>AQ_INDEXER</b><i>IDLE</i></div>
+            <div><span>041</span><b>SEC_CACHE</b><i>ACTIVE</i></div>
+          </div>
+
+          <h3 class="section-label">EVENT JOURNAL</h3>
+          <div id="system-event-log" class="system-event-log">
+            <p>[02:58] archive index requested by AQ-S17-441</p>
+            <p>[03:09] biometric cache validation scheduled</p>
+            <p>[03:14] session restore point created</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="window-network" class="os-window is-hidden" data-window="network">
+        <header class="os-window__bar drag-handle">
+          <div><span class="window-led"></span> AKWA LOCAL NETWORK</div>
+          <button class="window-close" data-close="network" type="button">×</button>
+        </header>
+        <div class="os-window__content network-panel">
+          <div class="network-banner">
+            EXTERNAL UPLINK: <strong>DISABLED</strong>
+          </div>
+          <div class="network-map">
+            <button class="network-node is-current" type="button" data-node="A-17">
+              <b>A-17</b><span>WORKSTATION</span>
+            </button>
+            <span class="network-line"></span>
+            <button class="network-node" type="button" data-node="ARCH-2">
+              <b>ARCH-2</b><span>ARCHIVE</span>
+            </button>
+            <span class="network-line network-line--faint"></span>
+            <button class="network-node" type="button" data-node="SEC-C">
+              <b>SEC-C</b><span>SECURITY</span>
+            </button>
+            <span id="ghost-route-line" class="network-line network-line--ghost is-hidden"></span>
+            <button id="ghost-node" class="network-node network-node--ghost is-hidden" type="button" data-node="UNKNOWN">
+              <b>---</b><span>UNRESOLVED</span>
+            </button>
+          </div>
+          <div id="network-detail" class="network-detail">
+            Select a local node.
+          </div>
         </div>
       </section>
 
