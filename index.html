@@ -391,203 +391,109 @@
         });
 
 
-       /* ================================
+        /* ================================
    КОМАНДЫ
    ================================ */
 
-const API_URL =
-    "https://akwa-terminal-api.moskinasasa32.workers.dev";
+const API_URL = "https://akwa-terminal-api.moskinasasa32.workers.dev";
 
 let mode = "command";
 let authUsername = "";
 
 input.addEventListener("keydown", async function(event) {
-
-    if (event.key !== "Enter") {
-        return;
-    }
+    if (event.key !== "Enter") return;
 
     const value = input.value.trim();
-
-    if (value === "") {
-        return;
-    }
+    if (value === "") return;
 
     input.value = "";
 
-    // ================================
-    // РЕГИСТРАЦИЯ
-    // ================================
-
     if (mode === "register_username") {
-
         authUsername = value.toLowerCase();
-
         print("USER ID: " + authUsername);
-
-        mode = "register_password";
-
         print("Введите пароль:");
-
+        mode = "register_password";
         return;
     }
 
     if (mode === "register_password") {
-
         const password = value;
-
         print("PASSWORD: ********");
 
         try {
-
-            const response = await fetch(
-                API_URL + "/register",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        username: authUsername,
-                        password: password
-                    })
-                }
-            );
+            const response = await fetch(API_URL + "/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    username: authUsername,
+                    password: password
+                })
+            });
 
             const data = await response.json();
 
             if (data.ok) {
-
                 print("");
-                print(
-                    data.message,
-                    "success"
-                );
-
+                print(data.message, "success");
             } else {
-
-                print(
-                    data.error,
-                    "error"
-                );
-
+                print(data.error || "REGISTRATION FAILED", "error");
             }
-
         } catch (error) {
-
-            print(
-                "ERROR: CONNECTION FAILED",
-                "error"
-            );
-
+            print("ERROR: CONNECTION FAILED", "error");
         }
 
         authUsername = "";
         mode = "command";
-
         return;
     }
 
-
-    // ================================
-    // ВХОД
-    // ================================
-
     if (mode === "login_username") {
-
         authUsername = value.toLowerCase();
-
         print("USER ID: " + authUsername);
-
-        mode = "login_password";
-
         print("Введите пароль:");
-
+        mode = "login_password";
         return;
     }
 
     if (mode === "login_password") {
-
         const password = value;
-
         print("PASSWORD: ********");
 
         try {
-
-            const response = await fetch(
-                API_URL + "/login",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        username: authUsername,
-                        password: password
-                    })
-                }
-            );
+            const response = await fetch(API_URL + "/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    username: authUsername,
+                    password: password
+                })
+            });
 
             const data = await response.json();
 
             if (data.ok) {
-
                 print("");
-                print(
-                    "AUTHENTICATION SUCCESSFUL",
-                    "success"
-                );
-
-                print(
-                    "USER ID ........ " +
-                    data.username
-                );
-
-                print(
-                    "STATUS ......... " +
-                    data.status
-                );
-
-                print(
-                    "ACCESS LEVEL ... " +
-                    data.access_level
-                );
-
+                print("AUTHENTICATION SUCCESSFUL", "success");
+                print("USER ID ........ " + data.username);
+                print("STATUS ......... " + data.status);
+                print("ACCESS LEVEL ... " + data.access_level);
             } else {
-
-                print(
-                    data.error,
-                    "error"
-                );
-
+                print(data.error || "AUTHENTICATION FAILED", "error");
             }
-
         } catch (error) {
-
-            print(
-                "ERROR: CONNECTION FAILED",
-                "error"
-            );
-
+            print("ERROR: CONNECTION FAILED", "error");
         }
 
         authUsername = "";
         mode = "command";
-
         return;
     }
-
-
-    // ================================
-    // ОБЫЧНЫЕ КОМАНДЫ
-    // ================================
 
     const command = value.toLowerCase();
 
     print("AKWA_OS: " + value);
 
     if (command === "help") {
-
         print("");
         print("AVAILABLE COMMANDS");
         print("");
@@ -596,52 +502,37 @@ input.addEventListener("keydown", async function(event) {
         print("login");
         print("register");
         print("clear");
-
     }
-
     else if (command === "status") {
-
         print("");
         print("SYSTEM STATUS ........ ONLINE");
         print("NETWORK .............. AKWA-INTERNAL");
         print("NODE ................. 17");
         print("SECURITY LEVEL ....... 03");
-
     }
-
     else if (command === "register") {
-
         print("");
         print("REGISTRATION");
         print("");
         print("USER ID:");
-
         mode = "register_username";
     }
-
     else if (command === "login") {
-
         print("");
         print("AUTHENTICATION");
         print("");
         print("USER ID:");
-
         mode = "login_username";
     }
-
     else if (command === "clear") {
-
         output.innerHTML = "";
-
     }
-
     else {
-
-        print(
-            "ERROR: UNKNOWN COMMAND",
-            "error"
-        );
-
+        print("ERROR: UNKNOWN COMMAND", "error");
     }
-
 });
+
+    </script>
+
+</body>
+</html>
