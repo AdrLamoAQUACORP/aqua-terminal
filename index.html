@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>AKWA // REMOTE NODE 17</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
 
+        html,
         body {
             margin: 0;
+            padding: 0;
+
+            width: 100%;
+            min-height: 100%;
 
             background: #050505;
             color: #00ff66;
 
-            font-family: "Courier New", Courier, monospace;
-            font-size: 16px;
-            line-height: 1.5;
+            font-family: "Courier New", monospace;
+        }
 
+        body {
             min-height: 100vh;
 
             display: flex;
@@ -29,10 +35,9 @@
             text-align: center;
         }
 
-
-        /* =========================================
+        /* ================================
            ЭКРАН ЗАПУСКА
-           ========================================= */
+           ================================ */
 
         #startup {
             display: flex;
@@ -41,79 +46,86 @@
             justify-content: center;
             align-items: center;
 
-            gap: 25px;
-        }
+            gap: 20px;
 
+            width: 100%;
+        }
 
         #startup-title {
-            font-size: 24px;
-            letter-spacing: 3px;
+            font-size: 28px;
+            letter-spacing: 4px;
         }
-
 
         #startup-subtitle {
             color: #777;
             font-size: 14px;
+            letter-spacing: 2px;
         }
 
-
         #start-button {
+            margin-top: 20px;
+
+            padding: 15px 40px;
+
             background: transparent;
 
             border: 1px solid #00ff66;
 
             color: #00ff66;
 
-            font-family: "Courier New", Courier, monospace;
+            font-family: "Courier New", monospace;
             font-size: 16px;
 
-            padding: 14px 35px;
-
             cursor: pointer;
-
-            transition: 0.2s;
         }
-
 
         #start-button:hover {
             background: #00ff66;
             color: #050505;
-
-            box-shadow:
-                0 0 15px rgba(0, 255, 102, 0.4);
         }
 
-
-        /* =========================================
+        /* ================================
            ТЕРМИНАЛ
-           ========================================= */
+           ================================ */
 
         #terminal {
+            display: none;
+
             width: 90%;
             max-width: 900px;
 
             min-height: 500px;
 
-            border: 1px solid #00ff66;
-
             padding: 30px;
 
-            box-sizing: border-box;
+            border: 1px solid #00ff66;
 
             box-shadow:
-                0 0 15px rgba(0, 255, 102, 0.2);
-
-            display: none;
+                0 0 20px rgba(0, 255, 102, 0.2);
         }
-
 
         #output {
             text-align: center;
         }
 
+        .system {
+            color: #999;
+        }
 
-        .input-line {
-            display: flex;
+        .success {
+            color: #ffff33;
+        }
+
+        .error {
+            color: #ff3333;
+        }
+
+        .warning {
+            color: #ffaa00;
+        }
+
+        #input-line {
+            display: none;
 
             justify-content: center;
             align-items: center;
@@ -121,17 +133,14 @@
             margin-top: 20px;
         }
 
-
-        .prompt {
+        #prompt {
             color: #00aaff;
-
             margin-right: 10px;
-
-            white-space: nowrap;
         }
 
+        #command-input {
+            width: 300px;
 
-        input {
             background: transparent;
 
             border: none;
@@ -139,719 +148,310 @@
 
             color: #00ff66;
 
-            font-family: inherit;
-            font-size: inherit;
-
-            width: 300px;
+            font-family: "Courier New", monospace;
+            font-size: 16px;
 
             text-align: center;
         }
-
-
-        .error {
-            color: #ff3333;
-        }
-
-
-        .success {
-            color: #ffff33;
-        }
-
-
-        .system {
-            color: #aaaaaa;
-        }
-
-
-        .warning {
-            color: #ffaa00;
-        }
-
-
-        .cursor {
-            animation: blink 1s infinite;
-        }
-
-
-        @keyframes blink {
-
-            0% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0;
-            }
-
-            100% {
-                opacity: 1;
-            }
-
-        }
-
     </style>
-
 </head>
 
 
 <body>
 
+    <!-- =================================
+         ЭКРАН ДО ЗАПУСКА
+         ================================= -->
 
-<!-- =========================================
-     ЭКРАН ДО ЗАПУСКА
-     ========================================= -->
+    <div id="startup">
 
-<div id="startup">
+        <div id="startup-title">
+            AKWA // REMOTE NODE 17
+        </div>
 
-    <div id="startup-title">
-        AKWA // REMOTE NODE 17
-    </div>
+        <div id="startup-subtitle">
+            REMOTE COMPUTER TERMINAL
+        </div>
 
-    <div id="startup-subtitle">
-        REMOTE COMPUTER TERMINAL
-    </div>
-
-    <button id="start-button">
-        ЗАПУСТИТЬ ПК
-    </button>
-
-</div>
-
-
-
-<!-- =========================================
-     ТЕРМИНАЛ
-     ========================================= -->
-
-<div id="terminal">
-
-    <div id="output"></div>
-
-    <div
-        class="input-line"
-        id="input-line"
-    >
-
-        <span
-            id="prompt-text"
-            class="prompt"
-        >
-            AKWA_OS:
-        </span>
-
-        <input
-            type="text"
-            id="cmd-input"
-            autofocus
-            autocomplete="off"
-        >
+        <button id="start-button">
+            ЗАПУСТИТЬ ПК
+        </button>
 
     </div>
 
-</div>
+
+    <!-- =================================
+         ТЕРМИНАЛ
+         ================================= -->
+
+    <div id="terminal">
+
+        <div id="output"></div>
+
+        <div id="input-line">
+
+            <span id="prompt">
+                AKWA_OS:
+            </span>
+
+            <input
+                id="command-input"
+                type="text"
+                autocomplete="off"
+            >
+
+        </div>
+
+    </div>
 
 
+    <script>
 
-<script>
+        const startup = document.getElementById("startup");
+        const terminal = document.getElementById("terminal");
+        const button = document.getElementById("start-button");
 
-
-    /* =========================================
-       ЭЛЕМЕНТЫ
-       ========================================= */
-
-    const startup =
-        document.getElementById("startup");
-
-    const startButton =
-        document.getElementById("start-button");
-
-    const terminal =
-        document.getElementById("terminal");
-
-    const output =
-        document.getElementById("output");
-
-    const input =
-        document.getElementById("cmd-input");
-
-    const inputLine =
-        document.getElementById("input-line");
-
-    const promptText =
-        document.getElementById("prompt-text");
+        const output = document.getElementById("output");
+        const inputLine = document.getElementById("input-line");
+        const input = document.getElementById("command-input");
 
 
+        /* ================================
+           ВЫВОД ТЕКСТА
+           ================================ */
 
-    /* =========================================
-       СОСТОЯНИЕ
-       ========================================= */
+        function print(text, className = "") {
 
-    let systemReady = false;
+            const line = document.createElement("div");
 
+            line.className = className;
 
+            line.textContent = text;
 
-    /* =========================================
-       ВЫВОД СТРОКИ
-       ========================================= */
-
-    function print(text = "", className = "") {
-
-        const div =
-            document.createElement("div");
-
-        div.className = className;
-
-        div.innerHTML = text;
-
-        output.appendChild(div);
-
-        window.scrollTo(
-            0,
-            document.body.scrollHeight
-        );
-
-    }
-
-
-
-    /* =========================================
-       ЗАДЕРЖКА
-       ========================================= */
-
-    function wait(ms) {
-
-        return new Promise(
-            resolve => setTimeout(resolve, ms)
-        );
-
-    }
-
-
-
-    /* =========================================
-       АНИМАЦИЯ ПЕЧАТИ
-       ========================================= */
-
-    async function typeLine(
-        text,
-        className = "",
-        speed = 25
-    ) {
-
-        const div =
-            document.createElement("div");
-
-        div.className = className;
-
-        output.appendChild(div);
-
-
-        for (
-            let i = 0;
-            i < text.length;
-            i++
-        ) {
-
-            div.textContent =
-                text.substring(0, i + 1);
-
-            await wait(speed);
-
+            output.appendChild(line);
         }
 
 
-        window.scrollTo(
-            0,
-            document.body.scrollHeight
-        );
+        /* ================================
+           ПАУЗА
+           ================================ */
 
-    }
+        function sleep(ms) {
+            return new Promise(resolve => {
+                setTimeout(resolve, ms);
+            });
+        }
 
 
+        /* ================================
+           ЗАГРУЗКА ПК
+           ================================ */
 
-    /* =========================================
-       ЗАГРУЗКА ПК
-       ========================================= */
+        async function boot() {
 
-    async function bootComputer() {
+            print("AKWA BIOS v4.28", "system");
 
-        inputLine.style.display = "none";
+            await sleep(500);
 
+            print("--------------------------------", "system");
 
-        await typeLine(
-            "AKWA BIOS v4.28",
-            "system",
-            20
-        );
+            await sleep(400);
 
+            print("MEMORY CHECK ............ OK");
 
-        await typeLine(
-            "--------------------------------",
-            "system",
-            10
-        );
+            await sleep(250);
 
+            print("CPU CHECK ............... OK");
 
-        await wait(300);
+            await sleep(250);
 
+            print("STORAGE CHECK ........... OK");
 
-        await typeLine(
-            "MEMORY CHECK ............ OK"
-        );
+            await sleep(500);
 
+            print("");
 
-        await wait(180);
+            print("NODE 17");
 
+            await sleep(250);
 
-        await typeLine(
-            "CPU CHECK ............... OK"
-        );
+            print("BOOT DEVICE ............. LOCAL");
 
+            await sleep(700);
 
-        await wait(180);
+            print("");
 
+            print("LOADING AKWA OS...", "success");
 
-        await typeLine(
-            "STORAGE CHECK ........... OK"
-        );
+            await sleep(1000);
 
+            print("");
 
-        await wait(300);
+            print(
+                "[СИСТЕМА]: Запуск операционной системы...",
+                "system"
+            );
 
+            await sleep(500);
 
-        await typeLine(
-            "NODE 17"
-        );
+            print(
+                "[СИСТЕМА]: Проверка локального оборудования...",
+                "system"
+            );
 
+            await sleep(500);
 
-        await typeLine(
-            "BOOT DEVICE ............. LOCAL"
-        );
+            print(
+                "[СИСТЕМА]: Проверка сетевого модуля...",
+                "system"
+            );
 
+            await sleep(700);
 
-        await wait(500);
+            print(
+                "[СИСТЕМА]: Поиск AKWA-INTERNAL...",
+                "system"
+            );
 
+            await sleep(1000);
 
-        print("");
+            print(
+                "[СИСТЕМА]: СЕТЬ НАЙДЕНА.",
+                "success"
+            );
 
+            await sleep(500);
 
-        await typeLine(
-            "LOADING AKWA OS...",
-            "success",
-            40
-        );
+            print(
+                "[СИСТЕМА]: Подключение к REMOTE NODE 17...",
+                "system"
+            );
 
+            await sleep(1200);
 
-        await wait(700);
+            print(
+                "[СИСТЕМА]: СОЕДИНЕНИЕ УСТАНОВЛЕНО.",
+                "success"
+            );
 
+            await sleep(500);
 
-        print("");
+            print("");
 
+            print("AKWA // REMOTE NODE 17");
 
-        await typeLine(
-            "[СИСТЕМА]: Запуск операционной системы...",
-            "system",
-            20
-        );
+            print("--------------------------------");
 
+            print("SYSTEM STATUS ........ ONLINE");
 
-        await wait(400);
+            print("NETWORK .............. AKWA-INTERNAL");
 
+            print("NODE ................. 17");
 
-        await typeLine(
-            "[СИСТЕМА]: Проверка локального оборудования...",
-            "system",
-            20
-        );
+            print("SECURITY LEVEL ....... 03");
 
+            await sleep(500);
 
-        await wait(400);
+            print("");
 
+            print(
+                "Последний зарегистрированный пользователь:"
+            );
 
-        await typeLine(
-            "[СИСТЕМА]: Проверка сетевого модуля...",
-            "system",
-            20
-        );
+            print("ADRIAN LAMO", "success");
 
+            await sleep(500);
 
-        await wait(600);
+            print("");
 
+            print(
+                "Введите команду help для получения списка доступных команд."
+            );
 
-        await typeLine(
-            "[СИСТЕМА]: Поиск AKWA-INTERNAL...",
-            "system",
-            20
-        );
+            await sleep(300);
 
+            inputLine.style.display = "flex";
 
-        await wait(800);
+            input.focus();
+        }
 
 
-        await typeLine(
-            "[СИСТЕМА]: СЕТЬ НАЙДЕНА.",
-            "success",
-            25
-        );
+        /* ================================
+           КНОПКА
+           ================================ */
 
-
-        await wait(300);
-
-
-        await typeLine(
-            "[СИСТЕМА]: Подключение к REMOTE NODE 17...",
-            "system",
-            20
-        );
-
-
-        await wait(900);
-
-
-        await typeLine(
-            "[СИСТЕМА]: СОЕДИНЕНИЕ УСТАНОВЛЕНО.",
-            "success",
-            25
-        );
-
-
-        await wait(500);
-
-
-        print("");
-
-
-        await typeLine(
-            "AKWA // REMOTE NODE 17",
-            "",
-            30
-        );
-
-
-        await typeLine(
-            "--------------------------------",
-            "",
-            10
-        );
-
-
-        await typeLine(
-            "SYSTEM STATUS ........ ONLINE"
-        );
-
-
-        await typeLine(
-            "NETWORK .............. AKWA-INTERNAL"
-        );
-
-
-        await typeLine(
-            "NODE ................. 17"
-        );
-
-
-        await typeLine(
-            "SECURITY LEVEL ....... 03"
-        );
-
-
-        await wait(500);
-
-
-        print("");
-
-
-        await typeLine(
-            "Последний зарегистрированный пользователь:"
-        );
-
-
-        await typeLine(
-            "ADRIAN LAMO",
-            "success",
-            35
-        );
-
-
-        await wait(500);
-
-
-        print("");
-
-
-        await typeLine(
-            "Введите команду help для получения списка доступных команд."
-        );
-
-
-        await wait(300);
-
-
-        inputLine.style.display = "flex";
-
-        input.focus();
-
-        systemReady = true;
-
-    }
-
-
-
-    /* =========================================
-       КНОПКА ЗАПУСКА
-       ========================================= */
-
-    startButton.addEventListener(
-        "click",
-        async function() {
-
-            startButton.disabled = true;
+        button.addEventListener("click", function() {
 
             startup.style.display = "none";
 
             terminal.style.display = "block";
 
-            await bootComputer();
+            boot();
 
-        }
-    );
+        });
 
 
+        /* ================================
+           КОМАНДЫ
+           ================================ */
 
-    /* =========================================
-       HELP
-       ========================================= */
+        input.addEventListener("keydown", function(event) {
 
-    function showHelp() {
+            if (event.key !== "Enter") {
+                return;
+            }
 
-        print("AVAILABLE COMMANDS");
+            const command = input.value.trim();
 
-        print("");
+            if (command === "") {
+                return;
+            }
 
-        print("help");
+            print("AKWA_OS: " + command);
 
-        print("status");
+            input.value = "";
 
-        print("login");
+            if (command.toLowerCase() === "help") {
 
-        print("register");
+                print("");
+                print("AVAILABLE COMMANDS");
+                print("");
+                print("help");
+                print("status");
+                print("login");
+                print("register");
+                print("clear");
 
-        print("clear");
+            }
 
-    }
+            else if (command.toLowerCase() === "status") {
 
+                print("");
+                print("SYSTEM STATUS ........ ONLINE");
+                print("NETWORK .............. AKWA-INTERNAL");
+                print("NODE ................. 17");
+                print("SECURITY LEVEL ....... 03");
 
+            }
 
-    /* =========================================
-       STATUS
-       ========================================= */
+            else if (command.toLowerCase() === "clear") {
 
-    function showStatus() {
+                output.innerHTML = "";
 
-        print(
-            "SYSTEM STATUS ........ ONLINE"
-        );
+            }
 
-        print(
-            "NETWORK .............. AKWA-INTERNAL"
-        );
-
-        print(
-            "NODE ................. 17"
-        );
-
-        print(
-            "SECURITY LEVEL ....... 03"
-        );
-
-        print("");
-
-        print(
-            "LAST USER ............ ADRIAN LAMO"
-        );
-
-        print(
-            "ACCOUNT STATUS ....... ACTIVE"
-        );
-
-    }
-
-
-
-    /* =========================================
-       CLEAR
-       ========================================= */
-
-    function clearTerminal() {
-
-        output.innerHTML = "";
-
-    }
-
-
-
-    /* =========================================
-       LOGIN
-       ========================================= */
-
-    function startLogin() {
-
-        print(
-            "AUTHENTICATION REQUIRED",
-            "system"
-        );
-
-        print("");
-
-        print(
-            "USER ID:"
-        );
-
-        promptText.innerText =
-            "USER ID:";
-
-    }
-
-
-
-    /* =========================================
-       REGИСТРАЦИЯ
-       ========================================= */
-
-    function startRegistration() {
-
-        print(
-            "ACCOUNT REGISTRATION",
-            "system"
-        );
-
-        print("");
-
-        print(
-            "Введите желаемый USER ID:"
-        );
-
-        promptText.innerText =
-            "NEW USER ID:";
-
-    }
-
-
-
-    /* =========================================
-       ОБРАБОТКА КОМАНД
-       ========================================= */
-
-    function handleCommand(value) {
-
-        const command =
-            value.trim().toLowerCase();
-
-
-        print(
-            `${promptText.innerText} ${value}`
-        );
-
-        print("");
-
-
-        switch (command) {
-
-
-            case "help":
-
-                showHelp();
-
-                break;
-
-
-            case "status":
-
-                showStatus();
-
-                break;
-
-
-            case "clear":
-
-                clearTerminal();
-
-                break;
-
-
-            case "login":
-
-                startLogin();
-
-                break;
-
-
-            case "register":
-
-                startRegistration();
-
-                break;
-
-
-            case "":
-
-                break;
-
-
-            default:
+            else {
 
                 print(
                     "ERROR: UNKNOWN COMMAND",
                     "error"
                 );
 
-        }
-
-    }
-
-
-
-    /* =========================================
-       ENTER
-       ========================================= */
-
-    input.addEventListener(
-        "keydown",
-        function(event) {
-
-            if (
-                event.key !== "Enter"
-                || !systemReady
-            ) {
-
-                return;
-
             }
 
+        });
 
-            const value =
-                input.value;
-
-
-            if (!value.trim()) {
-
-                return;
-
-            }
-
-
-            input.value = "";
-
-
-            handleCommand(value);
-
-        }
-    );
-
-
-</script>
-
+    </script>
 
 </body>
-
 </html>
