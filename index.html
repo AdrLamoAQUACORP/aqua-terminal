@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
 
 <meta charset="UTF-8">
 
-<title>AKWAOS</title>
+<title>AkwaOS</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -15,54 +15,84 @@
 <body>
 
 
+<audio id="bootSound">
+
+<source src="welcome-computer-message.mp3" type="audio/mpeg">
+
+</audio>
+
+
+
+
+
 <!-- =====================
- BOOT SCREEN
+BOOT SCREEN
 ===================== -->
 
 
 <div id="bootScreen">
 
 
-<div class="boot-wrapper">
+<div class="boot-content">
 
 
-<div class="akwa-title">
+<div class="akwa-logo">
+
+
+<div class="logo-glitch">
 AKWAOS
 </div>
+
+
+<div class="logo-main">
+AKWAOS
+</div>
+
+
+<div class="logo-scan">
+AKWAOS
+</div>
+
+
+</div>
+
+
 
 
 
 <div class="boot-console">
 
 
-<div>
+<p>
 > INITIALIZING CORE ........ OK
-</div>
+</p>
 
 
-<div>
-> MEMORY CHECK ............ OK
-</div>
+<p>
+> CHECKING MEMORY ......... OK
+</p>
 
 
-<div>
+<p>
 > LOADING SYSTEM FILES .... OK
-</div>
+</p>
 
 
-<div>
-> NETWORK CONNECT ......... ONLINE
-</div>
+<p>
+> NETWORK CONNECT ........ ONLINE
+</p>
 
 
-<div>
-> STARTING AKWA_KERNEL .... OK
-</div>
+<p>
+> STARTING AKWA_KERNEL ... OK
+</p>
 
 
-<div class="loading-bar">
+<div class="loading">
+
 
 <div></div>
+
 
 </div>
 
@@ -73,13 +103,15 @@ _
 </div>
 
 
-</div>
-
 
 </div>
 
 
 </div>
+
+
+</div>
+
 
 
 
@@ -89,7 +121,7 @@ _
 
 
 <!-- =====================
- DESKTOP
+DESKTOP
 ===================== -->
 
 
@@ -97,44 +129,24 @@ _
 
 
 
-<div class="binary">
-
-01010101<br>
-00110110<br>
-11100010<br>
-01010101<br>
-11001010
-
-</div>
+<div class="scanline"></div>
 
 
-
-<div class="binary right">
-
-10101010<br>
-01100101<br>
-11100011<br>
-01010010<br>
-00110101
-
-</div>
+<div class="crt"></div>
 
 
 
 
 
-<!-- ICONS -->
-
-
-<div class="icons">
+<div class="desktop-icons">
 
 
 
-<div class="desktop-icon"
+<div class="icon"
 ondblclick="openWindow('computer')">
 
 
-<div class="pixel-computer">
+<div class="computer">
 
 ▣
 
@@ -153,12 +165,11 @@ MY COMPUTER
 
 
 
+<div class="icon"
+ondblclick="openWindow('console')">
 
-<div class="desktop-icon"
-ondblclick="openWindow('terminal')">
 
-
-<div class="pixel-terminal">
+<div class="terminal-icon">
 
 >_
 
@@ -177,12 +188,11 @@ CONSOLE
 
 
 
-
-<div class="desktop-icon"
+<div class="icon"
 ondblclick="openWindow('game')">
 
 
-<div class="pixel-game">
+<div class="game">
 
 ◆
 
@@ -198,6 +208,7 @@ GAME 01
 
 
 
+
 </div>
 
 
@@ -208,19 +219,21 @@ GAME 01
 
 
 
-<!-- COMPUTER WINDOW -->
+<!-- COMPUTER -->
 
 
 <div class="window" id="computer">
 
 
-<div class="window-title">
+<div class="window-header">
 
-COMPUTER
+MY COMPUTER
 
 
 <button onclick="closeWindow('computer')">
+
 X
+
 </button>
 
 
@@ -241,24 +254,15 @@ AKWAOS 0.7.13
 
 
 CPU:
-UNKNOWN PROCESSOR
+UNKNOWN
 
 
-MEMORY:
-640 KB EXTENDED
+RAM:
+640 KB
 
 
 NETWORK:
-CONNECTED
-
-
-DRIVES:
-
-[C:]
-SYSTEM
-
-[D:]
-UNKNOWN DATA
+ONLINE
 
 
 </pre>
@@ -277,19 +281,19 @@ UNKNOWN DATA
 
 
 
-<!-- TERMINAL WINDOW -->
+<!-- TERMINAL -->
 
 
-<div class="window" id="terminal">
+<div class="window" id="console">
 
 
-<div class="window-title">
+<div class="window-header">
 
 
 AKWA TERMINAL
 
 
-<button onclick="closeWindow('terminal')">
+<button onclick="closeWindow('console')">
 
 X
 
@@ -300,10 +304,10 @@ X
 
 
 
-<div class="window-body terminal-body">
+<div class="window-body">
 
 
-<pre id="terminalText">
+<pre id="terminalOutput">
 
 AKWA_OS TERMINAL
 
@@ -313,13 +317,14 @@ TYPE "help"
 </pre>
 
 
-
 <div>
-
 
 AKWA_OS >
 
-<input id="commandInput">
+<input id="terminalInput">
+
+</div>
+
 
 
 </div>
@@ -328,7 +333,6 @@ AKWA_OS >
 </div>
 
 
-</div>
 
 
 
@@ -336,15 +340,13 @@ AKWA_OS >
 
 
 
-
-
-<!-- GAME WINDOW -->
+<!-- GAME -->
 
 
 <div class="window" id="game">
 
 
-<div class="window-title">
+<div class="window-header">
 
 GAME_01.EXE
 
@@ -359,23 +361,17 @@ X
 </div>
 
 
-
 <div class="window-body">
 
 
-<h3>
-
+<h2>
 GAME 01
-
-</h3>
+</h2>
 
 
 <p>
-
 UNKNOWN PROGRAM
-
 </p>
-
 
 
 <button>
@@ -398,36 +394,26 @@ START
 
 
 
-<!-- TASKBAR -->
-
-
 <div class="taskbar">
 
 
+<span>
 AKWA_OS ONLINE
+</span>
 
 
-<div id="clock">
-
+<span id="clock">
 00:00
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="crt"></div>
+</span>
 
 
 </div>
 
 
+
+
+
+</div>
 
 
 
@@ -437,6 +423,5 @@ AKWA_OS ONLINE
 
 
 </body>
-
 
 </html>
