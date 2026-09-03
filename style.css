@@ -1,10 +1,4 @@
-/* =====================================
-   AKWA OS v1.0
-   CRT / BIOS STYLE
-===================================== */
-
-
-* {
+*{
 
 box-sizing:border-box;
 
@@ -12,123 +6,88 @@ box-sizing:border-box;
 
 
 
-body {
-
+body{
 
 margin:0;
 
-width:100%;
+background:black;
 
-height:100%;
+color:#39ff14;
 
+font-family:"Courier New",monospace;
 
 overflow:hidden;
 
-
-background:black;
-
-
-color:#39ff14;
-
-
-font-family:
-
-"Courier New",
-monospace;
-
-
 }
 
 
 
 
 
-/* =====================================
-   BOOT SCREEN
-===================================== */
 
 
-#bootScreen {
+/* =====================
+BOOT
+===================== */
 
+
+#bootScreen{
 
 position:fixed;
 
-
 inset:0;
-
 
 background:#000;
 
-
 z-index:9999;
-
 
 display:flex;
 
-
 flex-direction:column;
-
 
 justify-content:center;
 
-
 align-items:center;
 
-
-animation:
-
-bootFade 1.5s forwards 8s;
-
+animation:bootFade 1.5s forwards 8s;
 
 }
 
 
 
-.bios-container {
-
+.bios-container{
 
 width:650px;
 
-
 }
 
 
 
-#biosText {
-
+#biosText{
 
 font-size:16px;
 
-
-line-height:26px;
-
+line-height:25px;
 
 color:#39ff14;
 
-
 text-shadow:
 
-0 0 8px #39ff14;
-
-
-}
-
-
-
-.cursor {
-
-
-animation:
-
-cursorBlink .7s infinite;
-
+0 0 10px #39ff14;
 
 }
 
 
 
-@keyframes cursorBlink {
+.cursor{
 
+animation:blink .7s infinite;
+
+}
+
+
+
+@keyframes blink{
 
 50%{
 
@@ -136,7 +95,6 @@ opacity:0;
 
 }
 
-
 }
 
 
@@ -144,42 +102,52 @@ opacity:0;
 
 
 
+/* =====================
+AKWAOS LOGO ANIMATION
+===================== */
 
-/* AKWA LOGO */
 
 
-.akwa-logo {
-
+.akwa-logo{
 
 position:relative;
 
+height:150px;
 
-margin-top:20px;
+width:650px;
 
+display:flex;
 
-height:120px;
+justify-content:center;
 
-
-width:500px;
-
-
-text-align:center;
-
+align-items:center;
 
 }
 
 
 
-.logo-main {
 
+
+.logo-main,
+.logo-glitch,
+.logo-scan{
+
+
+position:absolute;
 
 font-size:90px;
 
-
 font-weight:bold;
 
+letter-spacing:15px;
 
-letter-spacing:10px;
+}
+
+
+
+
+
+.logo-main{
 
 
 color:white;
@@ -187,96 +155,115 @@ color:white;
 
 text-shadow:
 
-0 0 15px white;
-
-
-animation:
-
-logoAppear 3s forwards;
-
-
-}
-
-
-
-.logo-shadow {
-
-
-position:absolute;
-
-
-width:100%;
-
-
-font-size:90px;
-
-
-font-weight:bold;
-
-
-letter-spacing:10px;
-
-
-color:#39ff14;
-
-
-opacity:.5;
-
-
-filter:blur(10px);
-
-
-animation:
-
-logoGlitch 2s infinite;
-
-
-}
-
-
-
-
-
-.boot-message {
-
-
-margin-top:20px;
-
-
-letter-spacing:5px;
-
-
-animation:
-
-blink 1s infinite;
-
-
-}
-
-
-
-@keyframes logoAppear {
-
-
-0%{
-
-
-transform:
-
-scaleX(5);
-
-
-filter:blur(30px);
+0 0 10px white,
+0 0 30px white;
 
 
 opacity:0;
 
 
+animation:
+
+logoBuild 3s forwards;
+
+
 }
+
+
+
+
+
+
+.logo-glitch{
+
+
+color:#39ff14;
+
+
+opacity:0;
+
+
+filter:blur(20px);
+
+
+animation:
+
+glitchBuild 3s forwards;
+
+
+}
+
+
+
+
+
+.logo-scan{
+
+
+color:white;
+
+
+opacity:0;
+
+
+animation:
+
+scanText 3s forwards;
+
+
+}
+
+
+
+
+
+
+
+
+@keyframes logoBuild{
+
+
+0%{
+
+opacity:0;
+
+transform:
+
+scaleX(8)
+translateX(-300px);
+
+
+filter:blur(50px);
+
+}
+
+
+
+40%{
+
+opacity:1;
+
+transform:
+
+scaleX(2);
+
+}
+
+
+
+70%{
+
+transform:
+
+scaleX(.9);
+
+}
+
 
 
 100%{
 
+opacity:1;
 
 transform:
 
@@ -285,9 +272,48 @@ scaleX(1);
 
 filter:blur(0);
 
+}
 
-opacity:1;
 
+}
+
+
+
+
+
+
+@keyframes glitchBuild{
+
+
+0%{
+
+opacity:0;
+
+transform:
+
+translateX(300px);
+
+}
+
+
+
+40%{
+
+opacity:.8;
+
+}
+
+
+
+100%{
+
+opacity:.35;
+
+transform:
+
+translateX(0);
+
+filter:blur(5px);
 
 }
 
@@ -298,16 +324,35 @@ opacity:1;
 
 
 
-@keyframes logoGlitch {
+
+
+@keyframes scanText{
+
+
+0%{
+
+opacity:0;
+
+clip-path:inset(100% 0 100% 0);
+
+}
 
 
 50%{
 
+opacity:.8;
 
-transform:
+clip-path:inset(0 0 50% 0);
 
-translateX(4px);
+}
 
+
+
+100%{
+
+opacity:0;
+
+clip-path:inset(100% 0 0 0);
 
 }
 
@@ -318,20 +363,15 @@ translateX(4px);
 
 
 
-
-
-@keyframes bootFade {
+@keyframes bootFade{
 
 
 to{
 
-
 opacity:0;
-
 
 visibility:hidden;
 
-
 }
 
 
@@ -344,118 +384,57 @@ visibility:hidden;
 
 
 
+/* =====================
+CRT DESKTOP
+===================== */
 
-/* =====================================
-   DESKTOP
-===================================== */
 
-
-.desktop {
-
+.desktop{
 
 height:100vh;
 
-
-width:100vw;
-
-
-position:relative;
-
-
 background:
 
-
 radial-gradient(
-
-ellipse at center,
-
+ellipse,
 #202020,
-
-#020202
-
+#000
 );
 
 
-
-border-radius:45px;
-
+border-radius:40px;
 
 overflow:hidden;
 
+position:relative;
 
 box-shadow:
 
-inset 0 0 120px black;
-
+inset 0 0 100px black;
 
 }
 
 
 
 
-
-
-.screen-curvature {
-
+.scanline{
 
 position:absolute;
 
+top:-100px;
 
-inset:0;
-
-
-border-radius:45px;
-
-
-box-shadow:
-
-inset 0 0 80px black;
-
-
-pointer-events:none;
-
-
-z-index:20;
-
-
-}
-
-
-
-
-
-
-.scanline {
-
-
-position:absolute;
-
-
-top:-120px;
-
-
-left:0;
-
-
-height:120px;
-
+height:100px;
 
 width:100%;
-
 
 
 background:
 
 linear-gradient(
-
 transparent,
-
-rgba(57,255,20,.25),
-
+rgba(57,255,20,.3),
 transparent
-
 );
-
 
 
 animation:
@@ -463,97 +442,66 @@ animation:
 scan 5s linear infinite;
 
 
-z-index:15;
-
-
 }
 
 
-
-
-@keyframes scan {
-
+@keyframes scan{
 
 to{
 
-top:110%;
+top:100%;
+
+}
 
 }
 
 
-}
 
 
 
-
-
-
-.crt-lines {
-
+.crt-lines{
 
 position:absolute;
-
 
 inset:0;
 
 
 background:
-
 
 repeating-linear-gradient(
 
 0deg,
 
-rgba(255,255,255,.04),
+rgba(255,255,255,.05),
 
-rgba(255,255,255,.04) 1px,
+rgba(255,255,255,.05) 1px,
 
-transparent 2px,
-
-transparent 4px
+transparent 3px
 
 );
 
 
-z-index:16;
-
-
 }
 
 
 
 
 
-
-
-.crt-flicker {
-
+.crt-flicker{
 
 position:absolute;
 
-
 inset:0;
 
+background:#fff1;
 
-background:
-
-rgba(255,255,255,.03);
-
-
-animation:
-
-flicker .15s infinite;
-
-
-z-index:17;
+animation:flicker .2s infinite;
 
 
 }
 
 
-
-@keyframes flicker {
-
+@keyframes flicker{
 
 50%{
 
@@ -561,7 +509,6 @@ opacity:.2;
 
 }
 
-
 }
 
 
@@ -572,123 +519,77 @@ opacity:.2;
 
 
 
-/* =====================================
-   ICONS
-===================================== */
+/* ICONS */
 
 
-.desktop-icons {
-
+.desktop-icons{
 
 position:absolute;
 
+top:30px;
 
-top:35px;
-
-
-left:35px;
-
+left:30px;
 
 display:flex;
-
 
 flex-direction:column;
 
-
 gap:30px;
-
-
-z-index:30;
-
 
 }
 
 
 
 
-.icon {
-
+.icon{
 
 width:100px;
 
-
 text-align:center;
-
-
-cursor:pointer;
-
-
-font-size:12px;
-
 
 color:white;
 
+font-size:12px;
+
+cursor:pointer;
 
 }
 
 
 
-.icon:hover {
-
-
-background:
-
-rgba(57,255,20,.2);
-
-
-}
-
-
-
-
-
-.icon-image {
-
+.icon-image{
 
 margin:auto;
 
-
 margin-bottom:8px;
-
 
 }
 
 
 
-.computer {
-
+.computer{
 
 width:45px;
 
-
 height:35px;
 
-
-border:
-
-2px solid #39ff14;
-
+border:2px solid #39ff14;
 
 }
 
 
 
-.terminal {
-
+.terminal{
 
 font-size:35px;
 
-
 }
 
 
-
-.game {
-
+.game{
 
 font-size:40px;
 
-
 }
 
 
@@ -698,286 +599,86 @@ font-size:40px;
 
 
 
-
-/* =====================================
-   WINDOWS
-===================================== */
+/* WINDOWS */
 
 
-.window {
-
+.window{
 
 display:none;
 
-
 position:absolute;
-
 
 width:600px;
 
-
 height:400px;
-
 
 background:#050505;
 
-
-border:
-
-2px solid #39ff14;
-
-
-color:#39ff14;
-
+border:2px solid #39ff14;
 
 z-index:100;
 
-
-box-shadow:
-
-
-0 0 25px black;
-
-
 }
 
 
-
-.window.active {
-
+.window.active{
 
 display:block;
 
-
 }
 
 
 
-
-.window-header {
-
+.window-header{
 
 height:35px;
 
-
 background:#39ff14;
 
-
 color:black;
-
-
-display:flex;
-
-
-justify-content:space-between;
-
-
-align-items:center;
-
 
 padding:5px;
 
-
-font-family:Arial;
-
-
-font-weight:bold;
-
-
-}
-
-
-
-.window-header button {
-
-
-background:black;
-
-
-color:#39ff14;
-
-
-border:
-
-1px solid #39ff14;
-
-
-cursor:pointer;
-
-
-}
-
-
-
-
-
-
-.window-content {
-
-
-height:calc(100% - 35px);
-
-
-padding:15px;
-
-
-overflow:auto;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =====================================
-   TERMINAL
-===================================== */
-
-
-.terminal {
-
-
-color:#39ff14;
-
-
-}
-
-
-
-.input-line {
-
-
 display:flex;
-
-
-}
-
-
-.input-line input {
-
-
-background:none;
-
-
-border:none;
-
-
-outline:none;
-
-
-color:#39ff14;
-
-
-font-family:
-
-"Courier New";
-
-
-font-size:16px;
-
-
-flex:1;
-
-
-}
-
-
-
-
-
-
-
-
-
-
-/* =====================================
-   GAME
-===================================== */
-
-
-.game button {
-
-
-background:black;
-
-
-border:
-
-2px solid #39ff14;
-
-
-color:#39ff14;
-
-
-padding:10px;
-
-
-cursor:pointer;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =====================================
-   TASKBAR
-===================================== */
-
-
-.taskbar {
-
-
-position:absolute;
-
-
-bottom:0;
-
-
-left:0;
-
-
-height:35px;
-
-
-width:100%;
-
-
-background:#39ff14;
-
-
-color:black;
-
-
-display:flex;
-
 
 justify-content:space-between;
 
-
-align-items:center;
-
-
-padding:0 15px;
+}
 
 
-font-family:Arial;
+
+.window-content{
+
+padding:15px;
+
+}
 
 
-font-weight:bold;
 
 
-z-index:200;
 
+
+/* TASKBAR */
+
+
+.taskbar{
+
+position:absolute;
+
+bottom:0;
+
+height:35px;
+
+width:100%;
+
+background:#39ff14;
+
+color:black;
+
+display:flex;
+
+justify-content:space-between;
+
+padding:10px;
 
 }
