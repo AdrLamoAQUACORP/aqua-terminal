@@ -1,7 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 
 <head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>AkwaOS</title>
 
@@ -13,52 +17,584 @@
 <body>
 
 
-<audio id="bootSound"
-src="welcome-computer-message.mp3">
+<!-- ================================
+     STARTUP SOUND
+================================ -->
+
+<audio id="bootSound" preload="auto">
+    <source src="welcome-computer-message.mp3" type="audio/mpeg">
 </audio>
+
+
+
+
+<!-- ================================
+     BIOS BOOT SCREEN
+================================ -->
 
 
 <div id="bootScreen">
 
-    <pre>
+
+<div class="bios-container">
+
+
+<pre id="biosText">
 
 AKWA BIOS v1.04
+----------------------------
+
+INITIALIZING HARDWARE...
 
 
-CPU ........ OK
-MEMORY ..... OK
-NETWORK .... ONLINE
+CPU ................. OK
+
+MEMORY .............. 640 KB OK
+
+STORAGE ............. FOUND
+
+NETWORK ............. ONLINE
 
 
-LOADING AKWA_OS_
+CHECKING SYSTEM FILES...
 
-    </pre>
+
+SYSTEM CORE ......... OK
+
+SECURITY ............ ACTIVE
+
+
+LOADING AKWA_OS
+
+
+<span class="cursor">_</span>
+
+
+</pre>
+
 
 </div>
 
 
+
+
+
+<div class="akwa-logo">
+
+
+<div class="logo-shadow">
+AKWAOS
+</div>
+
+
+<div class="logo-main">
+AKWAOS
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="boot-message">
+
+WELCOME TO AKWA_OS
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ================================
+     DESKTOP
+================================ -->
 
 
 <div class="desktop">
 
 
-    <div class="icon">
-        MY COMPUTER
-    </div>
+
+<!-- CRT EFFECTS -->
+
+<div class="screen-curvature"></div>
+
+<div class="scanline"></div>
+
+<div class="crt-lines"></div>
+
+<div class="crt-flicker"></div>
 
 
-    <div class="icon">
-        CONSOLE
-    </div>
 
 
-    <div class="icon">
-        GAME 01
-    </div>
+
+
+
+<!-- ================================
+     DESKTOP ICONS
+================================ -->
+
+
+<div class="desktop-icons">
+
+
+
+<div class="icon"
+ondblclick="openWindow('computer')">
+
+
+<div class="icon-image computer">
+
+</div>
+
+
+<span>
+MY COMPUTER
+</span>
+
+
+</div>
+
+
+
+
+
+
+<div class="icon"
+ondblclick="openWindow('console')">
+
+
+<div class="icon-image terminal">
+
+&gt;_
+
+</div>
+
+
+<span>
+CONSOLE
+</span>
+
+
+</div>
+
+
+
+
+
+
+<div class="icon"
+ondblclick="openWindow('game')">
+
+
+<div class="icon-image game">
+
+◆
+
+</div>
+
+
+<span>
+GAME 01
+</span>
+
+
+</div>
+
+
 
 
 
 </div>
+
+
+
+
+
+
+
+
+
+<!-- ================================
+     COMPUTER WINDOW
+================================ -->
+
+
+<div class="window"
+id="computer">
+
+
+<div class="window-header">
+
+
+<span>
+
+MY COMPUTER
+
+</span>
+
+
+<button onclick="closeWindow('computer')">
+
+X
+
+</button>
+
+
+</div>
+
+
+
+
+
+<div class="window-content">
+
+
+<pre>
+
+
+AKWA_OS COMPUTER
+
+
+SYSTEM INFORMATION
+
+
+OS:
+AkwaOS 0.7.13
+
+
+CPU:
+UNKNOWN PROCESSOR
+
+
+RAM:
+640 KB
+
+
+NETWORK:
+CONNECTED
+
+
+DRIVES:
+
+
+[C:]
+
+SYSTEM
+
+
+[D:]
+
+BACKUP
+
+
+
+</pre>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ================================
+     TERMINAL WINDOW
+================================ -->
+
+
+<div class="window"
+id="console">
+
+
+<div class="window-header">
+
+
+<span>
+
+AKWA TERMINAL
+
+</span>
+
+
+
+<button onclick="closeWindow('console')">
+
+X
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="window-content terminal">
+
+
+<pre id="terminalOutput">
+
+AKWA_OS TERMINAL v1.04
+
+
+TYPE "help"
+FOR COMMAND LIST
+
+
+</pre>
+
+
+
+
+
+<div class="input-line">
+
+
+<span>
+
+AKWA_OS&gt;
+
+</span>
+
+
+<input id="terminalInput"
+autocomplete="off">
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ================================
+     GAME WINDOW
+================================ -->
+
+
+<div class="window"
+id="game">
+
+
+<div class="window-header">
+
+
+<span>
+
+GAME_01.EXE
+
+</span>
+
+
+<button onclick="closeWindow('game')">
+
+X
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="window-content game">
+
+
+<h1>
+
+GAME 01
+
+</h1>
+
+
+<p>
+
+UNKNOWN PROGRAM
+
+</p>
+
+
+
+<button onclick="startGame()">
+
+START
+
+</button>
+
+
+
+<div id="gameMessage">
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ================================
+     SYSTEM FILES WINDOW
+================================ -->
+
+
+<div class="window"
+id="logs">
+
+
+<div class="window-header">
+
+
+<span>
+
+SYSTEM.LOG
+
+</span>
+
+
+<button onclick="closeWindow('logs')">
+
+X
+
+</button>
+
+
+</div>
+
+
+
+
+
+<div class="window-content">
+
+
+<pre>
+
+
+SYSTEM LOG
+
+
+03:41:02
+
+BOOT COMPLETE
+
+
+03:42:11
+
+USER LOGIN:
+
+
+Adrian_lamo
+
+
+03:42:15
+
+WARNING:
+
+
+UNKNOWN PROCESS ACTIVE
+
+
+
+</pre>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ================================
+     TASKBAR
+================================ -->
+
+
+<div class="taskbar">
+
+
+<span>
+
+AKWA_OS ONLINE
+
+</span>
+
+
+
+<span id="clock">
+
+</span>
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+
 
 
 
