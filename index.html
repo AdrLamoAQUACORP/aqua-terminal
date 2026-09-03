@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
 
     <meta charset="UTF-8">
@@ -10,38 +11,73 @@
     <style>
 
         body {
-            margin: 0;
-            background: #000;
-            color: #ccc;
-            font-family: monospace;
+            background-color: #050505;
+            color: #00ff66;
+            font-family: "Courier New", Courier, monospace;
+            padding: 20px;
             font-size: 16px;
+            line-height: 1.4;
         }
 
         #terminal {
-            padding: 30px;
-            min-height: 100vh;
-            box-sizing: border-box;
+            max-width: 900px;
+            margin: 0 auto;
+
+            border: 1px solid #00ff66;
+
+            padding: 20px;
+
+            box-shadow:
+                0 0 15px rgba(0, 255, 102, 0.2);
+
+            min-height: 500px;
         }
 
-        #output {
-            white-space: pre-wrap;
-        }
-
-        #input-line {
+        .input-line {
             display: flex;
-            gap: 8px;
+            align-items: center;
+
+            margin-top: 15px;
         }
 
-        #command-input {
-            flex: 1;
+        .prompt {
+            color: #00aaff;
+
+            margin-right: 10px;
+
+            white-space: nowrap;
+        }
+
+        input {
             background: transparent;
+
             border: none;
+
+            color: #00ff66;
+
+            font-family: inherit;
+
+            font-size: inherit;
+
             outline: none;
 
-            color: #ccc;
+            width: 100%;
+        }
 
-            font-family: monospace;
-            font-size: 16px;
+        .error {
+            color: #ff3333;
+        }
+
+        .success {
+            color: #ffff33;
+        }
+
+        .system {
+            color: #aaaaaa;
+        }
+
+        .warning {
+            color: #ffaa00;
         }
 
     </style>
@@ -51,108 +87,251 @@
 
 <body>
 
-    <div id="terminal">
 
-        <div id="output">
+<div id="terminal">
 
-            <div>AKWA // REMOTE NODE 17</div>
-            <div>--------------------------------</div>
-            <div>SYSTEM STATUS ........ ONLINE</div>
-            <div>NETWORK .............. AKWA-INTERNAL</div>
-            <div>SECURITY LEVEL ....... 03</div>
+    <div id="output">
 
-            <br>
-
+        <div class="system">
+            [СИСТЕМА]: Инициализация терминала AKWA...
         </div>
 
+        <div class="system">
+            [СИСТЕМА]: Проверка удалённого соединения...
+        </div>
 
-        <div id="input-line">
+        <div class="success">
+            [СИСТЕМА]: СОЕДИНЕНИЕ УСТАНОВЛЕНО.
+        </div>
 
-            <span>&gt;</span>
+        <br>
 
-            <input
-                id="command-input"
-                type="text"
-                autocomplete="off"
-                autofocus
-            >
+        <div>
+            AKWA // REMOTE NODE 17
+        </div>
 
+        <div>
+            --------------------------------
+        </div>
+
+        <div>
+            SYSTEM STATUS ........ ONLINE
+        </div>
+
+        <div>
+            NETWORK .............. AKWA-INTERNAL
+        </div>
+
+        <div>
+            NODE ................. 17
+        </div>
+
+        <div>
+            SECURITY LEVEL ....... 03
+        </div>
+
+        <br>
+
+        <div>
+            Последний зарегистрированный пользователь:
+        </div>
+
+        <div>
+            ADRIAN LAMO
+        </div>
+
+        <br>
+
+        <div>
+            Введите команду <b>help</b> для получения списка доступных команд.
         </div>
 
     </div>
 
 
-    <script>
+    <div class="input-line">
 
-        const output = document.getElementById("output");
-        const input = document.getElementById("command-input");
+        <span id="prompt-text" class="prompt">
+            AKWA_OS:
+        </span>
 
+        <input
+            type="text"
+            id="cmd-input"
+            autofocus
+            autocomplete="off"
+        >
 
-        function print(text = "") {
+    </div>
 
-            const line = document.createElement("div");
-
-            line.textContent = text;
-
-            output.appendChild(line);
-
-            window.scrollTo(
-                0,
-                document.body.scrollHeight
-            );
-
-        }
+</div>
 
 
-        function showHelp() {
-
-            print("AVAILABLE COMMANDS");
-            print("");
-            print("help");
-            print("status");
-            print("login");
-            print("clear");
-
-        }
+<script>
 
 
-        function showStatus() {
+    // =========================================================
+    // ОСНОВНЫЕ ЭЛЕМЕНТЫ ТЕРМИНАЛА
+    // =========================================================
 
-            print("SYSTEM STATUS ........ ONLINE");
-            print("NETWORK .............. AKWA-INTERNAL");
-            print("NODE ................. 17");
+    const output = document.getElementById("output");
 
-        }
+    const input = document.getElementById("cmd-input");
 
-
-        function clearTerminal() {
-
-            output.innerHTML = "";
-
-        }
+    const promptText = document.getElementById("prompt-text");
 
 
-        function startLogin() {
+    // =========================================================
+    // СОСТОЯНИЕ ТЕРМИНАЛА
+    // =========================================================
 
-            print("AUTHENTICATION REQUIRED");
-            print("");
-            print("USER ID:");
-            print("");
-            print("ENTER USER ID TO CONTINUE.");
+    let currentStep = "COMMAND";
 
-        }
-
-
-        function handleCommand(command) {
-
-            const cmd = command.trim().toLowerCase();
+    let registrationData = {
+        login: "",
+        password: ""
+    };
 
 
-            print("> " + command);
-            print("");
+    // =========================================================
+    // ВЫВОД ТЕКСТА
+    // =========================================================
+
+    function print(text = "", className = "") {
+
+        const div = document.createElement("div");
+
+        div.className = className;
+
+        div.innerHTML = text;
+
+        output.appendChild(div);
+
+        window.scrollTo(
+            0,
+            document.body.scrollHeight
+        );
+
+    }
 
 
-            switch (cmd) {
+    // =========================================================
+    // HELP
+    // =========================================================
+
+    function showHelp() {
+
+        print("AVAILABLE COMMANDS");
+
+        print("");
+
+        print("help");
+
+        print("status");
+
+        print("login");
+
+        print("register");
+
+        print("clear");
+
+    }
+
+
+    // =========================================================
+    // STATUS
+    // =========================================================
+
+    function showStatus() {
+
+        print("SYSTEM STATUS ........ ONLINE");
+
+        print("NETWORK .............. AKWA-INTERNAL");
+
+        print("NODE ................. 17");
+
+        print("SECURITY LEVEL ....... 03");
+
+        print("");
+
+        print("LAST USER ............ ADRIAN LAMO");
+
+        print("ACCOUNT STATUS ....... ACTIVE");
+
+    }
+
+
+    // =========================================================
+    // ОЧИСТКА
+    // =========================================================
+
+    function clearTerminal() {
+
+        output.innerHTML = "";
+
+    }
+
+
+    // =========================================================
+    // LOGIN
+    // =========================================================
+
+    function startLogin() {
+
+        print("AUTHENTICATION REQUIRED", "system");
+
+        print("");
+
+        print("USER ID:");
+
+        promptText.innerText = "USER ID:";
+
+        currentStep = "LOGIN";
+
+    }
+
+
+    // =========================================================
+    // РЕГИСТРАЦИЯ
+    // =========================================================
+
+    function startRegistration() {
+
+        print("ACCOUNT REGISTRATION", "system");
+
+        print("");
+
+        print("Новая учётная запись не получает доступ к закрытым разделам.");
+
+        print("После регистрации данные будут отправлены руководству на рассмотрение.");
+
+        print("");
+
+        print("Введите желаемый USER ID:");
+
+        promptText.innerText = "NEW USER ID:";
+
+        currentStep = "REGISTER_LOGIN";
+
+    }
+
+
+    // =========================================================
+    // ОБРАБОТКА КОМАНД
+    // =========================================================
+
+    function handleCommand(value) {
+
+        const lowerValue = value.trim().toLowerCase();
+
+
+        // -----------------------------------------------------
+        // ОБЫЧНЫЕ КОМАНДЫ
+        // -----------------------------------------------------
+
+        if (currentStep === "COMMAND") {
+
+            switch (lowerValue) {
 
                 case "help":
 
@@ -175,6 +354,13 @@
                     break;
 
 
+                case "register":
+
+                    startRegistration();
+
+                    break;
+
+
                 case "clear":
 
                     clearTerminal();
@@ -189,34 +375,253 @@
 
                 default:
 
-                    print("ERROR: UNKNOWN COMMAND");
+                    print(
+                        "ERROR: UNKNOWN COMMAND",
+                        "error"
+                    );
 
             }
 
-
-            print("");
+            return;
 
         }
 
 
-        input.addEventListener(
-            "keydown",
-            function(event) {
+        // -----------------------------------------------------
+        // LOGIN
+        // -----------------------------------------------------
 
-                if (event.key === "Enter") {
+        if (currentStep === "LOGIN") {
 
-                    const command = input.value;
+            if (lowerValue === "adrian_lamo") {
 
-                    input.value = "";
+                print(
+                    "[СИСТЕМА]: USER ID ACCEPTED.",
+                    "success"
+                );
 
-                    handleCommand(command);
+                print("");
 
-                }
+                print(
+                    "Введите пароль:"
+                );
+
+                promptText.innerText = "PASSWORD:";
+
+                currentStep = "PASSWORD";
 
             }
-        );
 
-    </script>
+            else {
+
+                print(
+                    "ERROR: USER NOT FOUND.",
+                    "error"
+                );
+
+                print(
+                    "Если у вас нет учётной записи, используйте команду register."
+                );
+
+                promptText.innerText = "AKWA_OS:";
+
+                currentStep = "COMMAND";
+
+            }
+
+            return;
+
+        }
+
+
+        // -----------------------------------------------------
+        // ПАРОЛЬ
+        // -----------------------------------------------------
+
+        if (currentStep === "PASSWORD") {
+
+            /*
+                ВАЖНО:
+
+                Настоящий пароль здесь пока НЕ создаём.
+
+                Эта часть будет подключена к серверной
+                системе авторизации.
+
+                Сейчас мы только создаём правильную
+                структуру терминала.
+            */
+
+            print(
+                "AUTHENTICATION SERVICE UNAVAILABLE.",
+                "error"
+            );
+
+            print("");
+
+            print(
+                "REMOTE AUTHENTICATION MODULE REQUIRED.",
+                "system"
+            );
+
+            print("");
+
+            promptText.innerText = "AKWA_OS:";
+
+            currentStep = "COMMAND";
+
+            return;
+
+        }
+
+
+        // -----------------------------------------------------
+        // РЕГИСТРАЦИЯ — USER ID
+        // -----------------------------------------------------
+
+        if (currentStep === "REGISTER_LOGIN") {
+
+            if (value.trim().length < 3) {
+
+                print(
+                    "ERROR: USER ID TOO SHORT.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            registrationData.login = value.trim();
+
+
+            print(
+                "USER ID ACCEPTED.",
+                "success"
+            );
+
+            print("");
+
+            print(
+                "Введите пароль:"
+            );
+
+            promptText.innerText = "NEW PASSWORD:";
+
+            currentStep = "REGISTER_PASSWORD";
+
+            return;
+
+        }
+
+
+        // -----------------------------------------------------
+        // РЕГИСТРАЦИЯ — ПАРОЛЬ
+        // -----------------------------------------------------
+
+        if (currentStep === "REGISTER_PASSWORD") {
+
+            if (value.length < 4) {
+
+                print(
+                    "ERROR: PASSWORD TOO SHORT.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            registrationData.password = value;
+
+
+            print(
+                "Регистрация завершена.",
+                "success"
+            );
+
+            print("");
+
+            print(
+                "Ваши данные были отправлены для ознакомления и подтверждения руководству.",
+                "system"
+            );
+
+            print("");
+
+            print(
+                "ACCOUNT STATUS: PENDING"
+            );
+
+            print(
+                "ACCESS LEVEL: NONE"
+            );
+
+            print("");
+
+            print(
+                "Доступ к закрытым разделам отсутствует.",
+                "warning"
+            );
+
+
+            registrationData = {
+                login: "",
+                password: ""
+            };
+
+
+            promptText.innerText = "AKWA_OS:";
+
+            currentStep = "COMMAND";
+
+            return;
+
+        }
+
+    }
+
+
+    // =========================================================
+    // НАЖАТИЕ ENTER
+    // =========================================================
+
+    input.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key !== "Enter") {
+                return;
+            }
+
+
+            const value = input.value;
+
+
+            if (!value.trim()) {
+                return;
+            }
+
+
+            print(
+                `${promptText.innerText} ${value}`
+            );
+
+
+            input.value = "";
+
+
+            handleCommand(value);
+
+        }
+    );
+
+
+</script>
+
 
 </body>
+
 </html>
