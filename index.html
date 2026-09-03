@@ -426,8 +426,8 @@
 const API_URL = "https://akwa-terminal-api.moskinasasa32.workers.dev";
 
         let mode = "command";
-        let authUsername = "";\nlet sessionToken = "";
-        let loggedInUser = "";
+        let authUsername = "";
+        let loggedInUser = "";\nlet sessionToken = "";
         let loggedInAccessLevel = 0;
 
         input.addEventListener("keydown", async function(event) {
@@ -509,7 +509,7 @@ const API_URL = "https://akwa-terminal-api.moskinasasa32.workers.dev";
                         print("AUTHENTICATION SUCCESSFUL", "success");
                         print("USER ID ........ " + data.username);
                         print("STATUS ......... " + data.status);
-                        print("ACCESS LEVEL ... " + data.access_level);\n                sessionToken = data.session_token || "";
+                        print("ACCESS LEVEL ... " + data.access_level);
                     } else {
                         print(data.error || "AUTHENTICATION FAILED", "error");
                         authUsername = "";
@@ -536,6 +536,7 @@ const API_URL = "https://akwa-terminal-api.moskinasasa32.workers.dev";
                 print("login");
                 print("register");
                 print("personnel");
+                print("logout");
                 print("clear");
             }
 
@@ -570,7 +571,7 @@ const API_URL = "https://akwa-terminal-api.moskinasasa32.workers.dev";
             }
 
             else if (command === "personnel") {
-                if (!loggedInUser) {
+                if (!sessionToken) {
                     print("");
                     print("AUTHENTICATION REQUIRED", "error");
                     return;
@@ -583,10 +584,10 @@ const API_URL = "https://akwa-terminal-api.moskinasasa32.workers.dev";
                 try {
                     const response = await fetch(API_URL + "/personnel", {
                         method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            username: loggedInUser
-                        })
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + sessionToken
+                        }
                     });
 
                     const data = await response.json();
@@ -606,61 +607,37 @@ const API_URL = "https://akwa-terminal-api.moskinasasa32.workers.dev";
                 }
             }
 
-            else if (command === "personnel") {
-        if (!sessionToken) {
-            print("ERROR: AUTHENTICATION REQUIRED", "error");
-        } else {
-            try {
-                const response = await fetch(API_URL + "/personnel", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": "Bearer " + sessionToken
-                    }
-                });
-
-                const data = await response.json();
-
-                if (data.ok) {
-                    print("");
-                    for (const line of data.data) {
-                        print(line);
-                    }
-                } else {
-                    print(data.error || "ACCESS DENIED", "error");
+            else if (command === "logout") {
+                if (!sessionToken) {
+                    print("NO ACTIVE SESSION", "warning");
+                    return;
                 }
-            } catch (error) {
-                print("ERROR: CONNECTION FAILED", "error");
-            }
-        }
-    }
-    else if (command === "logout") {
-        if (!sessionToken) {
-            print("NO ACTIVE SESSION", "warning");
-        } else {
-            try {
-                const response = await fetch(API_URL + "/logout", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": "Bearer " + sessionToken
+
+                try {
+                    const response = await fetch(API_URL + "/logout", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + sessionToken
+                        }
+                    });
+
+                    const data = await response.json();
+
+                    if (data.ok) {
+                        sessionToken = "";
+                        loggedInUser = "";
+                        loggedInAccessLevel = null;
+                        print(data.message, "success");
+                    } else {
+                        print(data.error || "LOGOUT FAILED", "error");
                     }
-                });
-
-                const data = await response.json();
-
-                if (data.ok) {
-                    sessionToken = "";
-                    print(data.message, "success");
-                } else {
-                    print(data.error || "LOGOUT FAILED", "error");
+                } catch (error) {
+                    print("ERROR: CONNECTION FAILED", "error");
                 }
-            } catch (error) {
-                print("ERROR: CONNECTION FAILED", "error");
             }
-        }
-    }
-    else if (command === "clear") {
+
+            else if (command === "clear") {
                 output.innerHTML = "";
             }
 
