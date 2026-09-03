@@ -16,23 +16,44 @@ const sound =
 document.getElementById("bootSound");
 
 
+let soundStarted = false;
 
-setTimeout(()=>{
+
+
+function startBootSound(){
+
+
+if(soundStarted)
+return;
+
+
+soundStarted = true;
+
 
 
 if(sound){
 
 
-sound.volume = 0.7;
+sound.volume = 0.8;
+
+
+sound.currentTime = 0;
 
 
 sound.play()
-.catch(()=>{
+.then(()=>{
 
 console.log(
-"Browser blocked autoplay"
+"AkwaOS boot sound started"
 );
 
+})
+.catch(error=>{
+
+console.log(
+"Sound error:",
+error
+);
 
 });
 
@@ -40,11 +61,26 @@ console.log(
 }
 
 
-},1200);
+}
 
 
 
 
+
+// первый клик запускает питание ПК
+
+document.addEventListener(
+"click",
+startBootSound,
+{
+once:true
+}
+);
+
+
+
+
+// загрузка заставки
 
 setTimeout(()=>{
 
@@ -64,9 +100,7 @@ boot.style.opacity="0";
 
 setTimeout(()=>{
 
-
 boot.remove();
-
 
 },1000);
 
@@ -74,12 +108,11 @@ boot.remove();
 }
 
 
-},6000);
+},7000);
 
 
 
 });
-
 
 
 
