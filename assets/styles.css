@@ -2881,3 +2881,72 @@ body.arg3-prealarm-adrian #arg3-error-layer::after {
     inset 0 0 18px rgba(145,227,125,.035),
     0 0 18px rgba(145,227,125,.025);
 }
+
+
+/* =========================================================
+   ARG 3 DYNAMIC PURGE + CINEMATIC TRANSITION / UPDATE 15
+   ========================================================= */
+
+body.arg3-prealarm-transition #arg3-error-layer {
+  animation: arg3ErrorLayerCollapse .72s steps(3,end) forwards;
+}
+
+body.arg3-prealarm-transition #desktop {
+  animation: arg3DesktopToBlack .72s ease forwards;
+}
+
+@keyframes arg3ErrorLayerCollapse {
+  0% {
+    opacity: 1;
+    filter: none;
+    transform: scale(1);
+  }
+  45% {
+    opacity: .82;
+    filter: contrast(1.8) brightness(.8);
+    transform: scale(1.018);
+  }
+  72% {
+    opacity: .28;
+    filter: blur(1.2px) contrast(2.1);
+    transform: scale(.992);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(2px);
+    transform: scale(1.025);
+  }
+}
+
+@keyframes arg3DesktopToBlack {
+  from {
+    filter: brightness(1);
+  }
+  to {
+    filter: brightness(.12) contrast(1.35);
+  }
+}
+
+/* DATA PURGE reacts continuously; player must drive it all the way to 0. */
+.arg3-purge__fill {
+  transition: height .18s linear, filter .18s ease;
+}
+
+.arg3-purge__track::after {
+  content: "0% = DATA PRESERVED";
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: 5px;
+  color: rgba(255,255,255,.48);
+  font-size: 9px;
+  letter-spacing: .06em;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* Slight emphasis that commands are not a fixed sequence. */
+.arg3-command-box__instruction::after {
+  content: " // COMMAND STREAM ACTIVE";
+  color: rgba(244,207,101,.62);
+}
