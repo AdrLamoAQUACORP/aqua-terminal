@@ -617,6 +617,9 @@ const API_URL = "https://akwa-terminal-api.moskinasasa32.workers.dev";
                     } else {
                         print(data.error || "ACCESS DENIED", "error");
                     }
+                } catch (error) {
+                    print("ERROR: CONNECTION FAILED", "error");
+                }
             }
 
             else if (command === "logout") {
