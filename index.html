@@ -17,7 +17,7 @@
             padding: 0;
 
             width: 100%;
-            min-height: 100%;
+            height: 100%;
 
             background: #050505;
             color: #00ff66;
@@ -27,6 +27,7 @@
 
         body {
             min-height: 100vh;
+            overflow: hidden;
 
             display: flex;
             justify-content: center;
@@ -91,10 +92,15 @@
         #terminal {
             display: none;
 
-            width: 90%;
-            max-width: 900px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
 
-            min-height: 500px;
+            width: 90vw;
+            max-width: 900px;
+            height: 70vh;
+            min-height: 400px;
 
             padding: 30px;
 
@@ -102,10 +108,21 @@
 
             box-shadow:
                 0 0 20px rgba(0, 255, 102, 0.2);
+
+            flex-direction: column;
+            overflow: hidden;
         }
 
         #output {
+            flex: 1;
+            min-height: 0;
+
+            overflow-y: auto;
+            overflow-x: hidden;
+
             text-align: center;
+
+            padding-bottom: 15px;
         }
 
         .system {
@@ -127,10 +144,19 @@
         #input-line {
             display: none;
 
+            flex-shrink: 0;
+
             justify-content: center;
             align-items: center;
 
-            margin-top: 20px;
+            width: 100%;
+
+            margin-top: 15px;
+            padding-top: 15px;
+
+            border-top: 1px solid rgba(0, 255, 102, 0.25);
+
+            background: #050505;
         }
 
         #prompt {
@@ -229,6 +255,8 @@
             line.textContent = text;
 
             output.appendChild(line);
+
+            output.scrollTop = output.scrollHeight;
         }
 
 
@@ -384,7 +412,7 @@
 
             startup.style.display = "none";
 
-            terminal.style.display = "block";
+            terminal.style.display = "flex";
 
             boot();
 
