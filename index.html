@@ -585,28 +585,38 @@ const API_URL = "https://akwa-terminal-api.moskinasasa32.workers.dev";
 
                 try {
                     const response = await fetch(API_URL + "/personnel", {
-                        method: "POST",
+                        method: "GET",
                         headers: {
-                            "Content-Type": "application/json",
                             "Authorization": "Bearer " + sessionToken
                         }
                     });
 
                     const data = await response.json();
 
-                    if (data.ok) {
+                    if (data.success) {
                         print("ACCESS GRANTED", "success");
                         print("");
+                        print("PERSONNEL DATABASE");
+                        print("");
 
-                        if (Array.isArray(data.data)) {
-                            data.data.forEach(line => print(line));
+                        if (Array.isArray(data.records)) {
+                            data.records.forEach(record => {
+                                print("--------------------------------");
+                                print("EMPLOYEE ID ......... " + record.employee_id);
+                                print("NAME ................ " + record.name);
+                                print("POSITION ............ " + record.position);
+                                print("STATUS .............. " + record.status);
+                                print("CLEARANCE ........... " + String(record.clearance).padStart(2, "0"));
+                                print("BIOMETRIC ........... " + (record.biometric_status || "N/A"));
+                                print("");
+                                print("NOTES:");
+                                print(record.notes || "NONE");
+                            });
+                            print("--------------------------------");
                         }
                     } else {
                         print(data.error || "ACCESS DENIED", "error");
                     }
-                } catch (error) {
-                    print("ERROR: CONNECTION FAILED", "error");
-                }
             }
 
             else if (command === "logout") {
