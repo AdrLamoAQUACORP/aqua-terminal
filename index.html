@@ -1,427 +1,270 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-
 <head>
-
-<meta charset="UTF-8">
-
-<title>AkwaOS</title>
-
-<link rel="stylesheet" href="style.css">
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#08110f" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <title>AKWAOS :: LOCAL NODE</title>
+  <link rel="stylesheet" href="./assets/styles.css" />
 </head>
-
-
 <body>
-
-
-<audio id="bootSound">
-
-<source src="welcome-computer-message.mp3" type="audio/mpeg">
-
-</audio>
-
-
-
-
-
-<!-- =====================
-BOOT SCREEN
-===================== -->
-
-
-<div id="bootScreen">
-
-
-<div class="boot-content">
-
-
-<div class="akwa-logo">
-
-
-<div class="logo-glitch">
-AKWAOS
-</div>
-
-
-<div class="logo-main">
-AKWAOS
-</div>
-
-
-<div class="logo-scan">
-AKWAOS
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="boot-console">
-
-
-<p>
-> INITIALIZING CORE ........ OK
-</p>
-
-
-<p>
-> CHECKING MEMORY ......... OK
-</p>
-
-
-<p>
-> LOADING SYSTEM FILES .... OK
-</p>
-
-
-<p>
-> NETWORK CONNECT ........ ONLINE
-</p>
-
-
-<p>
-> STARTING AKWA_KERNEL ... OK
-</p>
-
-
-<div class="loading">
-
-
-<div></div>
-
-
-</div>
-
-
-
-<div class="cursor">
-_
-</div>
-
-
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- =====================
-DESKTOP
-===================== -->
-
-
-<div class="desktop">
-
-
-
-<div class="scanline"></div>
-
-
-<div class="crt"></div>
-
-
-
-
-
-<div class="desktop-icons">
-
-
-
-<div class="icon"
-ondblclick="openWindow('computer')">
-
-
-<div class="computer">
-
-▣
-
-</div>
-
-
-<span>
-MY COMPUTER
-</span>
-
-
-</div>
-
-
-
-
-
-
-<div class="icon"
-ondblclick="openWindow('console')">
-
-
-<div class="terminal-icon">
-
->_
-
-</div>
-
-
-<span>
-CONSOLE
-</span>
-
-
-</div>
-
-
-
-
-
-
-<div class="icon"
-ondblclick="openWindow('game')">
-
-
-<div class="game">
-
-◆
-
-</div>
-
-
-<span>
-GAME 01
-</span>
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- COMPUTER -->
-
-
-<div class="window" id="computer">
-
-
-<div class="window-header">
-
-MY COMPUTER
-
-
-<button onclick="closeWindow('computer')">
-
-X
-
-</button>
-
-
-</div>
-
-
-
-<div class="window-body">
-
-
-<pre>
-
-AKWA COMPUTER
-
-
-SYSTEM:
-AKWAOS 0.7.13
-
-
-CPU:
-UNKNOWN
-
-
-RAM:
-640 KB
-
-
-NETWORK:
-ONLINE
-
-
-</pre>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- TERMINAL -->
-
-
-<div class="window" id="console">
-
-
-<div class="window-header">
-
-
-AKWA TERMINAL
-
-
-<button onclick="closeWindow('console')">
-
-X
-
-</button>
-
-
-</div>
-
-
-
-<div class="window-body">
-
-
-<pre id="terminalOutput">
-
-AKWA_OS TERMINAL
-
-TYPE "help"
-
-
-</pre>
-
-
-<div>
-
-AKWA_OS >
-
-<input id="terminalInput">
-
-</div>
-
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- GAME -->
-
-
-<div class="window" id="game">
-
-
-<div class="window-header">
-
-GAME_01.EXE
-
-
-<button onclick="closeWindow('game')">
-
-X
-
-</button>
-
-
-</div>
-
-
-<div class="window-body">
-
-
-<h2>
-GAME 01
-</h2>
-
-
-<p>
-UNKNOWN PROGRAM
-</p>
-
-
-<button>
-
-START
-
-</button>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="taskbar">
-
-
-<span>
-AKWA_OS ONLINE
-</span>
-
-
-<span id="clock">
-00:00
-</span>
-
-
-</div>
-
-
-
-
-
-</div>
-
-
-
-
-
-<script src="script.js"></script>
-
-
+  <div id="app" class="app-shell">
+    <div class="crt-overlay" aria-hidden="true"></div>
+    <div class="noise-overlay" aria-hidden="true"></div>
+
+    <section id="boot-gate" class="boot-gate screen-layer">
+      <div class="boot-gate__frame">
+        <div class="boot-gate__meta">
+          <span>AKWA RESEARCH NETWORK</span>
+          <span>LOCAL TERMINAL // A-17</span>
+        </div>
+
+        <div class="boot-gate__center">
+          <div class="boot-gate__sigil" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <p class="eyebrow">ISOLATED WORKSTATION</p>
+          <h1>AKWAOS</h1>
+          <p class="boot-gate__warning">
+            Внешнее сетевое соединение отсутствует.<br />
+            Доступ разрешён только авторизованному персоналу.
+          </p>
+          <button id="start-system" class="system-button" type="button">
+            <span class="system-button__lamp"></span>
+            ЗАПУСК СИСТЕМЫ
+          </button>
+        </div>
+
+        <div class="boot-gate__footer">
+          <span>BUILD 7.14.92-R</span>
+          <span>PROPERTY OF AKWA SCIENTIFIC DIRECTORATE</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="boot-screen" class="boot-screen screen-layer is-hidden" aria-live="polite">
+      <div class="boot-screen__brand">
+        <div id="akwa-logo" class="akwa-logo">AKWAOS</div>
+        <div class="akwa-logo__sub">RESEARCH OPERATING SYSTEM</div>
+      </div>
+
+      <div class="boot-console">
+        <div class="boot-console__header">
+          <span>BOOT TRACE</span>
+          <span id="boot-clock">00:00:00</span>
+        </div>
+        <div id="boot-lines" class="boot-console__lines"></div>
+        <div class="boot-console__progress">
+          <span id="boot-progress-bar"></span>
+        </div>
+      </div>
+    </section>
+
+    <main id="desktop" class="desktop screen-layer is-hidden" aria-label="Рабочий стол AKWAOS">
+      <div class="desktop__watermark">
+        <span>AKWA</span>
+        <small>SCIENTIFIC DIRECTORATE</small>
+      </div>
+
+      <div class="desktop-icons">
+        <button class="desktop-icon" data-open="files" type="button">
+          <img src="./assets/icons/folder.svg" alt="" />
+          <span>АРХИВЫ</span>
+        </button>
+
+        <button class="desktop-icon" data-open="terminal" type="button">
+          <img src="./assets/icons/terminal.svg" alt="" />
+          <span>ТЕРМИНАЛ</span>
+        </button>
+
+        <button class="desktop-icon" data-open="personnel" type="button">
+          <img src="./assets/icons/idcard.svg" alt="" />
+          <span>ПЕРСОНАЛ</span>
+        </button>
+
+        <button class="desktop-icon" data-open="research" type="button">
+          <img src="./assets/icons/flask.svg" alt="" />
+          <span>ИССЛЕДОВАНИЯ</span>
+        </button>
+
+        <button class="desktop-icon" data-open="game" type="button">
+          <img src="./assets/icons/game.svg" alt="" />
+          <span>CALIBRATE.EXE</span>
+        </button>
+
+        <button id="trash-icon" class="desktop-icon desktop-icon--muted" data-open="trash" type="button">
+          <img src="./assets/icons/trash.svg" alt="" />
+          <span>УДАЛЁННОЕ</span>
+        </button>
+      </div>
+
+      <section class="desktop-status" aria-label="Статус системы">
+        <div>
+          <span class="status-dot"></span>
+          LOCAL NODE
+        </div>
+        <div>NET: ISOLATED</div>
+        <div>SECURITY: LEVEL 3</div>
+      </section>
+
+      <section id="window-files" class="os-window is-hidden" data-window="files">
+        <header class="os-window__bar drag-handle">
+          <div><span class="window-led"></span> AKWA://ARCHIVE</div>
+          <button class="window-close" data-close="files" type="button">×</button>
+        </header>
+        <div class="os-window__toolbar">
+          <span>Локальный диск A:</span>
+          <span>Свободно: 12.4 MB</span>
+        </div>
+        <div class="os-window__content file-browser">
+          <button class="file-row" data-file="protocol">
+            <span class="file-row__icon">▣</span>
+            <span>PROTOCOL_626.TXT</span>
+            <small>4 KB</small>
+          </button>
+          <button class="file-row is-locked" data-file="nocturne">
+            <span class="file-row__icon">▣</span>
+            <span>NOCTURNE_OBSERVATION.LOG</span>
+            <small>LOCKED</small>
+          </button>
+          <button class="file-row is-corrupt" data-file="beacon">
+            <span class="file-row__icon">◇</span>
+            <span>BEACON_FRAGMENT.DAT</span>
+            <small>ERR</small>
+          </button>
+          <button class="file-row" data-file="shift">
+            <span class="file-row__icon">▤</span>
+            <span>SHIFT_HANDOVER_14.MEM</span>
+            <small>7 KB</small>
+          </button>
+        </div>
+      </section>
+
+      <section id="window-terminal" class="os-window os-window--terminal is-hidden" data-window="terminal">
+        <header class="os-window__bar drag-handle">
+          <div><span class="window-led"></span> SHELL://A17</div>
+          <button class="window-close" data-close="terminal" type="button">×</button>
+        </header>
+        <div class="terminal-body">
+          <div id="terminal-output" class="terminal-output">
+            <p>AKWA SHELL v3.8.1</p>
+            <p>Введите <strong>help</strong> для списка доступных команд.</p>
+          </div>
+          <form id="terminal-form" class="terminal-input-row">
+            <span>A:\USERS\ALAMO&gt;</span>
+            <input id="terminal-input" autocomplete="off" spellcheck="false" aria-label="Командная строка" />
+          </form>
+        </div>
+      </section>
+
+      <section id="window-personnel" class="os-window is-hidden" data-window="personnel">
+        <header class="os-window__bar drag-handle">
+          <div><span class="window-led"></span> PERSONNEL.DB</div>
+          <button class="window-close" data-close="personnel" type="button">×</button>
+        </header>
+        <div class="os-window__content dossier">
+          <div class="dossier__photo">
+            <div class="dossier__avatar">A17</div>
+            <span>PHOTO RECORD DAMAGED</span>
+          </div>
+          <div class="dossier__data">
+            <p><b>ИМЯ:</b> ADRIAN LAMO</p>
+            <p><b>ДОЛЖНОСТЬ:</b> SECURITY OFFICER / NIGHT SHIFT</p>
+            <p><b>ID:</b> AQ-S17-441</p>
+            <p><b>ДОПУСК:</b> LEVEL 3</p>
+            <p><b>ПОСЛЕДНИЙ ВХОД:</b> 03:14:07 // DATE CORRUPTED</p>
+            <p class="warning-line">Несоответствие биометрической записи: 1</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="window-research" class="os-window is-hidden" data-window="research">
+        <header class="os-window__bar drag-handle">
+          <div><span class="window-led"></span> RESEARCH INDEX</div>
+          <button class="window-close" data-close="research" type="button">×</button>
+        </header>
+        <div class="os-window__content research-grid">
+          <article>
+            <span class="research-code">R-626</span>
+            <h3>PROJECT 626</h3>
+            <p>Статус: приостановлен</p>
+            <p>Доступность: частичная</p>
+          </article>
+          <article>
+            <span class="research-code">N-04</span>
+            <h3>NOCTURNE</h3>
+            <p>Статус: наблюдение</p>
+            <p>Доступность: ограничена</p>
+          </article>
+          <article>
+            <span class="research-code">B-00</span>
+            <h3>BEACON / МАЯК</h3>
+            <p>Статус: архив</p>
+            <p>Доступность: повреждена</p>
+          </article>
+          <article>
+            <span class="research-code">O-??</span>
+            <h3>OSDEIN</h3>
+            <p>Статус: неизвестен</p>
+            <p>Доступность: индекс отсутствует</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="window-game" class="os-window is-hidden" data-window="game">
+        <header class="os-window__bar drag-handle">
+          <div><span class="window-led"></span> CALIBRATE.EXE</div>
+          <button class="window-close" data-close="game" type="button">×</button>
+        </header>
+        <div class="os-window__content calibration">
+          <div class="calibration__score">
+            <span>BEST LOCAL RECORD</span>
+            <strong>A.LAMO — 98.3%</strong>
+          </div>
+          <p>Стабилизируйте сигнал, нажимая кнопку в момент, когда маркер входит в центральную зону.</p>
+          <div class="calibration__track">
+            <div id="cal-marker" class="calibration__marker"></div>
+            <div class="calibration__target"></div>
+          </div>
+          <button id="calibrate-button" class="mini-button" type="button">ЗАФИКСИРОВАТЬ</button>
+          <p id="calibrate-result" class="calibration__result">Ожидание ввода...</p>
+        </div>
+      </section>
+
+      <section id="window-trash" class="os-window is-hidden" data-window="trash">
+        <header class="os-window__bar drag-handle">
+          <div><span class="window-led"></span> RECYCLE CACHE</div>
+          <button class="window-close" data-close="trash" type="button">×</button>
+        </header>
+        <div class="os-window__content">
+          <p>Корзина пуста.</p>
+          <p class="muted">Последняя очистка: SYSTEM / AUTO</p>
+        </div>
+      </section>
+
+      <section id="file-viewer" class="os-window os-window--viewer is-hidden" data-window="viewer">
+        <header class="os-window__bar drag-handle">
+          <div id="viewer-title"><span class="window-led"></span> FILE</div>
+          <button class="window-close" data-close="viewer" type="button">×</button>
+        </header>
+        <div id="viewer-content" class="os-window__content viewer-content"></div>
+      </section>
+
+      <div id="system-toast" class="system-toast is-hidden" role="status"></div>
+
+      <footer class="taskbar">
+        <button id="akwa-menu" class="taskbar__start" type="button">AKWA</button>
+        <div class="taskbar__divider"></div>
+        <div id="taskbar-apps" class="taskbar__apps"></div>
+        <div class="taskbar__clock">
+          <span id="desktop-time">--:--</span>
+          <small>A-17</small>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <script src="./assets/app.js"></script>
 </body>
-
 </html>
