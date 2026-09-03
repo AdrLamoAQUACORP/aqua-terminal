@@ -2719,3 +2719,165 @@ body.arg3-defense-failed .arg3-defense {
   from { transform: translateY(0); }
   to { transform: translateY(520%); }
 }
+
+
+/* =========================================================
+   ARG 3 HACKING MINIGAME / UPDATE 14
+   ========================================================= */
+
+/* Error windows appear as a centered cascade instead of scattered popups. */
+.arg3-error-layer--active {
+  display: block;
+}
+
+.arg3-error-window--centered {
+  --error-index: 0;
+  left: 50% !important;
+  top: 50% !important;
+  width: min(420px, 68vw);
+  transform:
+    translate(
+      calc(-50% + (var(--error-index) * 9px)),
+      calc(-50% + (var(--error-index) * 8px))
+    );
+  z-index: calc(9810 + var(--error-index));
+}
+
+.arg3-error-window--centered .arg3-error-window__bar {
+  background: #8b100b;
+  color: #fff3ef;
+  font-size: 13px;
+  text-transform: none;
+}
+
+.arg3-error-window--centered .arg3-error-window__body {
+  min-height: 72px;
+  background: #080909;
+  color: #eef8f2;
+}
+
+.arg3-error-window--centered .arg3-error-window__body b {
+  color: #ff6e63;
+  font-size: 14px;
+}
+
+body.arg3-prealarm-warning::before,
+body.arg3-prealarm-account::after {
+  position: fixed;
+  left: 4vw;
+  right: 4vw;
+  z-index: 9890;
+  text-align: center;
+  pointer-events: none;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: .055em;
+  color: #ff746b;
+  text-shadow:
+    4px 0 #3e0c09,
+    -3px 0 rgba(120,184,232,.18);
+}
+
+body.arg3-prealarm-warning::before {
+  content: "ПРЕСЕЧЕНИЕ ВЗЛОМА ДАННЫХ";
+  top: 11vh;
+  font-size: clamp(32px, 6vw, 82px);
+  animation: arg3PreAlertIn .22s steps(2,end) both,
+             arg3PreAlertGlitch .8s steps(2,end) infinite .22s;
+}
+
+body.arg3-prealarm-account::after {
+  content: "УДАЛЕНИЕ АККАУНТА С БАЗ ДАННЫХ AKWA";
+  top: 23vh;
+  font-size: clamp(21px, 3.6vw, 51px);
+  animation: arg3PreAlertIn .22s steps(2,end) both,
+             arg3PreAlertGlitch 1s steps(2,end) infinite .22s;
+}
+
+@keyframes arg3PreAlertIn {
+  from { opacity: 0; transform: scale(.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes arg3PreAlertGlitch {
+  0%, 72%, 100% { transform: translate(0,0); }
+  76% { transform: translate(3px,0); }
+  80% { transform: translate(-3px,1px); }
+  84% { transform: translate(2px,-1px); }
+  88% { transform: translate(0,0); }
+}
+
+/* Adrian's message is explicitly yellow and appears as a recovered hack note. */
+.arg3-adrian-hint {
+  opacity: 0;
+  transform: translateY(8px);
+  border-left-color: #f4cf65 !important;
+  background: rgba(244,207,101,.07) !important;
+  transition: opacity .24s ease, transform .24s ease;
+}
+
+.arg3-adrian-hint.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.arg3-adrian-hint span {
+  color: #f4cf65 !important;
+}
+
+.arg3-adrian-hint p {
+  color: #ffe995 !important;
+  font-size: 13px;
+  font-weight: 700;
+  text-shadow: 1px 0 rgba(244,207,101,.12);
+}
+
+/* During the pre-alarm, flash a yellow Adrian note before the game screen. */
+body.arg3-prealarm-adrian #arg3-error-layer::after {
+  content: "ADRIAN LAMO // Я выведу тебе команды на экран. Вводи их как можно скорее и тогда ты сохранишь все данные.";
+  position: fixed;
+  left: 50%;
+  bottom: 10vh;
+  width: min(720px, 84vw);
+  transform: translateX(-50%);
+  z-index: 9900;
+  padding: 15px 18px;
+  border: 1px solid rgba(244,207,101,.65);
+  border-left: 4px solid #f4cf65;
+  background: rgba(8,8,5,.94);
+  color: #ffe995;
+  font-size: clamp(12px, 1.7vw, 18px);
+  font-weight: 700;
+  line-height: 1.45;
+  text-align: left;
+  box-shadow: 8px 8px 0 rgba(0,0,0,.4);
+  animation: arg3AdrianPreIn .28s steps(2,end) both;
+}
+
+@keyframes arg3AdrianPreIn {
+  from { opacity: 0; transform: translate(-50%, 14px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* More "hacking game" atmosphere in the command area. */
+.arg3-command-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.arg3-command-box::before {
+  content: "AKWA INTRUSION COUNTERMEASURE // RECOVERY CHANNEL";
+  display: block;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed rgba(145,227,125,.24);
+  color: rgba(145,227,125,.72);
+  font-size: 10px;
+  letter-spacing: .09em;
+}
+
+.arg3-defense-form {
+  box-shadow:
+    inset 0 0 18px rgba(145,227,125,.035),
+    0 0 18px rgba(145,227,125,.025);
+}
