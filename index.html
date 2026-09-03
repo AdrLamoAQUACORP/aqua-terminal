@@ -1,1318 +1,54 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-    <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
 
-    <title>AKWA_OS</title>
+<meta charset="UTF-8">
 
-    <style>
-        /* =====================================================
-           ОСНОВА
-           ===================================================== */
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        * {
-            box-sizing: border-box;
-            user-select: none;
-        }
+<title>AkwaOS</title>
 
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            overflow: hidden;
+<link rel="stylesheet" href="style.css">
 
-            background: #100d1b;
-            color: #eeeeee;
-
-            font-family: "Courier New", monospace;
-        }
-
-        body {
-            cursor:
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='30' viewBox='0 0 24 30'%3E%3Cpath d='M2 1 L2 24 L8 18 L12 28 L16 26 L11 17 L20 17 Z' fill='white' stroke='%2311101b' stroke-width='2'/%3E%3C/svg%3E")
-                2 1,
-                default;
-        }
-
-
-        /* =====================================================
-           РАБОЧИЙ СТОЛ
-           ===================================================== */
-
-        .desktop {
-            position: relative;
-
-            width: 100vw;
-            height: 100vh;
-
-            overflow: hidden;
-
-            background:
-                radial-gradient(
-                    circle at 50% 45%,
-                    rgba(255, 255, 255, 0.025),
-                    transparent 45%
-                ),
-                #100d1b;
-        }
-
-
-        /* CRT-линии */
-
-        .desktop::before {
-            content: "";
-
-            position: absolute;
-            inset: 0;
-
-            pointer-events: none;
-
-            background:
-                repeating-linear-gradient(
-                    to bottom,
-                    rgba(255, 255, 255, 0.025) 0px,
-                    rgba(255, 255, 255, 0.025) 1px,
-                    transparent 1px,
-                    transparent 4px
-                );
-
-            z-index: 900;
-        }
-
-
-        /* Виньетка */
-
-        .desktop::after {
-            content: "";
-
-            position: absolute;
-            inset: 0;
-
-            pointer-events: none;
-
-            box-shadow:
-                inset 0 0 120px rgba(0, 0, 0, 0.65);
-
-            z-index: 901;
-        }
-
-
-        /* =====================================================
-           ДЕКОР ФОНА
-           ===================================================== */
-
-        .background-code {
-            position: absolute;
-
-            color: rgba(255, 255, 255, 0.65);
-
-            font-family: "Courier New", monospace;
-            font-size: 10px;
-            line-height: 12px;
-
-            white-space: pre;
-
-            pointer-events: none;
-        }
-
-        .code-1 {
-            top: 14px;
-            left: 20px;
-        }
-
-        .code-2 {
-            top: 8px;
-            right: 40px;
-        }
-
-        .code-3 {
-            bottom: 55px;
-            left: 180px;
-        }
-
-        .code-4 {
-            bottom: 120px;
-            right: 240px;
-        }
-
-
-        /* Кресты */
-
-        .background-cross {
-            position: absolute;
-
-            color: #eeeeee;
-
-            font-family: Arial, sans-serif;
-            font-size: 58px;
-            font-weight: 100;
-
-            line-height: 1;
-
-            pointer-events: none;
-        }
-
-        .cross-1 {
-            top: 165px;
-            left: 55px;
-        }
-
-        .cross-2 {
-            bottom: 210px;
-            left: 120px;
-            font-size: 48px;
-        }
-
-        .cross-3 {
-            right: 60px;
-            bottom: 80px;
-        }
-
-        .cross-4 {
-            top: 115px;
-            right: 250px;
-            font-size: 42px;
-        }
-
-
-        /* Точки */
-
-        .dots {
-            position: absolute;
-
-            color: rgba(255, 255, 255, 0.75);
-
-            font-family: monospace;
-
-            white-space: pre;
-
-            pointer-events: none;
-        }
-
-        .dots-1 {
-            top: 25px;
-            left: 250px;
-        }
-
-        .dots-2 {
-            top: 90px;
-            right: 160px;
-        }
-
-        .dots-3 {
-            bottom: 65px;
-            left: 30px;
-        }
-
-
-        /* =====================================================
-           ИКОНКИ РАБОЧЕГО СТОЛА
-           ===================================================== */
-
-        .desktop-icons {
-            position: absolute;
-
-            top: 22px;
-            left: 22px;
-
-            display: flex;
-            flex-direction: column;
-
-            gap: 16px;
-
-            z-index: 5;
-        }
-
-        .icon {
-            width: 78px;
-
-            padding: 5px;
-
-            text-align: center;
-
-            cursor:
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='30' viewBox='0 0 24 30'%3E%3Cpath d='M2 1 L2 24 L8 18 L12 28 L16 26 L11 17 L20 17 Z' fill='%23eeeeee' stroke='%2311101b' stroke-width='2'/%3E%3C/svg%3E")
-                2 1,
-                pointer;
-
-            color: #eeeeee;
-
-            border: 1px solid transparent;
-
-            transition:
-                background 0.08s,
-                transform 0.08s;
-        }
-
-        .icon:hover {
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .icon:active {
-            transform: scale(0.94);
-        }
-
-        .icon-image {
-            width: 40px;
-            height: 40px;
-
-            margin: 0 auto 5px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            color: #ffffff;
-
-            background: transparent;
-        }
-
-        .icon-name {
-            font-family: Arial, sans-serif;
-
-            font-size: 9px;
-            line-height: 11px;
-
-            color: #eeeeee;
-
-            text-shadow:
-                1px 1px 0 #000;
-        }
-
-
-        /* =====================================================
-           ИКОНКА КОМПЬЮТЕРА
-           ===================================================== */
-
-        .icon-computer {
-            position: relative;
-
-            width: 29px;
-            height: 21px;
-
-            border: 2px solid white;
-        }
-
-        .icon-computer::before {
-            content: "";
-
-            position: absolute;
-
-            top: 4px;
-            left: 5px;
-
-            width: 15px;
-            height: 10px;
-
-            border: 1px solid white;
-        }
-
-        .icon-computer::after {
-            content: "";
-
-            position: absolute;
-
-            left: 8px;
-            bottom: -7px;
-
-            width: 10px;
-            height: 4px;
-
-            border-top: 2px solid white;
-            border-bottom: 2px solid white;
-        }
-
-
-        /* =====================================================
-           ИКОНКА КОНСОЛИ
-           ===================================================== */
-
-        .icon-terminal {
-            font-size: 23px;
-            font-weight: bold;
-
-            color: white;
-        }
-
-
-        /* =====================================================
-           ИКОНКА ИГРЫ
-           ===================================================== */
-
-        .icon-game {
-            position: relative;
-
-            width: 28px;
-            height: 28px;
-
-            border: 2px solid white;
-
-            transform: rotate(45deg);
-        }
-
-        .icon-game::before {
-            content: "";
-
-            position: absolute;
-
-            top: 5px;
-            left: 5px;
-
-            width: 5px;
-            height: 5px;
-
-            background: white;
-        }
-
-        .icon-game::after {
-            content: "";
-
-            position: absolute;
-
-            right: 5px;
-            bottom: 5px;
-
-            width: 5px;
-            height: 5px;
-
-            background: white;
-        }
-
-
-        /* =====================================================
-           ОКНА
-           ===================================================== */
-
-        .window {
-            position: absolute;
-
-            display: none;
-
-            width: 600px;
-            height: 400px;
-
-            max-width: calc(100vw - 30px);
-            max-height: calc(100vh - 70px);
-
-            background: #11101b;
-
-            color: #eeeeee;
-
-            border: 2px solid #eeeeee;
-
-            box-shadow:
-                5px 5px 0 rgba(0, 0, 0, 0.75);
-
-            z-index: 10;
-        }
-
-        .window.active {
-            display: block;
-        }
-
-
-        /* =====================================================
-           ШАПКА ОКНА
-           ===================================================== */
-
-        .window-header {
-            height: 29px;
-
-            padding: 0 5px 0 8px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            background:
-                repeating-linear-gradient(
-                    135deg,
-                    #cfcfcf 0px,
-                    #cfcfcf 2px,
-                    #eeeeee 2px,
-                    #eeeeee 4px
-                );
-
-            color: #11101b;
-
-            border-bottom: 2px solid #eeeeee;
-
-            cursor: move;
-        }
-
-        .window-title {
-            font-family: Arial, sans-serif;
-
-            font-size: 11px;
-            font-weight: bold;
-
-            color: #11101b;
-        }
-
-
-        /* =====================================================
-           КНОПКИ ОКНА
-           ===================================================== */
-
-        .window-buttons {
-            display: flex;
-            gap: 3px;
-        }
-
-        .window-button {
-            width: 20px;
-            height: 19px;
-
-            padding: 0;
-
-            border: 2px solid #11101b;
-
-            background: #eeeeee;
-
-            color: #11101b;
-
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            font-weight: bold;
-
-            cursor:
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='30' viewBox='0 0 24 30'%3E%3Cpath d='M2 1 L2 24 L8 18 L12 28 L16 26 L11 17 L20 17 Z' fill='%23eeeeee' stroke='%2311101b' stroke-width='2'/%3E%3C/svg%3E")
-                2 1,
-                pointer;
-        }
-
-        .window-button:hover {
-            background: #11101b;
-            color: white;
-        }
-
-
-        /* =====================================================
-           СОДЕРЖИМОЕ ОКНА
-           ===================================================== */
-
-        .window-content {
-            height: calc(100% - 29px);
-
-            padding: 15px;
-
-            overflow: auto;
-
-            background:
-                radial-gradient(
-                    circle at 50% 20%,
-                    rgba(255, 255, 255, 0.025),
-                    transparent 55%
-                ),
-                #11101b;
-        }
-
-
-        /* =====================================================
-           МОЙ КОМПЬЮТЕР
-           ===================================================== */
-
-        .computer-info {
-            font-size: 12px;
-            line-height: 1.7;
-        }
-
-        .computer-header {
-            margin-bottom: 18px;
-
-            padding-bottom: 8px;
-
-            border-bottom:
-                1px dotted rgba(255, 255, 255, 0.6);
-        }
-
-        .drive {
-            margin: 14px 0;
-
-            padding: 12px;
-
-            border:
-                1px solid rgba(255, 255, 255, 0.55);
-
-            background:
-                rgba(255, 255, 255, 0.025);
-        }
-
-        .drive-title {
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .bar {
-            width: 100%;
-            height: 8px;
-
-            margin-top: 7px;
-
-            border: 1px solid #eeeeee;
-        }
-
-        .bar-fill {
-            width: 37%;
-            height: 100%;
-
-            background: #eeeeee;
-        }
-
-
-        /* =====================================================
-           ФАЙЛЫ
-           ===================================================== */
-
-        .file-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(auto-fill, minmax(90px, 1fr));
-
-            gap: 14px;
-
-            margin-top: 18px;
-        }
-
-        .file-item {
-            min-height: 80px;
-
-            padding: 8px;
-
-            text-align: center;
-
-            border: 1px solid transparent;
-
-            cursor:
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='30' viewBox='0 0 24 30'%3E%3Cpath d='M2 1 L2 24 L8 18 L12 28 L16 26 L11 17 L20 17 Z' fill='%23eeeeee' stroke='%2311101b' stroke-width='2'/%3E%3C/svg%3E")
-                2 1,
-                pointer;
-        }
-
-        .file-item:hover {
-            background: rgba(255, 255, 255, 0.06);
-
-            border-color:
-                rgba(255, 255, 255, 0.35);
-        }
-
-        .file-icon {
-            margin-bottom: 7px;
-
-            font-size: 28px;
-        }
-
-        .file-name {
-            font-family: Arial, sans-serif;
-
-            font-size: 9px;
-
-            word-break: break-word;
-        }
-
-
-        /* =====================================================
-           КОНСОЛЬ
-           ===================================================== */
-
-        .terminal {
-            width: 100%;
-            height: 100%;
-
-            font-family: "Courier New", monospace;
-
-            font-size: 13px;
-            line-height: 1.5;
-
-            color: #dddddd;
-
-            white-space: pre-wrap;
-        }
-
-        .terminal-line {
-            margin-bottom: 3px;
-        }
-
-        .system {
-            color: #aaaaaa;
-        }
-
-        .prompt {
-            color: #ffffff;
-            white-space: nowrap;
-        }
-
-        .terminal-input-row {
-            display: flex;
-            align-items: center;
-
-            margin-top: 8px;
-        }
-
-        .terminal-input {
-            flex: 1;
-
-            min-width: 0;
-
-            margin-left: 7px;
-
-            padding: 0;
-
-            border: none;
-            outline: none;
-
-            background: transparent;
-
-            color: #ffffff;
-
-            font-family: "Courier New", monospace;
-            font-size: 13px;
-
-            user-select: text;
-            cursor: text;
-        }
-
-        .cmd-description {
-            color: #888888;
-        }
-
-
-        /* =====================================================
-           ИГРА
-           ===================================================== */
-
-        .game {
-            width: 100%;
-            height: 100%;
-
-            display: flex;
-            flex-direction: column;
-
-            align-items: center;
-            justify-content: center;
-
-            text-align: center;
-        }
-
-        .game h1 {
-            margin: 0 0 12px;
-
-            font-family: "Courier New", monospace;
-
-            font-size: 27px;
-            letter-spacing: 2px;
-
-            color: #eeeeee;
-        }
-
-        .game-subtitle {
-            margin-bottom: 20px;
-
-            color: #aaaaaa;
-
-            font-size: 12px;
-        }
-
-        .game p {
-            color: #aaaaaa;
-
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        .game-button {
-            padding: 9px 25px;
-
-            border: 2px solid #eeeeee;
-
-            background: transparent;
-
-            color: #eeeeee;
-
-            font-family: "Courier New", monospace;
-            font-size: 12px;
-
-            cursor:
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='30' viewBox='0 0 24 30'%3E%3Cpath d='M2 1 L2 24 L8 18 L12 28 L16 26 L11 17 L20 17 Z' fill='%23eeeeee' stroke='%2311101b' stroke-width='2'/%3E%3C/svg%3E")
-                2 1,
-                pointer;
-        }
-
-        .game-button:hover {
-            background: #eeeeee;
-            color: #11101b;
-        }
-
-        #game-message {
-            min-height: 20px;
-
-            margin-top: 20px;
-
-            color: #eeeeee;
-
-            font-size: 12px;
-        }
-
-
-        /* =====================================================
-           ПАНЕЛЬ ЗАДАЧ
-           ===================================================== */
-
-        .taskbar {
-            position: absolute;
-
-            left: 0;
-            bottom: 0;
-
-            width: 100%;
-            height: 27px;
-
-            padding: 0 8px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            background: #eeeeee;
-
-            color: #11101b;
-
-            border-top: 2px solid #ffffff;
-
-            font-family: Arial, sans-serif;
-
-            font-size: 10px;
-
-            z-index: 1000;
-        }
-
-        .status {
-            color: #11101b;
-        }
-
-        .clock {
-            color: #11101b;
-        }
-
-
-        /* =====================================================
-           МОБИЛЬНАЯ ВЕРСИЯ
-           ===================================================== */
-
-        @media (max-width: 700px) {
-
-            .desktop-icons {
-                top: 10px;
-                left: 10px;
-
-                gap: 10px;
-            }
-
-            .icon {
-                width: 70px;
-            }
-
-            .window {
-                left: 15px !important;
-                top: 80px !important;
-
-                width: calc(100vw - 30px);
-                height: calc(100vh - 125px);
-            }
-
-            .background-code,
-            .background-cross,
-            .dots {
-                opacity: 0.35;
-            }
-        }
-    </style>
 </head>
 
 
 <body>
 
-<div class="desktop">
+
+<!-- =====================================================
+     BOOT SCREEN
+     ===================================================== -->
 
 
-    <!-- =====================================================
-         ДЕКОР ФОНА
-         ===================================================== -->
-
-    <div class="background-code code-1">1
-0
-1
-1
-0
-0
-1
-0
-1
-1
-0
-1</div>
-
-    <div class="background-code code-2">0
-1
-0
-0
-1
-1
-0
-1
-0
-0
-1</div>
-
-    <div class="background-code code-3">101010100101
-001101010111
-110010100101</div>
-
-    <div class="background-code code-4">010101
-110010
-001101
-101001</div>
+<div id="bootScreen">
 
 
-    <div class="background-cross cross-1">×</div>
-    <div class="background-cross cross-2">×</div>
-    <div class="background-cross cross-3">×</div>
-    <div class="background-cross cross-4">×</div>
+    <div class="boot-logo-container">
 
 
-    <div class="dots dots-1">
-        ·····
-        ·····
-    </div>
-
-    <div class="dots dots-2">
-        ·······
-        ·······
-    </div>
-
-    <div class="dots dots-3">
-        ·········
-    </div>
-
-
-
-    <!-- =====================================================
-         ИКОНКИ
-         ===================================================== -->
-
-    <div class="desktop-icons">
-
-
-        <!-- COMPUTER -->
-
-        <div
-            class="icon"
-            ondblclick="openWindow('computer')"
-            title="Мой компьютер"
-        >
-
-            <div class="icon-image">
-
-                <div class="icon-computer"></div>
-
-            </div>
-
-            <div class="icon-name">
-                COMPUTER
-            </div>
-
+        <div class="boot-logo ghost-one">
+            AkwaOS
         </div>
 
 
-
-        <!-- CONSOLE -->
-
-        <div
-            class="icon"
-            ondblclick="openWindow('console')"
-            title="Консоль"
-        >
-
-            <div class="icon-image icon-terminal">
-                &gt;_
-            </div>
-
-            <div class="icon-name">
-                CONSOLE
-            </div>
-
+        <div class="boot-logo ghost-two">
+            AkwaOS
         </div>
 
 
-
-        <!-- GAME 01 -->
-
-        <div
-            class="icon"
-            ondblclick="openWindow('game')"
-            title="Игра 1"
-        >
-
-            <div class="icon-image">
-
-                <div class="icon-game"></div>
-
-            </div>
-
-            <div class="icon-name">
-                GAME 01
-            </div>
-
+        <div class="boot-logo main-logo">
+            AkwaOS
         </div>
 
 
     </div>
 
 
+    <div class="boot-text">
 
-    <!-- =====================================================
-         COMPUTER
-         ===================================================== -->
-
-    <div
-        class="window"
-        id="computer"
-
-        style="
-            left: 180px;
-            top: 80px;
-        "
-    >
-
-        <div class="window-header">
-
-            <span class="window-title">
-                MY COMPUTER
-            </span>
-
-            <div class="window-buttons">
-
-                <button
-                    class="window-button"
-                    onclick="closeWindow('computer')"
-                >
-                    X
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="window-content">
-
-            <div class="computer-info">
-
-
-                <div class="computer-header">
-
-                    SYSTEM: AKWA_OS
-                    <br>
-
-                    VERSION: 0.7.13
-                    <br>
-
-                    STATUS: ONLINE
-                    <br>
-
-                    USER: UNKNOWN
-
-                </div>
-
-
-
-                <div class="drive">
-
-                    <div class="drive-title">
-                        LOCAL DISK [C:]
-                    </div>
-
-                    37 GB / 100 GB
-
-                    <div class="bar">
-
-                        <div class="bar-fill"></div>
-
-                    </div>
-
-                </div>
-
-
-
-                <div class="drive">
-
-                    <div class="drive-title">
-                        NETWORK
-                    </div>
-
-                    CONNECTION: ESTABLISHED
-                    <br>
-
-                    NODE: 07
-                    <br>
-
-                    SIGNAL: UNKNOWN
-
-                </div>
-
-
-
-                <div class="file-grid">
-
-
-                    <div class="file-item">
-
-                        <div class="file-icon">
-                            ▣
-                        </div>
-
-                        <div class="file-name">
-                            SYSTEM.LOG
-                        </div>
-
-                    </div>
-
-
-                    <div class="file-item">
-
-                        <div class="file-icon">
-                            ▤
-                        </div>
-
-                        <div class="file-name">
-                            CONFIG.INI
-                        </div>
-
-                    </div>
-
-
-                    <div class="file-item">
-
-                        <div class="file-icon">
-                            ▧
-                        </div>
-
-                        <div class="file-name">
-                            COMMAND
-                        </div>
-
-                    </div>
-
-
-                    <div class="file-item">
-
-                        <div class="file-icon">
-                            ▥
-                        </div>
-
-                        <div class="file-name">
-                            DEBUG
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- =====================================================
-         CONSOLE
-         ===================================================== -->
-
-    <div
-        class="window"
-        id="console"
-
-        style="
-            left: 240px;
-            top: 120px;
-        "
-    >
-
-        <div class="window-header">
-
-            <span class="window-title">
-                AKWA_TERMINAL
-            </span>
-
-            <div class="window-buttons">
-
-                <button
-                    class="window-button"
-                    onclick="closeWindow('console')"
-                >
-                    X
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="window-content">
-
-            <div class="terminal">
-
-
-                <div class="terminal-line">
-                    AKWA_OS TERMINAL v0.7.13
-                </div>
-
-                <div class="terminal-line system">
-                    --------------------------------
-                </div>
-
-                <div class="terminal-line">
-                    [SYSTEM] Boot sequence complete...
-                </div>
-
-                <div class="terminal-line">
-                    [SYSTEM] Memory check: OK
-                </div>
-
-                <div class="terminal-line">
-                    [SYSTEM] Network initialized.
-                </div>
-
-                <div class="terminal-line">
-                    [SYSTEM] Secure channel established.
-                </div>
-
-                <div class="terminal-line">
-                    [SYSTEM] Awaiting input...
-                </div>
-
-                <br>
-
-
-                <div class="terminal-input-row">
-
-                    <span class="prompt">
-                        AKWA_OS:\SYSTEM&gt;
-                    </span>
-
-                    <input
-                        id="terminalInput"
-                        class="terminal-input"
-                        type="text"
-                        autocomplete="off"
-                        spellcheck="false"
-                    >
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- =====================================================
-         GAME 01
-         ===================================================== -->
-
-    <div
-        class="window"
-        id="game"
-
-        style="
-            left: 300px;
-            top: 170px;
-        "
-    >
-
-        <div class="window-header">
-
-            <span class="window-title">
-                GAME_01.EXE
-            </span>
-
-            <div class="window-buttons">
-
-                <button
-                    class="window-button"
-                    onclick="closeWindow('game')"
-                >
-                    X
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="window-content">
-
-            <div class="game">
-
-                <h1>
-                    GAME 01
-                </h1>
-
-                <div class="game-subtitle">
-                    CONNECTION PUZZLE
-                </div>
-
-                <p>
-                    Найдите правильный канал связи.
-                    <br>
-                    Система ожидает вашего действия.
-                </p>
-
-                <button
-                    class="game-button"
-                    onclick="startGame()"
-                >
-                    START
-                </button>
-
-                <div id="game-message"></div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- =====================================================
-         TASKBAR
-         ===================================================== -->
-
-    <div class="taskbar">
-
-        <div class="status">
-            AKWA_OS // SYSTEM ONLINE
-        </div>
-
-        <div
-            class="clock"
-            id="clock"
-        >
-            00:00:00
-        </div>
+        INITIALIZING SYSTEM...
 
     </div>
 
@@ -1321,503 +57,393 @@
 
 
 
-<script>
 
-    /* =====================================================
-       ОКНА
-       ===================================================== */
+<!-- =====================================================
+     DESKTOP
+     ===================================================== -->
 
-    let highestZ = 20;
 
+<div class="desktop">
 
-    function openWindow(id) {
 
-        const windowElement =
-            document.getElementById(id);
+    <!-- CRT EFFECTS -->
 
-        if (!windowElement) {
-            return;
-        }
 
-        windowElement.classList.add("active");
+    <div class="scanline"></div>
 
-        highestZ++;
+    <div class="crt-lines"></div>
 
-        windowElement.style.zIndex = highestZ;
+    <div class="crt-flicker"></div>
 
 
-        if (id === "console") {
 
-            setTimeout(() => {
+    <!-- BACKGROUND -->
 
-                const input =
-                    document.getElementById(
-                        "terminalInput"
-                    );
 
-                if (input) {
-                    input.focus();
-                }
+    <div class="binary left">
 
-            }, 100);
+101010101
+010101010
+110010101
+001101010
 
-        }
-    }
+    </div>
 
 
-    function closeWindow(id) {
+    <div class="binary right">
 
-        const windowElement =
-            document.getElementById(id);
+010101010
+110101001
+001010101
+111010010
 
-        if (!windowElement) {
-            return;
-        }
+    </div>
 
-        windowElement.classList.remove("active");
-    }
 
 
-    /* =====================================================
-       ФОКУС ОКОН
-       ===================================================== */
+    <div class="cross cross-one">
+        ×
+    </div>
 
-    document
-        .querySelectorAll(".window")
-        .forEach(windowElement => {
 
-            windowElement.addEventListener(
-                "mousedown",
-                () => {
+    <div class="cross cross-two">
+        ×
+    </div>
 
-                    highestZ++;
 
-                    windowElement.style.zIndex =
-                        highestZ;
 
-                }
-            );
+    <!-- =================================================
+         ICONS
+         ================================================= -->
 
-        });
 
+    <div class="desktop-icons">
 
 
-    /* =====================================================
-       ЧАСЫ
-       ===================================================== */
 
-    function updateClock() {
+        <div class="icon"
+        ondblclick="openWindow('computer')">
 
-        const now = new Date();
 
-        const hours =
-            String(now.getHours())
-                .padStart(2, "0");
+            <div class="computer-icon">
 
-        const minutes =
-            String(now.getMinutes())
-                .padStart(2, "0");
 
-        const seconds =
-            String(now.getSeconds())
-                .padStart(2, "0");
+                <div></div>
 
-        document.getElementById(
-            "clock"
-        ).textContent =
-            `${hours}:${minutes}:${seconds}`;
-    }
 
+            </div>
 
-    updateClock();
 
-    setInterval(
-        updateClock,
-        1000
-    );
+            <span>
+                COMPUTER
+            </span>
 
 
+        </div>
 
-    /* =====================================================
-       КОНСОЛЬ
-       ===================================================== */
 
-    const terminalInput =
-        document.getElementById(
-            "terminalInput"
-        );
 
 
-    terminalInput.addEventListener(
-        "keydown",
-        function(event) {
 
-            if (event.key !== "Enter") {
-                return;
-            }
+        <div class="icon"
+        ondblclick="openWindow('console')">
 
-            const command =
-                terminalInput.value
-                    .trim()
-                    .toLowerCase();
 
-            terminalInput.value = "";
+            <div class="terminal-icon">
 
+                &gt;_
 
-            if (!command) {
-                return;
-            }
+            </div>
 
 
-            const terminal =
-                terminalInput.closest(
-                    ".terminal"
-                );
+            <span>
+                CONSOLE
+            </span>
 
-            const inputRow =
-                terminalInput.closest(
-                    ".terminal-input-row"
-                );
 
+        </div>
 
-            /* Строка введённой команды */
 
-            const previousLine =
-                document.createElement("div");
 
-            previousLine.className =
-                "terminal-line";
 
-            previousLine.innerHTML =
-                `<span class="prompt">AKWA_OS:\\SYSTEM&gt;</span> ${escapeHTML(command)}`;
 
+        <div class="icon"
+        ondblclick="openWindow('game')">
 
-            terminal.insertBefore(
-                previousLine,
-                inputRow
-            );
 
+            <div class="game-icon">
 
-            /* Ответ */
+                ◆
 
-            const response =
-                document.createElement("div");
+            </div>
 
-            response.className =
-                "terminal-line";
 
+            <span>
+                GAME 01
+            </span>
 
-            /* =============================
-               HELP
-               ============================= */
 
-            if (command === "help") {
+        </div>
 
-                response.innerHTML = `
-                    AVAILABLE COMMANDS
-                    <br>
-                    ------------------------------
-                    <br>
-                    help
-                    <span class="cmd-description">
-                        - показать список доступных команд
-                    </span>
-                    <br>
-                    clear
-                    <span class="cmd-description">
-                        - очистить содержимое терминала
-                    </span>
-                    <br>
-                    status
-                    <span class="cmd-description">
-                        - показать состояние системы
-                    </span>
-                    <br>
-                    whoami
-                    <span class="cmd-description">
-                        - показать текущего пользователя
-                    </span>
-                    <br>
-                    scan
-                    <span class="cmd-description">
-                        - просканировать локальную сеть
-                    </span>
-                    <br>
-                    ------------------------------
-                `;
-            }
 
 
-            /* =============================
-               CLEAR
-               ============================= */
+    </div>
 
-            else if (command === "clear") {
 
-                terminal
-                    .querySelectorAll(
-                        ".terminal-line"
-                    )
-                    .forEach(
-                        element =>
-                            element.remove()
-                    );
 
-                return;
-            }
 
 
-            /* =============================
-               STATUS
-               ============================= */
 
-            else if (command === "status") {
 
-                response.innerHTML =
-                    "[SYSTEM] ALL SYSTEMS NOMINAL";
-            }
+    <!-- =================================================
+         COMPUTER WINDOW
+         ================================================= -->
 
 
-            /* =============================
-               WHOAMI
-               ============================= */
+    <div class="window"
+    id="computer">
 
-            else if (command === "whoami") {
 
-                response.innerHTML =
-                    "USER: UNKNOWN";
-            }
+        <div class="window-header">
 
 
-            /* =============================
-               SCAN
-               ============================= */
+            <span>
+                MY COMPUTER
+            </span>
 
-            else if (command === "scan") {
 
-                response.innerHTML =
-                    "[SCAN] NODE 07 FOUND";
-            }
+            <button onclick="closeWindow('computer')">
+                X
+            </button>
 
 
-            /* =============================
-               UNKNOWN
-               ============================= */
+        </div>
 
-            else {
 
-                response.innerHTML =
-                    `COMMAND NOT FOUND: ${escapeHTML(command)}`;
-            }
 
+        <div class="window-content">
 
-            terminal.insertBefore(
-                response,
-                inputRow
-            );
 
+<pre>
 
-            /* Автопрокрутка */
+AKWA_OS COMPUTER
 
-            terminal
-                .closest(".window-content")
-                .scrollTop =
-                    terminal.scrollHeight;
+SYSTEM:
+AkwaOS 0.7.13
 
-        }
-    );
+CPU:
+UNKNOWN PROCESSOR
 
+MEMORY:
+640 KB + EXTENDED
 
-    /* =====================================================
-       ЗАЩИТА ВЫВОДА ОТ HTML
-       ===================================================== */
+NETWORK:
+CONNECTED
 
-    function escapeHTML(text) {
+DRIVES:
 
-        return text
-            .replaceAll("&", "&amp;")
-            .replaceAll("<", "&lt;")
-            .replaceAll(">", "&gt;")
-            .replaceAll('"', "&quot;")
-            .replaceAll("'", "&#039;");
-    }
+[C:]
+SYSTEM
+CONFIG
+LOGS
 
+[D:]
+UNKNOWN DATA
 
+</pre>
 
-    /* =====================================================
-       GAME 01
-       ===================================================== */
 
-    function startGame() {
+        </div>
 
-        const message =
-            document.getElementById(
-                "game-message"
-            );
 
+    </div>
 
-        message.textContent =
-            "INITIALIZING...";
 
 
-        setTimeout(() => {
 
-            message.textContent =
-                "SEARCHING FOR CHANNEL...";
 
-        }, 800);
 
 
-        setTimeout(() => {
 
-            message.textContent =
-                "CHANNEL 07 FOUND.";
 
-        }, 1600);
+    <!-- =================================================
+         CONSOLE WINDOW
+         ================================================= -->
 
 
-        setTimeout(() => {
+    <div class="window"
+    id="console">
 
-            message.textContent =
-                "ACCESS GRANTED.";
 
-        }, 2500);
-    }
+        <div class="window-header">
 
 
+            <span>
+                AKWA TERMINAL
+            </span>
 
-    /* =====================================================
-       ПЕРЕТАСКИВАНИЕ ОКОН
-       ===================================================== */
 
-    document
-        .querySelectorAll(".window")
-        .forEach(windowElement => {
+            <button onclick="closeWindow('console')">
+                X
+            </button>
 
-            const header =
-                windowElement.querySelector(
-                    ".window-header"
-                );
 
+        </div>
 
-            let dragging = false;
 
-            let offsetX = 0;
-            let offsetY = 0;
 
 
-            header.addEventListener(
-                "mousedown",
-                function(event) {
+        <div class="window-content terminal">
 
-                    if (
-                        event.target.closest(
-                            ".window-buttons"
-                        )
-                    ) {
-                        return;
-                    }
 
+<pre id="terminalOutput">
 
-                    dragging = true;
 
+AKWA_OS TERMINAL v0.7.13
 
-                    const rect =
-                        windowElement.getBoundingClientRect();
 
+TYPE "help"
+FOR COMMAND LIST
 
-                    offsetX =
-                        event.clientX -
-                        rect.left;
 
-                    offsetY =
-                        event.clientY -
-                        rect.top;
 
+</pre>
 
-                    highestZ++;
 
-                    windowElement.style.zIndex =
-                        highestZ;
 
+<div class="input-line">
 
-                    event.preventDefault();
 
-                }
-            );
+<span>
+AKWA_OS&gt;
+</span>
 
 
-            document.addEventListener(
-                "mousemove",
-                function(event) {
+<input
+id="terminalInput"
+autocomplete="off"
+>
 
-                    if (!dragging) {
-                        return;
-                    }
 
+</div>
 
-                    let x =
-                        event.clientX -
-                        offsetX;
 
-                    let y =
-                        event.clientY -
-                        offsetY;
 
+        </div>
 
-                    const maxX =
-                        window.innerWidth -
-                        windowElement.offsetWidth;
 
+    </div>
 
-                    const maxY =
-                        window.innerHeight -
-                        windowElement.offsetHeight -
-                        27;
 
 
-                    x =
-                        Math.max(
-                            0,
-                            Math.min(
-                                x,
-                                maxX
-                            )
-                        );
 
 
-                    y =
-                        Math.max(
-                            0,
-                            Math.min(
-                                y,
-                                maxY
-                            )
-                        );
 
 
-                    windowElement.style.left =
-                        x + "px";
 
-                    windowElement.style.top =
-                        y + "px";
 
-                }
-            );
+    <!-- =================================================
+         GAME WINDOW
+         ================================================= -->
 
 
-            document.addEventListener(
-                "mouseup",
-                function() {
+    <div class="window"
+    id="game">
 
-                    dragging = false;
 
-                }
-            );
+        <div class="window-header">
 
-        });
 
-</script>
+            <span>
+                GAME_01.EXE
+            </span>
+
+
+            <button onclick="closeWindow('game')">
+                X
+            </button>
+
+
+        </div>
+
+
+
+
+        <div class="window-content game">
+
+
+<h1>
+GAME 01
+</h1>
+
+
+<p>
+
+CONNECTION TEST
+
+</p>
+
+
+
+<button onclick="startGame()">
+
+START
+
+</button>
+
+
+
+<div id="gameMessage">
+
+</div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- =================================================
+         TASKBAR
+         ================================================= -->
+
+
+    <div class="taskbar">
+
+
+        <span>
+            AKWA_OS SYSTEM ONLINE
+        </span>
+
+
+        <span id="clock">
+
+        </span>
+
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
+<script src="script.js"></script>
+
 
 </body>
+
 </html>
