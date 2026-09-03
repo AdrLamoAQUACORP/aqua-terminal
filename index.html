@@ -425,140 +425,195 @@
 
 const API_URL = "https://akwa-terminal-api.moskinasasa32.workers.dev";
 
-let mode = "command";
-let authUsername = "";
+        let mode = "command";
+        let authUsername = "";
+        let loggedInUser = "";
+        let loggedInAccessLevel = 0;
 
-input.addEventListener("keydown", async function(event) {
-    if (event.key !== "Enter") return;
+        input.addEventListener("keydown", async function(event) {
+            if (event.key !== "Enter") return;
 
-    const value = input.value.trim();
-    if (value === "") return;
+            const value = input.value.trim();
+            if (value === "") return;
 
-    input.value = "";
+            input.value = "";
 
-    if (mode === "register_username") {
-        authUsername = value.toLowerCase();
-        print("USER ID: " + authUsername);
-        print("Введите пароль:");
-        mode = "register_password";
-        return;
-    }
-
-    if (mode === "register_password") {
-        const password = value;
-        print("PASSWORD: ********");
-
-        try {
-            const response = await fetch(API_URL + "/register", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    username: authUsername,
-                    password: password
-                })
-            });
-
-            const data = await response.json();
-
-            if (data.ok) {
-                print("");
-                print(data.message, "success");
-            } else {
-                print(data.error || "REGISTRATION FAILED", "error");
+            if (mode === "register_username") {
+                authUsername = value.toLowerCase();
+                print("USER ID: " + authUsername);
+                print("Введите пароль:");
+                mode = "register_password";
+                return;
             }
-        } catch (error) {
-            print("ERROR: CONNECTION FAILED", "error");
-        }
 
-        authUsername = "";
-        mode = "command";
-        return;
-    }
+            if (mode === "register_password") {
+                const password = value;
+                print("PASSWORD: ********");
 
-    if (mode === "login_username") {
-        authUsername = value.toLowerCase();
-        print("USER ID: " + authUsername);
-        print("Введите пароль:");
-        mode = "login_password";
-        return;
-    }
+                try {
+                    const response = await fetch(API_URL + "/register", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            username: authUsername,
+                            password: password
+                        })
+                    });
 
-    if (mode === "login_password") {
-        const password = value;
-        print("PASSWORD: ********");
+                    const data = await response.json();
 
-        try {
-            const response = await fetch(API_URL + "/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    username: authUsername,
-                    password: password
-                })
-            });
+                    if (data.ok) {
+                        print("");
+                        print(data.message, "success");
+                    } else {
+                        print(data.error || "REGISTRATION FAILED", "error");
+                    }
+                } catch (error) {
+                    print("ERROR: CONNECTION FAILED", "error");
+                }
 
-            const data = await response.json();
-
-            if (data.ok) {
-                print("");
-                print("AUTHENTICATION SUCCESSFUL", "success");
-                print("USER ID ........ " + data.username);
-                print("STATUS ......... " + data.status);
-                print("ACCESS LEVEL ... " + data.access_level);
-            } else {
-                print(data.error || "AUTHENTICATION FAILED", "error");
+                authUsername = "";
+                mode = "command";
+                return;
             }
-        } catch (error) {
-            print("ERROR: CONNECTION FAILED", "error");
-        }
 
-        authUsername = "";
-        mode = "command";
-        return;
-    }
+            if (mode === "login_username") {
+                authUsername = value.toLowerCase();
+                print("USER ID: " + authUsername);
+                print("Введите пароль:");
+                mode = "login_password";
+                return;
+            }
 
-    const command = value.toLowerCase();
+            if (mode === "login_password") {
+                const password = value;
+                print("PASSWORD: ********");
 
-    print("AKWA_OS: " + value);
+                try {
+                    const response = await fetch(API_URL + "/login", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            username: authUsername,
+                            password: password
+                        })
+                    });
 
-    if (command === "help") {
-        print("");
-        print("AVAILABLE COMMANDS");
-        print("");
-        print("help");
-        print("status");
-        print("login");
-        print("register");
-        print("clear");
-    }
-    else if (command === "status") {
-        print("");
-        print("SYSTEM STATUS ........ ONLINE");
-        print("NETWORK .............. AKWA-INTERNAL");
-        print("NODE ................. 17");
-        print("SECURITY LEVEL ....... 03");
-    }
-    else if (command === "register") {
-        print("");
-        print("REGISTRATION");
-        print("");
-        print("USER ID:");
-        mode = "register_username";
-    }
-    else if (command === "login") {
-        print("");
-        print("AUTHENTICATION");
-        print("");
-        print("USER ID:");
-        mode = "login_username";
-    }
-    else if (command === "clear") {
-        output.innerHTML = "";
-    }
-    else {
-        print("ERROR: UNKNOWN COMMAND", "error");
-    }
-});
+                    const data = await response.json();
+
+                    if (data.ok) {
+                        loggedInUser = data.username;
+                        loggedInAccessLevel = Number(data.access_level) || 0;
+
+                        print("");
+                        print("AUTHENTICATION SUCCESSFUL", "success");
+                        print("USER ID ........ " + data.username);
+                        print("STATUS ......... " + data.status);
+                        print("ACCESS LEVEL ... " + data.access_level);
+                    } else {
+                        print(data.error || "AUTHENTICATION FAILED", "error");
+                        authUsername = "";
+                    }
+                } catch (error) {
+                    print("ERROR: CONNECTION FAILED", "error");
+                    authUsername = "";
+                }
+
+                mode = "command";
+                return;
+            }
+
+            const command = value.toLowerCase();
+
+            print("AKWA_OS: " + value);
+
+            if (command === "help") {
+                print("");
+                print("AVAILABLE COMMANDS");
+                print("");
+                print("help");
+                print("status");
+                print("login");
+                print("register");
+                print("personnel");
+                print("clear");
+            }
+
+            else if (command === "status") {
+                print("");
+                print("SYSTEM STATUS ........ ONLINE");
+                print("NETWORK .............. AKWA-INTERNAL");
+                print("NODE ................. 17");
+                print("SECURITY LEVEL ....... 03");
+
+                if (loggedInUser) {
+                    print("");
+                    print("AUTHENTICATED USER ... " + loggedInUser);
+                    print("ACCESS LEVEL ......... " + loggedInAccessLevel);
+                }
+            }
+
+            else if (command === "register") {
+                print("");
+                print("REGISTRATION");
+                print("");
+                print("USER ID:");
+                mode = "register_username";
+            }
+
+            else if (command === "login") {
+                print("");
+                print("AUTHENTICATION");
+                print("");
+                print("USER ID:");
+                mode = "login_username";
+            }
+
+            else if (command === "personnel") {
+                if (!loggedInUser) {
+                    print("");
+                    print("AUTHENTICATION REQUIRED", "error");
+                    return;
+                }
+
+                print("");
+                print("ACCESSING PERSONNEL DATABASE...");
+                print("");
+
+                try {
+                    const response = await fetch(API_URL + "/personnel", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            username: loggedInUser
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (data.ok) {
+                        print("ACCESS GRANTED", "success");
+                        print("");
+
+                        if (Array.isArray(data.data)) {
+                            data.data.forEach(line => print(line));
+                        }
+                    } else {
+                        print(data.error || "ACCESS DENIED", "error");
+                    }
+                } catch (error) {
+                    print("ERROR: CONNECTION FAILED", "error");
+                }
+            }
+
+            else if (command === "clear") {
+                output.innerHTML = "";
+            }
+
+            else {
+                print("ERROR: UNKNOWN COMMAND", "error");
+            }
+        });
 
     </script>
 
