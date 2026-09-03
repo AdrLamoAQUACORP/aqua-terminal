@@ -2834,7 +2834,7 @@ body.arg3-prealarm-account::after {
 
 /* During the pre-alarm, flash a yellow Adrian note before the game screen. */
 body.arg3-prealarm-adrian #arg3-error-layer::after {
-  content: "ADRIAN LAMO // Я выведу тебе команды на экран. Вводи их как можно скорее и тогда ты сохранишь все данные.";
+  content: "⚠ ПОДСКАЗКА ОТ ADRIAN LAMO // Я выведу команды прямо на экран. Переписывай их в поле ниже как можно быстрее. Каждая правильная команда откатывает удаление данных назад.";
   position: fixed;
   left: 50%;
   bottom: 10vh;
@@ -2949,4 +2949,73 @@ body.arg3-prealarm-transition #desktop {
 .arg3-command-box__instruction::after {
   content: " // COMMAND STREAM ACTIVE";
   color: rgba(244,207,101,.62);
+}
+
+
+/* =========================================================
+   ARG3 HINT VISIBILITY + LOWER MUSIC / UPDATE 17
+   ========================================================= */
+
+.arg3-adrian-hint {
+  margin-top: 18px !important;
+  padding: 16px 18px !important;
+  border: 2px solid #f4cf65 !important;
+  border-left-width: 5px !important;
+  background:
+    linear-gradient(90deg, rgba(244,207,101,.15), rgba(244,207,101,.055)) !important;
+  box-shadow:
+    0 0 0 1px rgba(244,207,101,.15),
+    0 0 24px rgba(244,207,101,.10),
+    7px 7px 0 rgba(0,0,0,.32);
+}
+
+.arg3-adrian-hint.is-visible {
+  animation: arg3AdrianHintAttention 1.15s steps(2,end) 2;
+}
+
+.arg3-adrian-hint span {
+  color: #ffd95c !important;
+  font-size: clamp(12px, 1.45vw, 17px) !important;
+  font-weight: 900 !important;
+  letter-spacing: .08em !important;
+  margin-bottom: 10px !important;
+}
+
+.arg3-adrian-hint p {
+  color: #fff2a8 !important;
+  font-size: clamp(15px, 1.75vw, 20px) !important;
+  line-height: 1.5 !important;
+  font-weight: 800 !important;
+  text-shadow: 0 0 10px rgba(244,207,101,.08);
+}
+
+@keyframes arg3AdrianHintAttention {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    box-shadow:
+      0 0 0 1px rgba(244,207,101,.15),
+      0 0 24px rgba(244,207,101,.10),
+      7px 7px 0 rgba(0,0,0,.32);
+  }
+  48% {
+    transform: translateY(-1px) scale(1.012);
+    box-shadow:
+      0 0 0 1px rgba(244,207,101,.34),
+      0 0 38px rgba(244,207,101,.20),
+      7px 7px 0 rgba(0,0,0,.32);
+  }
+}
+
+/* Предварительная подсказка перед мини-игрой тоже заметнее */
+body.arg3-prealarm-adrian #arg3-error-layer::after {
+  border: 2px solid #f4cf65 !important;
+  border-left-width: 6px !important;
+  background: rgba(12,11,4,.97) !important;
+  color: #fff09b !important;
+  font-size: clamp(15px, 2vw, 22px) !important;
+  font-weight: 900 !important;
+  line-height: 1.5 !important;
+  box-shadow:
+    0 0 30px rgba(244,207,101,.13),
+    10px 10px 0 rgba(0,0,0,.42) !important;
 }
