@@ -3050,3 +3050,159 @@ body.arg-stage-3 .arg-clue-stage3,
 body.arg-stage-3-ready .arg3-recovered-only {
   cursor: default !important;
 }
+
+
+/* =========================================================
+   ARG STAGED HIGHLIGHT — HARD RESTORE / UPDATE 19
+   ========================================================= */
+
+/* По умолчанию все подсказки выглядят как обычный текст. */
+body .arg-clue-stage1,
+body .arg-clue-stage2,
+body .arg-clue-stage3 {
+  position: relative;
+  display: inline-block;
+  width: max-content;
+  max-width: 100%;
+  animation: none !important;
+  transform: none !important;
+  filter: none !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  color: inherit !important;
+  opacity: 1 !important;
+}
+
+body .arg-clue-stage1::before,
+body .arg-clue-stage1::after,
+body .arg-clue-stage2::before,
+body .arg-clue-stage2::after,
+body .arg-clue-stage3::before,
+body .arg-clue-stage3::after {
+  opacity: 0 !important;
+  animation: none !important;
+}
+
+/* ARG 1 — OPEN / A17 / PREVIOUS_SESSION / .LOG */
+body[data-arg-stage="1"] .arg-clue-stage1 {
+  color: #d9fff0 !important;
+  font-weight: 800 !important;
+  letter-spacing: .075em !important;
+  padding: 1px 5px !important;
+  border-left: 2px solid rgba(145,227,125,.75) !important;
+  background: rgba(145,227,125,.09) !important;
+  box-shadow:
+    inset 0 0 10px rgba(145,227,125,.04),
+    0 0 14px rgba(145,227,125,.07) !important;
+  text-shadow:
+    2px 0 rgba(238,129,118,.45),
+    -2px 0 rgba(120,184,232,.40),
+    0 0 10px rgba(145,227,125,.25) !important;
+  animation:
+    akwaArgStage1Glitch 1.75s steps(2,end) infinite,
+    akwaArgGlow 2.8s ease-in-out infinite !important;
+}
+
+body[data-arg-stage="1"] .arg-clue-stage1.arg-fragment-glitch--open {
+  color: #f4ffe9 !important;
+  background: rgba(145,227,125,.14) !important;
+  border-left-color: #91e37d !important;
+  animation:
+    akwaArgOpenGlitch .82s steps(2,end) infinite,
+    akwaArgGlow 2.1s ease-in-out infinite !important;
+}
+
+/* ARG 2 — BIO / AQ-S17-441 / .CHK */
+body[data-arg-stage="2"] .arg-clue-stage2 {
+  color: #fff0b8 !important;
+  font-weight: 800 !important;
+  letter-spacing: .075em !important;
+  padding: 1px 5px !important;
+  border-left: 2px solid rgba(228,189,112,.82) !important;
+  background: rgba(228,189,112,.10) !important;
+  box-shadow:
+    inset 0 0 10px rgba(228,189,112,.04),
+    0 0 14px rgba(228,189,112,.07) !important;
+  text-shadow:
+    2px 0 rgba(238,129,118,.50),
+    -2px 0 rgba(120,184,232,.45),
+    0 0 10px rgba(228,189,112,.23) !important;
+  animation:
+    akwaArgStage2Glitch 1.55s steps(2,end) infinite,
+    akwaArgGlow 2.45s ease-in-out infinite !important;
+}
+
+/* ARG 3 — ECHO / SDE / IXION.REQ */
+body[data-arg-stage="3"] .arg-clue-stage3 {
+  color: #ffe59b !important;
+  font-weight: 900 !important;
+  letter-spacing: .085em !important;
+  padding: 1px 5px !important;
+  border-left: 2px solid rgba(244,207,101,.90) !important;
+  background: rgba(244,207,101,.115) !important;
+  box-shadow:
+    inset 0 0 12px rgba(244,207,101,.05),
+    0 0 16px rgba(244,207,101,.09) !important;
+  text-shadow:
+    2px 0 rgba(238,129,118,.54),
+    -2px 0 rgba(180,154,232,.50),
+    0 0 11px rgba(244,207,101,.27) !important;
+  animation:
+    akwaArgStage3Glitch 1.25s steps(2,end) infinite,
+    akwaArgGlow 2.15s ease-in-out infinite !important;
+}
+
+/* После решения текущего этапа прежние подсказки гарантированно гаснут. */
+body[data-arg-stage="2"] .arg-clue-stage1,
+body[data-arg-stage="3"] .arg-clue-stage1,
+body[data-arg-stage="3"] .arg-clue-stage2,
+body[data-arg-stage="3-ready"] .arg-clue-stage1,
+body[data-arg-stage="3-ready"] .arg-clue-stage2,
+body[data-arg-stage="3-ready"] .arg-clue-stage3,
+body[data-arg-stage="complete"] .arg-clue-stage1,
+body[data-arg-stage="complete"] .arg-clue-stage2,
+body[data-arg-stage="complete"] .arg-clue-stage3 {
+  animation: none !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  color: inherit !important;
+}
+
+/* Нерегулярный системный glitch */
+@keyframes akwaArgStage1Glitch {
+  0%, 61%, 68%, 100% { transform: translate(0,0); opacity: 1; }
+  62% { transform: translate(2px,0); opacity: .48; }
+  64% { transform: translate(-2px,1px); opacity: .94; }
+  66% { transform: translate(1px,-1px); opacity: .63; }
+}
+
+@keyframes akwaArgOpenGlitch {
+  0%, 47%, 56%, 100% { transform: translate(0,0); opacity: 1; }
+  49% { transform: translate(3px,0); opacity: .34; }
+  51% { transform: translate(-3px,1px); opacity: .92; }
+  53% { transform: translate(2px,-1px); opacity: .52; }
+}
+
+@keyframes akwaArgStage2Glitch {
+  0%, 54%, 64%, 100% { transform: translate(0,0); opacity: 1; }
+  56% { transform: translate(-3px,0); opacity: .42; }
+  58% { transform: translate(2px,-1px); opacity: .92; }
+  61% { transform: translate(-1px,1px); opacity: .59; }
+}
+
+@keyframes akwaArgStage3Glitch {
+  0%, 43%, 55%, 100% { transform: translate(0,0); opacity: 1; }
+  45% { transform: translate(3px,-1px); opacity: .34; }
+  48% { transform: translate(-3px,1px); opacity: .88; }
+  51% { transform: translate(2px,0); opacity: .56; }
+}
+
+@keyframes akwaArgGlow {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.24); }
+}
