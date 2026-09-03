@@ -2055,3 +2055,82 @@ body {
   50%  { transform: translateY(1px); opacity: .52; }
   100% { transform: translateY(-1px); opacity: .35; }
 }
+
+
+/* ===== ARG COMMAND FRAGMENTS / UPDATE 05 ===== */
+
+.arg-document {
+  white-space: normal;
+  line-height: 1.58;
+}
+
+.arg-fragment-glitch {
+  position: relative;
+  display: inline-block;
+  width: max-content;
+  max-width: 100%;
+  margin: 2px 0;
+  padding: 1px 4px;
+  color: #d7fff1;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-shadow:
+    1px 0 rgba(238,129,118,.38),
+    -1px 0 rgba(120,184,232,.32);
+  animation:
+    argFragmentShift 2.8s steps(2,end) infinite,
+    argFragmentBlink 4.4s steps(1,end) infinite;
+}
+
+.arg-fragment-glitch::before,
+.arg-fragment-glitch::after {
+  content: attr(data-fragment);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.arg-fragment-glitch::before {
+  color: rgba(238,129,118,.72);
+  transform: translateX(-1px);
+  clip-path: inset(18% 0 58% 0);
+  animation: argFragmentGhostA 3.1s steps(2,end) infinite;
+}
+
+.arg-fragment-glitch::after {
+  color: rgba(120,184,232,.72);
+  transform: translateX(1px);
+  clip-path: inset(61% 0 16% 0);
+  animation: argFragmentGhostB 2.7s steps(2,end) infinite;
+}
+
+@keyframes argFragmentShift {
+  0%, 84%, 100% { transform: translate(0,0); filter: none; }
+  86% { transform: translate(1px,0); }
+  88% { transform: translate(-2px,1px); }
+  90% { transform: translate(2px,-1px); filter: contrast(1.35); }
+  92% { transform: translate(-1px,0); }
+  94% { transform: translate(0,0); filter: none; }
+}
+
+@keyframes argFragmentBlink {
+  0%, 70%, 74%, 100% { opacity: 1; }
+  71% { opacity: .42; }
+  72% { opacity: .9; }
+  73% { opacity: .18; }
+}
+
+@keyframes argFragmentGhostA {
+  0%, 82%, 100% { opacity: 0; }
+  84% { opacity: .8; transform: translate(-2px,0); }
+  86% { opacity: .25; transform: translate(2px,0); }
+  88% { opacity: 0; }
+}
+
+@keyframes argFragmentGhostB {
+  0%, 90%, 100% { opacity: 0; }
+  92% { opacity: .72; transform: translate(2px,1px); }
+  94% { opacity: .28; transform: translate(-1px,-1px); }
+  96% { opacity: 0; }
+}
