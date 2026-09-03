@@ -7,7 +7,7 @@ body{
 
 margin:0;
 
-background:black;
+background:#000;
 
 color:#39ff14;
 
@@ -21,9 +21,9 @@ overflow:hidden;
 
 
 
-/* =========================
+/* ==========================
 BOOT SCREEN
-========================= */
+========================== */
 
 
 #bootScreen{
@@ -38,25 +38,36 @@ z-index:9999;
 
 display:flex;
 
-flex-direction:column;
-
 justify-content:center;
 
 align-items:center;
 
+flex-direction:column;
+
+
 animation:
 
-bootFade 1.5s forwards 10s;
+bootFade 1.5s forwards 14s;
 
 }
+
+
 
 
 
 .bios-container{
 
-width:650px;
+position:absolute;
+
+top:20%;
+
+left:12%;
+
+width:600px;
 
 }
+
+
 
 
 
@@ -70,15 +81,18 @@ color:#39ff14;
 
 text-shadow:
 
-0 0 8px #39ff14;
+0 0 10px #39ff14;
 
 }
+
+
 
 
 
 .cursor{
 
 animation:
+
 blink .7s infinite;
 
 }
@@ -99,30 +113,52 @@ opacity:0;
 
 
 
-/* =========================
+
+
+
+/* ==========================
 AKWAOS LOGO
-========================= */
+========================== */
+
 
 
 .akwa-logo{
 
-position:relative;
 
-width:700px;
+position:absolute;
 
-height:160px;
 
-display:flex;
+left:50%;
 
-justify-content:center;
 
-align-items:center;
+top:60%;
 
-margin-top:30px;
+
+transform:
+
+translate(-50%,-50%);
+
+
+width:650px;
+
+
+height:130px;
+
 
 z-index:20;
 
+
+opacity:0;
+
+
+animation:
+
+logoAppear 1s forwards 5s;
+
+
 }
+
+
 
 
 
@@ -132,26 +168,41 @@ z-index:20;
 .logo-glitch,
 .logo-scan{
 
+
 position:absolute;
+
 
 left:50%;
 
+
 top:50%;
+
 
 transform:
 
 translate(-50%,-50%);
 
 
-font-size:90px;
+font-family:
+
+"Courier New";
+
+
+font-size:70px;
+
 
 font-weight:bold;
 
-letter-spacing:15px;
+
+letter-spacing:12px;
+
 
 white-space:nowrap;
 
+
 }
+
+
 
 
 
@@ -165,19 +216,23 @@ color:white;
 
 text-shadow:
 
-0 0 15px white,
-0 0 40px white;
+
+0 0 10px white,
 
 
-opacity:0;
+0 0 25px white;
 
 
 animation:
 
-logoBuild 3s forwards;
+
+logoBuild 3s forwards 5s;
 
 
 }
+
+
+
 
 
 
@@ -188,20 +243,18 @@ logoBuild 3s forwards;
 color:#39ff14;
 
 
-opacity:0;
-
-
-filter:
-
-blur(20px);
+opacity:.5;
 
 
 animation:
 
-glitchBuild 3s forwards;
+
+glitch .25s infinite 5s;
 
 
 }
+
+
 
 
 
@@ -218,10 +271,36 @@ opacity:0;
 
 animation:
 
-scanText 3s forwards;
+
+scanLine 2s forwards 5s;
 
 
 }
+
+
+
+
+
+
+
+@keyframes logoAppear{
+
+
+from{
+
+opacity:0;
+
+}
+
+
+to{
+
+opacity:1;
+
+}
+
+}
+
 
 
 
@@ -234,41 +313,31 @@ scanText 3s forwards;
 
 0%{
 
+
 opacity:0;
 
 
 transform:
 
+
 translate(-50%,-50%)
-scaleX(8);
+
+scaleX(4);
 
 
 filter:
 
-blur(50px);
+blur(30px);
 
 
 }
 
 
 
-30%{
+40%{
 
 
 opacity:1;
-
-
-}
-
-
-
-60%{
-
-
-transform:
-
-translate(-50%,-50%)
-scaleX(.8);
 
 
 }
@@ -283,7 +352,9 @@ opacity:1;
 
 transform:
 
+
 translate(-50%,-50%)
+
 scaleX(1);
 
 
@@ -303,62 +374,33 @@ blur(0);
 
 
 
-@keyframes glitchBuild{
+@keyframes glitch{
 
 
 0%{
 
+transform:
 
-opacity:0;
+translate(-52%,-50%);
 
+}
+
+
+50%{
 
 transform:
 
-translate(-45%,-50%);
-
-
-}
-
-
-
-30%{
-
-
-opacity:.8;
-
+translate(-48%,-50%);
 
 }
-
-
-
-70%{
-
-
-transform:
-
-translate(-55%,-50%);
-
-
-}
-
 
 
 100%{
-
-
-opacity:.35;
-
 
 transform:
 
 translate(-50%,-50%);
 
-
-filter:
-
-blur(4px);
-
-
 }
 
 
@@ -370,40 +412,10 @@ blur(4px);
 
 
 
-@keyframes scanText{
+@keyframes scanLine{
 
 
 0%{
-
-
-opacity:0;
-
-
-clip-path:
-
-inset(100% 0 100% 0);
-
-
-}
-
-
-
-50%{
-
-
-opacity:.8;
-
-
-clip-path:
-
-inset(0 0 50% 0);
-
-
-}
-
-
-
-100%{
 
 
 opacity:0;
@@ -417,7 +429,38 @@ inset(100% 0 0 0);
 }
 
 
+
+50%{
+
+
+opacity:1;
+
+
+clip-path:
+
+inset(0 0 0 0);
+
+
 }
+
+
+
+100%{
+
+
+opacity:0;
+
+
+clip-path:
+
+inset(0 0 100% 0);
+
+
+}
+
+
+}
+
 
 
 
@@ -427,38 +470,26 @@ inset(100% 0 0 0);
 
 .boot-message{
 
-margin-top:20px;
+
+position:absolute;
+
+
+top:75%;
+
+
+font-size:16px;
+
 
 letter-spacing:5px;
 
+
 color:#39ff14;
+
 
 animation:
 
 blink 1s infinite;
 
-}
-
-
-
-
-
-
-
-@keyframes bootFade{
-
-
-to{
-
-
-opacity:0;
-
-
-visibility:hidden;
-
-
-}
-
 
 }
 
@@ -468,24 +499,29 @@ visibility:hidden;
 
 
 
-/* =========================
+
+
+/* ==========================
 DESKTOP CRT
-========================= */
+========================== */
+
 
 
 .desktop{
 
+
 height:100vh;
+
 
 width:100vw;
 
-position:relative;
 
 background:
 
+
 radial-gradient(
 
-ellipse at center,
+ellipse,
 
 #202020,
 
@@ -494,9 +530,14 @@ ellipse at center,
 );
 
 
-border-radius:50px;
+border-radius:40px;
+
 
 overflow:hidden;
+
+
+position:relative;
+
 
 box-shadow:
 
@@ -504,6 +545,8 @@ inset 0 0 120px black;
 
 
 }
+
+
 
 
 
@@ -529,16 +572,16 @@ height:120px;
 
 background:
 
+
 linear-gradient(
 
 transparent,
 
-rgba(57,255,20,.25),
+rgba(57,255,20,.3),
 
 transparent
 
 );
-
 
 
 animation:
@@ -560,12 +603,14 @@ z-index:10;
 
 to{
 
+
 top:100%;
 
-}
-
 
 }
+
+}
+
 
 
 
@@ -578,10 +623,12 @@ top:100%;
 
 position:absolute;
 
+
 inset:0;
 
 
 background:
+
 
 repeating-linear-gradient(
 
@@ -591,17 +638,14 @@ rgba(255,255,255,.05),
 
 rgba(255,255,255,.05) 1px,
 
-transparent 2px,
-
-transparent 4px
+transparent 3px
 
 );
 
 
-pointer-events:none;
-
-
 }
+
+
 
 
 
@@ -611,6 +655,7 @@ pointer-events:none;
 
 
 position:absolute;
+
 
 inset:0;
 
@@ -638,7 +683,6 @@ opacity:.2;
 
 }
 
-
 }
 
 
@@ -647,9 +691,11 @@ opacity:.2;
 
 
 
-/* =========================
+
+/* ==========================
 ICONS
-========================= */
+========================== */
+
 
 
 .desktop-icons{
@@ -657,14 +703,18 @@ ICONS
 
 position:absolute;
 
-top:35px;
 
-left:35px;
+top:30px;
+
+
+left:30px;
 
 
 display:flex;
 
+
 flex-direction:column;
+
 
 gap:30px;
 
@@ -673,6 +723,7 @@ z-index:30;
 
 
 }
+
 
 
 
@@ -704,9 +755,7 @@ cursor:pointer;
 .icon:hover{
 
 
-background:
-
-rgba(57,255,20,.2);
+color:#39ff14;
 
 
 }
@@ -719,6 +768,7 @@ rgba(57,255,20,.2);
 
 margin:auto;
 
+
 margin-bottom:10px;
 
 
@@ -727,10 +777,12 @@ margin-bottom:10px;
 
 
 
+
 .computer{
 
 
 width:45px;
+
 
 height:35px;
 
@@ -756,6 +808,7 @@ font-size:35px;
 
 
 
+
 .game{
 
 
@@ -770,9 +823,11 @@ font-size:40px;
 
 
 
-/* =========================
+
+
+/* ==========================
 WINDOWS
-========================= */
+========================== */
 
 
 .window{
@@ -801,12 +856,8 @@ border:
 z-index:100;
 
 
-box-shadow:
-
-0 0 30px black;
-
-
 }
+
 
 
 
@@ -836,42 +887,13 @@ background:#39ff14;
 color:black;
 
 
+padding:5px;
+
+
 display:flex;
 
 
 justify-content:space-between;
-
-
-align-items:center;
-
-
-padding:5px;
-
-
-font-family:Arial;
-
-
-font-weight:bold;
-
-
-}
-
-
-
-
-
-.window-header button{
-
-
-background:black;
-
-
-color:#39ff14;
-
-
-border:
-
-1px solid #39ff14;
 
 
 }
@@ -894,9 +916,12 @@ padding:15px;
 
 
 
-/* =========================
+
+
+/* ==========================
 TASKBAR
-========================= */
+========================== */
+
 
 
 .taskbar{
@@ -911,10 +936,10 @@ bottom:0;
 left:0;
 
 
-height:35px;
-
-
 width:100%;
+
+
+height:35px;
 
 
 background:#39ff14;
@@ -936,9 +961,6 @@ padding:10px;
 
 
 font-family:Arial;
-
-
-font-weight:bold;
 
 
 }
