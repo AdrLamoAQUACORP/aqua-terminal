@@ -427,7 +427,8 @@ const API_URL = "https://akwa-terminal-api.moskinasasa32.workers.dev";
 
         let mode = "command";
         let authUsername = "";
-        let loggedInUser = "";\nlet sessionToken = "";
+        let loggedInUser = "";
+        let sessionToken = "";
         let loggedInAccessLevel = 0;
 
         input.addEventListener("keydown", async function(event) {
@@ -504,6 +505,7 @@ const API_URL = "https://akwa-terminal-api.moskinasasa32.workers.dev";
                     if (data.ok) {
                         loggedInUser = data.username;
                         loggedInAccessLevel = Number(data.access_level) || 0;
+                        sessionToken = data.session_token || "";
 
                         print("");
                         print("AUTHENTICATION SUCCESSFUL", "success");
