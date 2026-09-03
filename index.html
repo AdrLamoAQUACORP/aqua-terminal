@@ -194,19 +194,56 @@
           <div><span class="window-led"></span> PERSONNEL.DB</div>
           <button class="window-close" data-close="personnel" type="button">×</button>
         </header>
-        <div class="os-window__content dossier">
-          <div class="dossier__photo">
-            <div class="dossier__avatar">A17</div>
-            <span>PHOTO RECORD DAMAGED</span>
-          </div>
-          <div class="dossier__data">
-            <p><b>ИМЯ:</b> ADRIAN LAMO</p>
-            <p><b>ДОЛЖНОСТЬ:</b> SECURITY OFFICER / NIGHT SHIFT</p>
-            <p><b>ID:</b> AQ-S17-441</p>
-            <p><b>ДОПУСК:</b> LEVEL 3</p>
-            <p><b>ПОСЛЕДНИЙ ВХОД:</b> 03:14:07 // DATE CORRUPTED</p>
-            <p class="warning-line">Несоответствие биометрической записи: 1</p>
-          </div>
+        <div class="os-window__toolbar">
+          <span>Доступ: локальный индекс персонала</span>
+          <span>Записей: 9</span>
+        </div>
+        <div class="os-window__content file-browser">
+          <button class="file-row" data-file="adrian_lamo">
+            <span class="file-row__icon">▤</span>
+            <span>ADRIAN_LAMO_PERSONNEL.REP</span>
+            <small>5 KB</small>
+          </button>
+          <button class="file-row file-row--glitch" data-file="legit_tella">
+            <span class="file-row__icon">▥</span>
+            <span>LEGIT_TELLA_ARCHIVE.REP</span>
+            <small>3 KB</small>
+          </button>
+          <button class="file-row file-row--damaged" data-file="lonan">
+            <span class="file-row__icon">▧</span>
+            <span>LONAN_DAMAGED.DAT</span>
+            <small>2 KB</small>
+          </button>
+          <button class="file-row" data-file="varma_halla">
+            <span class="file-row__icon">▤</span>
+            <span>VARMA_HALLA_SECURITY.REP</span>
+            <small>4 KB</small>
+          </button>
+          <button class="file-row" data-file="valentina_hansen">
+            <span class="file-row__icon">▤</span>
+            <span>VALENTINA_HANSEN_GEN.REP</span>
+            <small>4 KB</small>
+          </button>
+          <button class="file-row" data-file="ixion_garcia">
+            <span class="file-row__icon">▤</span>
+            <span>IXION_GARCIA_PERSONNEL.REP</span>
+            <small>9 KB</small>
+          </button>
+          <button class="file-row" data-file="isaac_azim">
+            <span class="file-row__icon">▤</span>
+            <span>ISAAC_AZIM_ORV.REP</span>
+            <small>4 KB</small>
+          </button>
+          <button class="file-row file-row--glitch" data-file="sangus_torquemada">
+            <span class="file-row__icon">▥</span>
+            <span>SANGUS_TORQUEMADA.ARCH</span>
+            <small>1 KB</small>
+          </button>
+          <button class="file-row" data-file="leo_ellester">
+            <span class="file-row__icon">▤</span>
+            <span>LEO_ELLESTER_PERSONNEL.REP</span>
+            <small>3 KB</small>
+          </button>
         </div>
       </section>
 
@@ -422,6 +459,6 @@
     </main>
   </div>
 
-  <script src="./assets/app-archives-02.js"></script>
+  <script src="./assets/app-personnel-03.js"></script>
 </body>
 </html>

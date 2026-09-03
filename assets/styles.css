@@ -1870,3 +1870,104 @@ body {
     min-height: 88px;
   }
 }
+
+
+/* ===== PERSONNEL UPDATE 03 ===== */
+
+.file-row--glitch {
+  position: relative;
+  animation: personnelGlitch 2.9s steps(2, end) infinite;
+}
+
+.file-row--glitch::after {
+  content: "";
+  position: absolute;
+  inset: 2px 2px auto 2px;
+  height: 1px;
+  background: rgba(238,129,118,.75);
+  opacity: .25;
+  pointer-events: none;
+}
+
+.file-row--damaged {
+  opacity: .86;
+}
+
+.file-row--damaged .file-row__icon {
+  color: var(--amber);
+}
+
+@keyframes personnelGlitch {
+  0%, 88%, 100% { transform: translateX(0); opacity: 1; }
+  90% { transform: translateX(1px); opacity: .72; }
+  92% { transform: translateX(-1px); opacity: 1; }
+  94% { transform: translateX(1px); opacity: .78; }
+  96% { transform: translateX(0); opacity: 1; }
+}
+
+.viewer-content--corrupt {
+  position: relative;
+  overflow: hidden;
+  min-height: 340px;
+  background:
+    linear-gradient(rgba(0,0,0,.18), rgba(0,0,0,.18)),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0 1px, transparent 1px 5px),
+    #020604;
+}
+
+.viewer-corrupt {
+  animation: viewerCorrupt 2.6s steps(2, end) infinite;
+}
+
+.viewer-corrupt .os-window__bar {
+  text-shadow: 1px 0 rgba(238,129,118,.22), -1px 0 rgba(120,184,232,.14);
+}
+
+@keyframes viewerCorrupt {
+  0%, 90%, 100% { transform: translate(0, 0); }
+  91% { transform: translate(1px, 0); }
+  92% { transform: translate(-1px, 0); }
+  93% { transform: translate(1px, 1px); }
+  94% { transform: translate(0, 0); }
+}
+
+.corrupt-record {
+  white-space: normal;
+  color: var(--text);
+  display: grid;
+  gap: 10px;
+}
+
+.corrupt-record__head {
+  color: var(--amber);
+  letter-spacing: .08em;
+  font-size: 12px;
+}
+
+.corrupt-record__line {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.corrupt-record__line--dim,
+.corrupt-record__hint {
+  color: var(--text-dim);
+  font-size: 11px;
+}
+
+.corrupt-void {
+  width: 100%;
+  height: 112px;
+  background:
+    radial-gradient(circle at 32% 44%, rgba(255,255,255,.03), transparent 18%),
+    radial-gradient(circle at 74% 56%, rgba(255,255,255,.02), transparent 13%),
+    #000;
+  border: 1px dashed rgba(238,129,118,.35);
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.corrupt-void:hover {
+  box-shadow: inset 0 0 0 1px rgba(238,129,118,.28);
+}
+
