@@ -321,7 +321,7 @@
           <span>LOCAL CACHE</span>
           <div class="arg7-mail-toolbar">
             <span id="mail-count">3 MESSAGES</span>
-            <button id="arg7-compose-button" class="arg7-compose-button is-hidden" type="button">ОТПРАВИТЬ СООБЩЕНИЕ</button>
+            <button id="arg7-compose-button" class="arg7-compose-button is-hidden" type="button">SEND MESSAGE</button>
           </div>
         </div>
         <div id="mail-list" class="os-window__content mail-list">
@@ -355,7 +355,7 @@
 
           <div class="arg7-composer__meta">
             <label>TO:</label>
-            <strong>A.LAMO</strong>
+            <strong id="arg7-compose-recipient">A.LAMO</strong>
             <label>ROUTE:</label>
             <span>LOCAL RELAY</span>
           </div>
@@ -851,6 +851,11 @@
             <button class="arg6-file arg6-file--important" data-arg6-file="isaac" type="button">
               <b>ISAAC_AZIM.PROFILE</b><small>personnel / service owner</small>
             </button>
+            <button id="arg6-history-easter-button" class="arg6-easter-button" type="button">
+              <span>?</span>
+              <b>ОТКРЫТЬ ЛОКАЛЬНУЮ ИСТОРИЮ БРАУЗЕРА</b>
+              <small>EASTER EGG // ISAAC_AZIM // LOCAL CACHE</small>
+            </button>
             <button class="arg6-file" data-arg6-file="service" type="button">
               <b>ENGINEERING_SERVICE.LOG</b><small>maintenance / routing</small>
             </button>
@@ -915,7 +920,7 @@
             </div>
 
             <div class="arg6-aim-stats">
-              <div><span>TIME</span><b id="arg6-aim-time">00:45</b></div>
+              <div><span>TIME</span><b id="arg6-aim-time">00:50</b></div>
               <div><span>REAL HOLES</span><b id="arg6-aim-score">0 / 24</b></div>
               <div><span>ERRORS</span><b id="arg6-aim-errors">0 / 5</b></div>
             </div>
@@ -985,7 +990,26 @@
         </section>
       </section>
 
-      <button id="mail-notification" class="mail-notification is-hidden" type="button" aria-live="polite">
+      <section id="arg7-cinematic-overlay" class="arg7-cinematic-overlay is-hidden" aria-live="assertive">
+        <div class="arg7-cinematic-message">
+          <div class="arg7-cinematic-message__sender">A.LAMO // LOCAL BOT</div>
+          <div id="arg7-cinematic-message-text" class="arg7-cinematic-message__text"></div>
+          <div class="arg7-cinematic-message__signal">
+            PRE-RECORDED LOCAL SEQUENCE
+          </div>
+        </div>
+      </section>
+
+      <div id="arg7-fake-cursor" class="arg7-fake-cursor is-hidden" aria-hidden="true">
+        <span></span>
+      </div>
+
+      <section id="arg7-shutdown-overlay" class="arg7-shutdown-overlay is-hidden" aria-hidden="true">
+        <div class="arg7-crt-line"></div>
+        <div id="arg7-thankyou" class="arg7-thankyou">спасибо</div>
+      </section>
+
+      <button id="mail-notification" class="mail-notification is-hidden" type="button" aria-live="assertive">
         <span class="mail-notification__icon">✉</span>
         <span class="mail-notification__body">
           <b id="mail-notification-title">НОВОЕ СООБЩЕНИЕ</b>
@@ -1008,6 +1032,6 @@
     </main>
   </div>
 
-  <script src="./assets/app-arg-33.js"></script>
+  <script src="./assets/app-arg-37.js"></script>
 </body>
 </html>

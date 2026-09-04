@@ -5707,3 +5707,398 @@ body.arg6-defense-failed .arg6-aim-defense {
   opacity:.55;
   cursor:default;
 }
+
+
+/* =========================================================
+   ISAAC EASTER EGG + GLOBAL MAIL NOTIFICATION / UPDATE 34
+   ========================================================= */
+
+.arg6-easter-button {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  grid-template-areas:
+    "mark title"
+    "mark sub";
+  gap: 2px 10px;
+  align-items: center;
+  margin: 8px 0 11px;
+  padding: 11px 12px;
+  border: 1px dashed rgba(244,207,101,.48);
+  background:
+    linear-gradient(90deg, rgba(244,207,101,.08), rgba(244,207,101,.018));
+  color: #f4cf65;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: inset 0 0 16px rgba(244,207,101,.025);
+  animation: arg6EasterPulse 2.4s steps(2,end) infinite;
+}
+
+.arg6-easter-button > span {
+  grid-area: mark;
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  border: 1px solid rgba(244,207,101,.5);
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.arg6-easter-button > b {
+  grid-area: title;
+  color: #ffe799;
+  font-size: 10px;
+  letter-spacing: .04em;
+}
+
+.arg6-easter-button > small {
+  grid-area: sub;
+  color: #a7955c;
+  font-size: 8px;
+  letter-spacing: .06em;
+}
+
+.arg6-easter-button:hover {
+  border-color: #f4cf65;
+  background: rgba(244,207,101,.11);
+}
+
+@keyframes arg6EasterPulse {
+  0%, 76%, 100% { filter: none; transform: translateX(0); }
+  80% { filter: brightness(1.3); transform: translateX(1px); }
+  84% { filter: brightness(.9); transform: translateX(-1px); }
+}
+
+.arg6-tab--easter-active {
+  box-shadow: inset 0 -2px 0 #f4cf65 !important;
+  color: #ffe799 !important;
+}
+
+/* Force incoming mail above every desktop window and ARG overlay. */
+body > .mail-notification,
+.mail-notification {
+  position: fixed !important;
+  top: 18px !important;
+  right: 18px !important;
+  bottom: auto !important;
+  z-index: 2147483000 !important;
+  width: min(430px, calc(100vw - 36px)) !important;
+  min-height: 76px;
+  border: 2px solid #f4cf65 !important;
+  border-left: 6px solid #ffe799 !important;
+  background: rgba(4,8,6,.985) !important;
+  box-shadow:
+    0 0 0 2px rgba(244,207,101,.10),
+    12px 12px 0 rgba(0,0,0,.45),
+    0 0 36px rgba(244,207,101,.18) !important;
+  isolation: isolate;
+}
+
+body > .mail-notification.mail-notification--show {
+  animation:
+    mailNotifyInTop .36s steps(3,end) both,
+    mailNotifyAttention 1.2s steps(2,end) infinite .45s !important;
+}
+
+body > .mail-notification .mail-notification__icon {
+  font-size: 28px;
+}
+
+body > .mail-notification .mail-notification__body b {
+  font-size: 14px;
+}
+
+body > .mail-notification .mail-notification__body small {
+  font-size: 11px;
+}
+
+body > .mail-notification .mail-notification__open {
+  padding: 6px 8px;
+  border: 1px solid rgba(145,227,125,.32);
+  color: #baffc4;
+}
+
+@keyframes mailNotifyInTop {
+  0% { opacity: 0; transform: translateY(-34px); }
+  65% { opacity: 1; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mailNotifyAttention {
+  0%, 78%, 100% { transform: translate(0,0); filter: none; }
+  82% { transform: translate(2px,0); filter: brightness(1.22); }
+  86% { transform: translate(-2px,1px); }
+  90% { transform: translate(1px,-1px); filter: brightness(.92); }
+}
+
+@media (max-width: 640px) {
+  body > .mail-notification,
+  .mail-notification {
+    top: 10px !important;
+    right: 10px !important;
+    width: calc(100vw - 20px) !important;
+  }
+}
+
+
+/* =========================================================
+   ARG7 CINEMATIC FINALE / UPDATE 37
+   ========================================================= */
+
+.arg7-cinematic-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483200;
+  display: grid;
+  place-items: center;
+  pointer-events: all;
+  background: rgba(0,4,2,.64);
+  backdrop-filter: blur(2px);
+}
+
+.arg7-cinematic-message {
+  width: min(900px, 88vw);
+  min-height: 220px;
+  display: grid;
+  align-content: center;
+  gap: 14px;
+  padding: 34px 40px;
+  border-top: 1px solid rgba(244,207,101,.48);
+  border-bottom: 1px solid rgba(244,207,101,.48);
+  background:
+    linear-gradient(90deg, transparent, rgba(3,9,6,.94) 12%, rgba(3,9,6,.94) 88%, transparent);
+  text-align: center;
+  box-shadow: 0 0 60px rgba(0,0,0,.5);
+}
+
+.arg7-cinematic-message__sender {
+  color: #f4cf65;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .16em;
+}
+
+.arg7-cinematic-message__text {
+  min-height: 74px;
+  display: grid;
+  place-items: center;
+  color: #edf7f1;
+  font-size: clamp(22px,3vw,42px);
+  font-weight: 700;
+  line-height: 1.25;
+  opacity: 0;
+  text-shadow: 0 0 20px rgba(255,255,255,.08);
+}
+
+.arg7-cinematic-message__text.is-showing {
+  animation: arg7LineReveal .42s steps(4,end) both;
+}
+
+.arg7-cinematic-message__signal {
+  color: #687c72;
+  font-size: 8px;
+  letter-spacing: .12em;
+}
+
+@keyframes arg7LineReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+    filter: blur(5px);
+  }
+  45% {
+    opacity: .88;
+    transform: translateY(-1px);
+    filter: blur(0);
+  }
+  52% {
+    transform: translateX(2px);
+  }
+  58% {
+    transform: translateX(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0,0);
+    filter: blur(0);
+  }
+}
+
+body.arg7-cinematic-active,
+body.arg7-cinematic-active * {
+  cursor: none !important;
+}
+
+.arg7-fake-cursor {
+  --arg7-cursor-duration: 900ms;
+  position: fixed;
+  left: 50vw;
+  top: 50vh;
+  z-index: 2147483500;
+  width: 22px;
+  height: 30px;
+  pointer-events: none;
+  transition:
+    left var(--arg7-cursor-duration) cubic-bezier(.2,.76,.28,1),
+    top var(--arg7-cursor-duration) cubic-bezier(.2,.76,.28,1);
+  filter: drop-shadow(2px 3px 0 rgba(0,0,0,.65));
+}
+
+.arg7-fake-cursor::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 0, 0 90%, 24% 69%, 40% 100%, 55% 92%, 39% 63%, 70% 61%);
+  background: #eaf8f0;
+}
+
+.arg7-fake-cursor > span {
+  position: absolute;
+  left: -11px;
+  top: -11px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(244,207,101,.0);
+  border-radius: 50%;
+}
+
+.arg7-fake-cursor.is-clicking > span {
+  animation: arg7CursorClick .28s ease-out;
+}
+
+@keyframes arg7CursorClick {
+  0% {
+    transform: scale(.2);
+    opacity: 1;
+    border-color: #f4cf65;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+    border-color: #f4cf65;
+  }
+}
+
+.arg7-composer--cinematic {
+  z-index: 2147483300 !important;
+  background: rgba(0,0,0,.70) !important;
+}
+
+.arg7-composer--cinematic .arg7-composer__window {
+  width: min(760px, 90vw);
+}
+
+.arg7-compose-recipient--corrupt {
+  color: #ee8176 !important;
+  min-height: 1.2em;
+  letter-spacing: .14em;
+  text-shadow:
+    2px 0 rgba(120,184,232,.42),
+    -2px 0 rgba(238,129,118,.58);
+  animation: arg7RecipientNoise .48s steps(2,end) infinite;
+}
+
+@keyframes arg7RecipientNoise {
+  0%,100% { transform: translateX(0); }
+  35% { transform: translateX(1px); }
+  65% { transform: translateX(-1px); }
+}
+
+.arg7-composer--cinematic #arg7-compose-text {
+  min-height: 300px;
+  color: #dfece5;
+  caret-color: transparent;
+}
+
+.arg7-composer--cinematic #arg7-compose-status {
+  color: #f4cf65;
+}
+
+.arg7-composer--cinematic #arg7-compose-send {
+  min-width: 130px;
+}
+
+.arg7-shutdown-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483600;
+  overflow: hidden;
+  pointer-events: all;
+  background: transparent;
+}
+
+.arg7-crt-line {
+  position: absolute;
+  inset: 0;
+  background: #020503;
+  transform-origin: 50% 50%;
+  animation: arg7CrtCollapse .82s cubic-bezier(.65,0,.9,.35) forwards;
+}
+
+@keyframes arg7CrtCollapse {
+  0% {
+    transform: scale(1,1);
+    background: rgba(2,5,3,0);
+    box-shadow: inset 0 0 0 rgba(255,255,255,0);
+  }
+  55% {
+    transform: scale(1,.015);
+    background: rgba(224,255,236,.96);
+    box-shadow: 0 0 42px rgba(221,255,232,.72);
+  }
+  78% {
+    transform: scale(.025,.012);
+    background: rgba(244,255,247,.98);
+    box-shadow: 0 0 30px rgba(255,255,255,.8);
+  }
+  100% {
+    transform: scale(0,0);
+    background: #fff;
+    box-shadow: 0 0 0 transparent;
+  }
+}
+
+body.arg7-crt-black .arg7-shutdown-overlay {
+  background: #000;
+}
+
+.arg7-thankyou {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: rgba(230,244,235,0);
+  font-size: clamp(30px,5vw,68px);
+  font-weight: 400;
+  letter-spacing: .22em;
+  text-transform: lowercase;
+}
+
+.arg7-thankyou.is-visible {
+  animation: arg7Thankyou 5.5s ease forwards;
+}
+
+@keyframes arg7Thankyou {
+  0% {
+    color: rgba(230,244,235,0);
+    filter: blur(8px);
+    letter-spacing: .35em;
+  }
+  100% {
+    color: rgba(230,244,235,.82);
+    filter: blur(0);
+    letter-spacing: .22em;
+  }
+}
+
+@media(max-width:700px) {
+  .arg7-cinematic-message {
+    padding: 26px 18px;
+  }
+
+  .arg7-cinematic-message__text {
+    font-size: 22px;
+  }
+}
