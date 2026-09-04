@@ -700,10 +700,10 @@
               <div><span>DESTINATION</span><b>HOLDING SECTOR</b></div>
               <div><span>EXPORT</span><b>COMPLETED</b></div>
               <div><span>SECONDARY COPY</span><b>EXTERNAL DEVICE</b></div>
-              <button id="arg6-orv-entry" class="arg5-map__device arg6-orv-entry" type="button">
-                <span>DEVICE ID</span>
-                <b>ORV-04</b>
-                <small>TRACE SERVICE OWNER</small>
+              <button id="arg6-isaac-entry" class="arg5-map__device arg6-isaac-entry" type="button">
+                <span>SERVICE ACCOUNT</span>
+                <b>ISAAC AZIM</b>
+                <small>TRACE LEVEL 4 SESSION</small>
               </button>
             </div>
 
@@ -724,8 +724,8 @@
 
         <header class="arg6-orv__header">
           <div>
-            <span>ORV SERVICE NETWORK</span>
-            <h2>ORV-04 // SERVICE SESSION</h2>
+            <span>AKWA SERVICE DIRECTORY</span>
+            <h2>ISAAC AZIM // SERVICE SESSION</h2>
           </div>
           <button id="arg6-close" type="button">×</button>
         </header>
@@ -740,14 +740,14 @@
 
             <div class="arg6-auth__notice">
               <b>SESSION TOKEN DAMAGED</b>
-              <p>ORV-04 хранит остаток сервисной сессии. Синхронизируйте четыре фрагмента, чтобы восстановить доступ.</p>
+              <p>В локальном кэше остался повреждённый токен служебной сессии Айзека. Синхронизируйте четыре фрагмента, чтобы восстановить доступ.</p>
             </div>
 
             <div class="arg6-adrian-note">
               <span>A.LAMO // LOCAL RELAY</span>
-              <p>&gt; Айзек обслуживал ORV. Его уровень доступа выше моего.</p>
+              <p>&gt; У Айзека четвёртый уровень доступа. Нам нужен его служебный профиль.</p>
               <p>&gt; Поймай четыре части старой сессии. Не дай AUDIT TRACE дойти до 100%.</p>
-              <p>&gt; Нужная сигнатура: <b>A17 / ORV / 04 / IA</b></p>
+              <p>&gt; Нужная сигнатура: <b>A17 / IA / L4 / ENG</b></p>
             </div>
           </section>
 
@@ -770,21 +770,21 @@
 
               <article class="arg6-fragment" data-fragment-index="1">
                 <span>FRAGMENT 02</span>
-                <div class="arg6-fragment__target">TARGET: <b>ORV</b></div>
+                <div class="arg6-fragment__target">TARGET: <b>IA</b></div>
                 <div id="arg6-value-1" class="arg6-fragment__value">---</div>
                 <button class="arg6-lock" data-fragment-lock="1" type="button">LOCK</button>
               </article>
 
               <article class="arg6-fragment" data-fragment-index="2">
                 <span>FRAGMENT 03</span>
-                <div class="arg6-fragment__target">TARGET: <b>04</b></div>
+                <div class="arg6-fragment__target">TARGET: <b>L4</b></div>
                 <div id="arg6-value-2" class="arg6-fragment__value">---</div>
                 <button class="arg6-lock" data-fragment-lock="2" type="button">LOCK</button>
               </article>
 
               <article class="arg6-fragment" data-fragment-index="3">
                 <span>FRAGMENT 04</span>
-                <div class="arg6-fragment__target">TARGET: <b>IA</b></div>
+                <div class="arg6-fragment__target">TARGET: <b>ENG</b></div>
                 <div id="arg6-value-3" class="arg6-fragment__value">---</div>
                 <button class="arg6-lock" data-fragment-lock="3" type="button">LOCK</button>
               </article>
@@ -808,37 +808,36 @@
             </div>
             <div>
               <span>SERVICE</span>
-              <strong>ORV NETWORK</strong>
+              <strong>AKWA INTERNAL</strong>
             </div>
           </div>
 
           <nav class="arg6-tabs">
             <button class="arg6-tab is-active" data-arg6-tab="files" type="button">FILES</button>
-            <button class="arg6-tab" data-arg6-tab="logs" type="button">ORV LOGS</button>
+            <button class="arg6-tab" data-arg6-tab="logs" type="button">SERVICE LOGS</button>
             <button class="arg6-tab" data-arg6-tab="history" type="button">BROWSER HISTORY</button>
           </nav>
 
           <section id="arg6-pane-files" class="arg6-pane">
+            <button class="arg6-file arg6-file--important" data-arg6-file="isaac" type="button">
+              <b>ISAAC_AZIM.PROFILE</b><small>personnel / service owner</small>
+            </button>
             <button class="arg6-file" data-arg6-file="service" type="button">
-              <b>ORV_04_SERVICE.LOG</b><small>maintenance / routing</small>
+              <b>ENGINEERING_SERVICE.LOG</b><small>maintenance / routing</small>
             </button>
             <button class="arg6-file" data-arg6-file="sde" type="button">
-              <b>SDE_INTERFACE.NFO</b><small>osdein interface</small>
+              <b>SDE_INTERFACE.NFO</b><small>engineering reference</small>
             </button>
             <button class="arg6-file" data-arg6-file="export" type="button">
               <b>SEC_EXPORT.CPY</b><small>security route export</small>
             </button>
             <button class="arg6-file arg6-file--important" data-arg6-file="memory" type="button">
-              <b>ORV_04_MEM.MAP</b><small>memory map / last sync</small>
+              <b>LOCAL_SERVICE_CACHE.MAP</b><small>service cache / last sync</small>
             </button>
 
             <div id="arg6-file-view" class="arg6-file-view">
               SELECT A FILE.
             </div>
-
-            <button id="arg6-memory-reconstruct" class="arg6-memory-reconstruct is-hidden" type="button">
-              RUN M-04 MEMORY RECONSTRUCTION
-            </button>
           </section>
 
           <section id="arg6-pane-logs" class="arg6-pane is-hidden">
@@ -864,104 +863,112 @@
               <div><time>01:22</time><span>женский персонал Аква архив фото</span></div>
               <div><time>01:26</time><span>как удалить историю браузера полностью</span></div>
               <div><time>01:27</time><span>как удалить историю браузера так чтобы инженер не нашел</span></div>
-              <div><time>01:34</time><span>почему ORV-04 иногда смотрит на меня</span></div>
+              <div><time>01:34</time><span>почему служебный робот иногда смотрит на меня</span></div>
               <div><time>01:35</time><span>может ли робот запоминать обиды</span></div>
               <div class="arg6-browser-history__odd"><time>01:39</time><span>сука.</span></div>
             </div>
           </section>
         </div>
+      </section>
 
-        <section id="arg6-memory-game" class="arg6-memory-game is-hidden">
-          <div class="arg6-memory-game__panel">
-            <header class="arg6-memory-game__header">
-              <div>
-                <span>ORV-04 // MEMORY SLOT M-04</span>
-                <h3>SDE MEMORY RECONSTRUCTION</h3>
-              </div>
-              <button id="arg6-memory-close" type="button">×</button>
-            </header>
+      <section id="arg6-adrian-sequence" class="arg6-adrian-sequence is-hidden">
+        <div id="arg6-blackout" class="arg6-blackout">
+          <div class="arg6-blackout__scan"></div>
+          <pre id="arg6-blackout-text" class="arg6-blackout__text"></pre>
+          <div class="arg6-blackout__cursor">_</div>
+        </div>
 
-            <div class="arg6-memory-game__body">
-              <aside class="arg6-memory-game__info">
-                <div class="arg6-memory-game__status">
-                  <span>MEMORY SYNC</span>
-                  <b id="arg6-memory-sync">0%</b>
-                  <div><i id="arg6-memory-sync-fill"></i></div>
-                </div>
-
-                <div class="arg6-memory-game__instructions">
-                  <p>M-04 повреждён после аварийного завершения сессии.</p>
-                  <p>Поворачивайте сектора памяти, пока сигнальная схема не восстановится.</p>
-                  <p>Каждый сектор поворачивается на 90°.</p>
-                </div>
-
-                <div class="arg6-memory-game__adrian">
-                  <span>A.LAMO</span>
-                  <p>&gt; ORV хранит не только команды.</p>
-                  <p>&gt; Иногда он запоминает то, на что сам решил посмотреть.</p>
-                </div>
-
-                <button id="arg6-memory-reset-grid" type="button">RESET MATRIX</button>
-              </aside>
-
-              <main class="arg6-memory-grid-wrap">
-                <div id="arg6-memory-grid" class="arg6-memory-grid">
-                  <button class="arg6-memory-tile" data-memory-tile="0" type="button"><span>└</span><small>M01</small></button>
-                  <button class="arg6-memory-tile" data-memory-tile="1" type="button"><span>─</span><small>M02</small></button>
-                  <button class="arg6-memory-tile" data-memory-tile="2" type="button"><span>┐</span><small>M03</small></button>
-                  <button class="arg6-memory-tile" data-memory-tile="3" type="button"><span>│</span><small>M04</small></button>
-                  <button class="arg6-memory-tile arg6-memory-tile--core" data-memory-tile="4" type="button"><span>┼</span><small>SDE</small></button>
-                  <button class="arg6-memory-tile" data-memory-tile="5" type="button"><span>└</span><small>M05</small></button>
-                  <button class="arg6-memory-tile" data-memory-tile="6" type="button"><span>┘</span><small>M06</small></button>
-                  <button class="arg6-memory-tile" data-memory-tile="7" type="button"><span>─</span><small>M07</small></button>
-                  <button class="arg6-memory-tile" data-memory-tile="8" type="button"><span>┌</span><small>M08</small></button>
-                </div>
-                <div id="arg6-memory-feedback" class="arg6-memory-feedback">
-                  MEMORY PATH UNRESOLVED
-                </div>
-              </main>
+        <section id="arg6-adrian-defense" class="arg6-adrian-defense is-hidden">
+          <header class="arg6-adrian-defense__header">
+            <div>
+              <span>AKWAOS SECURITY WATCHDOG</span>
+              <h2>SUSPICIOUS ACTIVITY DETECTED</h2>
             </div>
+            <div id="arg6-adrian-countdown" class="arg6-adrian-countdown">01:00</div>
+          </header>
+
+          <div class="arg6-adrian-defense__layout">
+            <aside class="arg6-adrian-defense__controls">
+              <div class="arg6-defense-card">
+                <span>ACCOUNT</span>
+                <b>AQ-S17-441</b>
+                <small>SECURITY FLAG: ACTIVE</small>
+              </div>
+
+              <div class="arg6-defense-meter">
+                <div><span>SECURITY LOCK</span><b id="arg6-security-lock-value">28%</b></div>
+                <div class="arg6-defense-meter__track arg6-defense-meter__track--danger">
+                  <i id="arg6-security-lock-fill"></i>
+                </div>
+              </div>
+
+              <div class="arg6-defense-meter">
+                <div><span>A.LAMO LINK</span><b id="arg6-adrian-link-value">72%</b></div>
+                <div class="arg6-defense-meter__track arg6-defense-meter__track--link">
+                  <i id="arg6-adrian-link-fill"></i>
+                </div>
+              </div>
+
+              <button id="arg6-mask-session" class="arg6-defense-action" type="button">MASK SESSION</button>
+              <button id="arg6-relay-session" class="arg6-defense-action" type="button">RELAY LINK</button>
+
+              <div id="arg6-action-cooldown" class="arg6-action-cooldown">ACTIONS READY</div>
+            </aside>
+
+            <main class="arg6-adrian-defense__routes">
+              <div class="arg6-routes-title">LIVE SECURITY ROUTES</div>
+
+              <div class="arg6-route-grid">
+                <button class="arg6-route-node is-safe" data-arg6-route="A17" type="button">
+                  <b>A17</b><small>LOCAL LOOP</small>
+                </button>
+                <button class="arg6-route-node" data-arg6-route="MAIL" type="button">
+                  <b>MAIL</b><small>RELAY</small>
+                </button>
+                <button class="arg6-route-node is-danger" data-arg6-route="WATCH" type="button">
+                  <b>WATCHDOG</b><small>TRACE</small>
+                </button>
+                <button class="arg6-route-node" data-arg6-route="ARCH" type="button">
+                  <b>ARCH-2</b><small>CACHE MASK</small>
+                </button>
+                <button class="arg6-route-node is-danger-soft" data-arg6-route="SEC" type="button">
+                  <b>SEC-C</b><small>HOT ROUTE</small>
+                </button>
+                <button class="arg6-route-node is-target" data-arg6-route="ALAMO" type="button">
+                  <b>A.LAMO</b><small>HIDDEN LINK</small>
+                </button>
+              </div>
+
+              <div id="arg6-route-status" class="arg6-route-status">KEEP A.LAMO LINK ALIVE</div>
+
+              <div class="arg6-sweep">
+                <span>WATCHDOG SWEEP</span>
+                <div><i id="arg6-sweep-marker"></i></div>
+              </div>
+            </main>
+
+            <aside class="arg6-adrian-defense__chat">
+              <div class="arg6-adrian-chat__head">A.LAMO // LIVE RELAY</div>
+              <div id="arg6-adrian-live-log" class="arg6-adrian-live-log">
+                <p>&gt; Они увидели переход.</p>
+                <p>&gt; Не закрывай окно.</p>
+                <p>&gt; Мне нужна минута.</p>
+              </div>
+            </aside>
           </div>
 
-          <section id="arg6-memory-result" class="arg6-memory-result is-hidden">
-            <div class="arg6-memory-result__flash">M-04 MEMORY FRAGMENT RECOVERED</div>
-
-            <div class="arg6-memory-result__record">
-              <div class="arg6-memory-result__title">ORV-04 // AUTONOMOUS SENSOR MEMORY</div>
-
-              <div class="arg6-memory-result__rows">
-                <div><span>TIME</span><b>03:08:11</b></div>
-                <div><span>PASSIVE SDE SENSOR</span><b>ACTIVE</b></div>
-                <div><span>SDE FIELD</span><b>UNREGISTERED</b></div>
-                <div><span>ROUTE ACCOUNT</span><b>AQ-S17-441</b></div>
-                <div><span>REGISTERED USER</span><b>ADRIAN LAMO</b></div>
-                <div><span>PERSONNEL MATCH</span><b>NONE</b></div>
-                <div><span>SIGNATURE CLASS</span><b>[UNRESOLVED]</b></div>
-                <div><span>OPERATOR COMMAND</span><b>NONE</b></div>
-              </div>
-
-              <div class="arg6-memory-result__event">
-                <span>AUTONOMOUS ORIENTATION EVENT</span>
-                <p>ORV-04 changed optical-head direction toward the detected SDE source without an operator command.</p>
-                <p>Event repeated during A17 route-cache interval.</p>
-              </div>
-
-              <div class="arg6-memory-result__isaac">
-                <span>ENGINEER NOTE // ISAAC AZIM</span>
-                <p>«Если это опять привод поворота головы — я его лично разберу.»</p>
-              </div>
-
-              <div class="arg6-memory-result__adrian">
-                <span>A.LAMO // LOCAL RELAY</span>
-                <p>&gt; Забавно.</p>
-                <p>&gt; Машина заметила то, чего не заметила охрана.</p>
-              </div>
+          <section id="arg6-defense-result" class="arg6-defense-result is-hidden">
+            <div class="arg6-defense-result__title">LINK PRESERVED</div>
+            <div class="arg6-defense-result__subtitle">A.LAMO SESSION REMAINS ACTIVE</div>
+            <div class="arg6-defense-result__message">
+              <p>&gt; Есть.</p>
+              <p>&gt; Я забрал копию.</p>
+              <p>&gt; Дальше не открывай ничего сам.</p>
+              <p>&gt; Я свяжусь с тобой.</p>
             </div>
-
-            <button id="arg6-memory-result-close" type="button">RETURN TO ISAAC SESSION</button>
+            <button id="arg6-defense-exit" type="button">RETURN TO AKWAOS</button>
           </section>
         </section>
-
       </section>
 
       <button id="mail-notification" class="mail-notification is-hidden" type="button" aria-live="polite">
@@ -987,6 +994,6 @@
     </main>
   </div>
 
-  <script src="./assets/app-arg-26.js"></script>
+  <script src="./assets/app-arg-27.js"></script>
 </body>
 </html>
