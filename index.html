@@ -436,9 +436,30 @@
           <div><span class="window-led"></span> RECYCLE CACHE</div>
           <button class="window-close" data-close="trash" type="button">×</button>
         </header>
-        <div class="os-window__content">
-          <p>Корзина пуста.</p>
-          <p class="muted">Последняя очистка: SYSTEM / AUTO</p>
+        <div class="os-window__content recycle-panel">
+          <div class="recycle-panel__summary">
+            <div>OBJECTS: <b>0</b></div>
+            <div>RECOVERABLE: <b>0</b></div>
+            <div>LAST CLEANUP: <b>SYSTEM / AUTO</b></div>
+            <div>STATUS: <b id="recycle-status">EMPTY</b></div>
+          </div>
+
+          <div id="recycle-shadow" class="recycle-shadow is-hidden">
+            <div class="recycle-shadow__scan">SHADOW INDEX: <b>[DETECTED]</b></div>
+            <div>PURGE RECORD:</div>
+            <div class="recycle-arg4-fragment" data-arg4-fragment="R14">R14</div>
+            <div>NODE:</div>
+            <div class="recycle-arg4-fragment" data-arg4-fragment="A17">A17</div>
+            <div>OBJECT CLASS:</div>
+            <div class="recycle-arg4-fragment" data-arg4-fragment="SEC">SEC</div>
+            <div class="recycle-shadow__ref">REFERENCE: TERMINAL HELP / RECOVER</div>
+          </div>
+
+          <div id="recycle-restored" class="recycle-restored is-hidden">
+            <div>PARTIAL OBJECT RESTORED</div>
+            <div>OUTPUT:</div>
+            <div class="recycle-restored__file">R14_A17.REC</div>
+          </div>
         </div>
       </section>
 
@@ -502,6 +523,198 @@
         </div>
       </section>
 
+      <section id="arg5-routing" class="arg5-routing is-hidden" aria-live="polite">
+        <div class="arg5-routing__scan" aria-hidden="true"></div>
+
+        <header class="arg5-routing__header">
+          <div>
+            <span class="arg5-routing__eyebrow">AKWA SECURITY ROUTING MATRIX</span>
+            <h2>SEC-C // NIGHT ROUTE</h2>
+          </div>
+          <button id="arg5-close" class="arg5-routing__close" type="button">×</button>
+        </header>
+
+        <div class="arg5-routing__statusbar">
+          <div>
+            <span>REQUEST ACCOUNT</span>
+            <b>AQ-S17-441</b>
+          </div>
+          <div>
+            <span>CLEARANCE</span>
+            <b>LEVEL 3 / MASKED</b>
+          </div>
+          <div>
+            <span>TARGET</span>
+            <b>SEC-C</b>
+          </div>
+          <div>
+            <span>WATCHDOG</span>
+            <b id="arg5-watchdog-label">TRACE 08%</b>
+          </div>
+        </div>
+
+        <div class="arg5-routing__layout">
+          <aside class="arg5-routing__left">
+            <section class="arg5-objective">
+              <span>OBJECTIVE</span>
+              <strong>ROUTE A17 → SEC-C</strong>
+              <small>Получите три контрольных токена и доведите маршрут до SEC-C.</small>
+            </section>
+
+            <section class="arg5-tokens">
+              <div id="arg5-token-camera" class="arg5-token"><span>CAMERA</span><b>LOCKED</b></div>
+              <div id="arg5-token-audit" class="arg5-token"><span>AUDIT</span><b>LOCKED</b></div>
+              <div id="arg5-token-door" class="arg5-token"><span>DOOR</span><b>LOCKED</b></div>
+            </section>
+
+            <section class="arg5-meter-card">
+              <div class="arg5-meter-card__head">
+                <span>ROUTE INTEGRITY</span>
+                <b id="arg5-route-percent">12%</b>
+              </div>
+              <div class="arg5-meter"><i id="arg5-route-fill"></i></div>
+            </section>
+
+            <section class="arg5-meter-card arg5-meter-card--danger">
+              <div class="arg5-meter-card__head">
+                <span>WATCHDOG TRACE</span>
+                <b id="arg5-trace-percent">08%</b>
+              </div>
+              <div class="arg5-meter"><i id="arg5-trace-fill"></i></div>
+            </section>
+
+            <button id="arg5-disconnect" class="arg5-disconnect" type="button">DISCONNECT ROUTE</button>
+            <div id="arg5-cache" class="arg5-cache is-hidden">
+              ROUTE CACHE: <b id="arg5-cache-value">10</b>s
+            </div>
+          </aside>
+
+          <main class="arg5-routing__board">
+            <div class="arg5-board__label">LOCAL SECURITY TOPOLOGY / CLICK NEXT NODE</div>
+
+            <svg class="arg5-links" viewBox="0 0 900 520" preserveAspectRatio="none" aria-hidden="true">
+              <line x1="80" y1="260" x2="210" y2="260" />
+              <line x1="210" y1="260" x2="340" y2="110" />
+              <line x1="210" y1="260" x2="340" y2="260" />
+              <line x1="210" y1="260" x2="340" y2="410" />
+              <line x1="340" y1="110" x2="470" y2="180" />
+              <line x1="340" y1="260" x2="470" y2="260" />
+              <line x1="340" y1="410" x2="470" y2="340" />
+              <line x1="470" y1="180" x2="600" y2="260" />
+              <line x1="470" y1="260" x2="600" y2="260" />
+              <line x1="470" y1="340" x2="600" y2="260" />
+              <line x1="600" y1="260" x2="720" y2="175" />
+              <line x1="600" y1="260" x2="720" y2="345" />
+              <line x1="720" y1="175" x2="830" y2="260" />
+              <line x1="720" y1="345" x2="830" y2="260" />
+            </svg>
+
+            <button class="arg5-node arg5-node--start is-active" data-arg5-node="A17" style="--x:8%;--y:50%" type="button">
+              <b>A17</b><small>START</small>
+            </button>
+
+            <button class="arg5-node" data-arg5-node="R1" style="--x:23%;--y:50%" type="button">
+              <b>R1</b><small>ROUTER</small>
+            </button>
+
+            <button class="arg5-node arg5-node--token" data-arg5-node="CAM-12" style="--x:38%;--y:21%" type="button">
+              <b>CAM-12</b><small>CAMERA TOKEN</small>
+            </button>
+
+            <button class="arg5-node arg5-node--decoy" data-arg5-node="R2" style="--x:38%;--y:50%" type="button">
+              <b>R2</b><small>ARCHIVE ROUTE</small>
+            </button>
+
+            <button class="arg5-node arg5-node--decoy" data-arg5-node="MAINT" style="--x:38%;--y:79%" type="button">
+              <b>MAINT</b><small>SERVICE</small>
+            </button>
+
+            <button class="arg5-node" data-arg5-node="R3" style="--x:53%;--y:35%" type="button">
+              <b>R3</b><small>RELAY</small>
+            </button>
+
+            <button class="arg5-node arg5-node--token" data-arg5-node="AUDIT" style="--x:53%;--y:50%" type="button">
+              <b>AUDIT</b><small>AUDIT TOKEN</small>
+            </button>
+
+            <button class="arg5-node arg5-node--decoy" data-arg5-node="ARCH-2" style="--x:53%;--y:65%" type="button">
+              <b>ARCH-2</b><small>DEGRADED</small>
+            </button>
+
+            <button class="arg5-node" data-arg5-node="R4" style="--x:68%;--y:50%" type="button">
+              <b>R4</b><small>SEC RELAY</small>
+            </button>
+
+            <button class="arg5-node arg5-node--token" data-arg5-node="DOOR" style="--x:81%;--y:34%" type="button">
+              <b>DOOR</b><small>DOOR TOKEN</small>
+            </button>
+
+            <button class="arg5-node arg5-node--decoy" data-arg5-node="WATCHDOG" style="--x:81%;--y:66%" type="button">
+              <b>WATCHDOG</b><small>TRACE SOURCE</small>
+            </button>
+
+            <button class="arg5-node arg5-node--target" data-arg5-node="SEC-C" style="--x:93%;--y:50%" type="button">
+              <b>SEC-C</b><small>TARGET</small>
+            </button>
+
+            <div id="arg5-board-pulse" class="arg5-board-pulse is-hidden">SIGNAL ROUTED</div>
+          </main>
+
+          <aside class="arg5-routing__right">
+            <section class="arg5-adrian">
+              <div class="arg5-adrian__head">
+                <span>A.LAMO // LOCAL RELAY</span>
+                <i></i>
+              </div>
+              <div id="arg5-adrian-log" class="arg5-adrian__log">
+                <p>&gt; SEC-C не пустит тебя напрямую.</p>
+                <p>&gt; Проведи маршрут через контрольные узлы.</p>
+                <p>&gt; CAM-12 должна быть первой контрольной точкой.</p>
+              </div>
+            </section>
+
+            <section class="arg5-eventlog">
+              <span>ROUTING EVENTS</span>
+              <div id="arg5-event-log">
+                <p>WAITING FOR ROUTE INPUT...</p>
+              </div>
+            </section>
+          </aside>
+        </div>
+
+        <section id="arg5-result" class="arg5-result is-hidden">
+          <div class="arg5-result__grant">SEC-C ACCESS GRANTED</div>
+
+          <div class="arg5-map">
+            <div class="arg5-map__title">AKWA SECURITY MAP // RECOVERED NIGHT ROUTE</div>
+            <div class="arg5-map__route">
+              <span>A-17</span><i>→</i>
+              <span>SEC-C</span><i>→</i>
+              <span>SERVICE CORRIDOR</span><i>→</i>
+              <span>HOLDING SECTOR</span>
+            </div>
+
+            <div class="arg5-map__info">
+              <div><span>CREATED</span><b>03:07:42</b></div>
+              <div><span>ACCOUNT</span><b>AQ-S17-441</b></div>
+              <div><span>DESTINATION</span><b>HOLDING SECTOR</b></div>
+              <div><span>EXPORT</span><b>COMPLETED</b></div>
+              <div><span>SECONDARY COPY</span><b>EXTERNAL DEVICE</b></div>
+              <div class="arg5-map__device"><span>DEVICE ID</span><b>ORV-04</b></div>
+            </div>
+
+            <div class="arg5-map__identity">
+              <div>SECURITY IDENTITY CHECK</div>
+              <div>REQUEST ACCOUNT: <b>AQ-S17-441</b></div>
+              <div>REGISTERED USER: <b>ADRIAN LAMO</b></div>
+              <div>ROUTE OWNER: <b>[NULL]</b></div>
+            </div>
+          </div>
+
+          <button id="arg5-result-close" class="arg5-result__close" type="button">RETURN TO AKWAOS</button>
+        </section>
+      </section>
+
       <button id="mail-notification" class="mail-notification is-hidden" type="button" aria-live="polite">
         <span class="mail-notification__icon">✉</span>
         <span class="mail-notification__body">
@@ -525,6 +738,6 @@
     </main>
   </div>
 
-  <script src="./assets/app-arg-22.js"></script>
+  <script src="./assets/app-arg-24.js"></script>
 </body>
 </html>
