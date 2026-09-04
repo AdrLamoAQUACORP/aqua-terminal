@@ -3206,3 +3206,204 @@ body[data-arg-stage="complete"] .arg-clue-stage3 {
   0%, 100% { filter: brightness(1); }
   50% { filter: brightness(1.24); }
 }
+
+
+/* =========================================================
+   A.LAMO MAIL + NEW MESSAGE NOTIFICATION / UPDATE 21
+   ========================================================= */
+
+.mail-notification {
+  position: fixed;
+  right: 18px;
+  bottom: 54px;
+  z-index: 9950;
+  width: min(360px, calc(100vw - 36px));
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #e4bd70;
+  border-left: 4px solid #f4cf65;
+  background: #070a08;
+  color: #edf7f1;
+  padding: 12px 13px;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  box-shadow:
+    0 0 0 1px rgba(228,189,112,.14),
+    8px 8px 0 rgba(0,0,0,.35),
+    0 0 24px rgba(244,207,101,.08);
+}
+
+.mail-notification__icon {
+  color: #f4cf65;
+  font-size: 22px;
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(244,207,101,.24);
+}
+
+.mail-notification__body {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.mail-notification__body b {
+  color: #ffe799;
+  font-size: 12px;
+  letter-spacing: .08em;
+}
+
+.mail-notification__body small {
+  color: #c9d5ce;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mail-notification__open {
+  color: #91e37d;
+  font-size: 10px;
+  letter-spacing: .08em;
+}
+
+.mail-notification--show {
+  animation:
+    mailNotifyIn .34s steps(3,end) both,
+    mailNotifyGlitch 1.8s steps(2,end) infinite .5s;
+}
+
+.mail-notification--hide {
+  animation: mailNotifyOut .32s ease both !important;
+}
+
+@keyframes mailNotifyIn {
+  0% { opacity: 0; transform: translateX(28px); }
+  60% { opacity: 1; transform: translateX(-3px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes mailNotifyOut {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(28px); }
+}
+
+@keyframes mailNotifyGlitch {
+  0%, 79%, 100% { transform: translate(0,0); }
+  82% { transform: translate(2px,0); }
+  85% { transform: translate(-2px,1px); }
+  88% { transform: translate(1px,-1px); }
+}
+
+.mail-row--adrian {
+  border-color: rgba(228,189,112,.26);
+  background: linear-gradient(90deg, rgba(228,189,112,.07), transparent 72%);
+}
+
+.mail-row--adrian b {
+  color: #e4bd70;
+}
+
+.mail-row--adrian .mail-row__flag {
+  color: #f4cf65;
+  text-shadow: 0 0 9px rgba(244,207,101,.34);
+}
+
+.mail-row--adrian-linked {
+  border-color: rgba(145,227,125,.26);
+  background: linear-gradient(90deg, rgba(145,227,125,.055), transparent 72%);
+}
+
+body.adrian-mail-unread [data-open="mail"] {
+  animation:
+    adrianMailIconGlitch 1.55s steps(2,end) infinite,
+    adrianMailIconGlow 2.2s ease-in-out infinite;
+}
+
+@keyframes adrianMailIconGlitch {
+  0%,68%,100% { transform: translate(0,0); }
+  71% { transform: translate(2px,0); }
+  74% { transform: translate(-2px,1px); }
+  77% { transform: translate(1px,-1px); }
+}
+
+@keyframes adrianMailIconGlow {
+  0%,100% { filter: brightness(1); }
+  50% { filter: brightness(1.28); }
+}
+
+.adrian-mail-broken {
+  color: #ff9a90;
+  text-shadow: 2px 0 rgba(120,184,232,.34), -2px 0 rgba(238,129,118,.42);
+  animation: adrianMailBroken 1.55s steps(2,end) infinite;
+}
+
+@keyframes adrianMailBroken {
+  0%,65%,100% { transform: translate(0,0); opacity: 1; }
+  68% { transform: translate(2px,0); opacity: .38; }
+  72% { transform: translate(-2px,1px); opacity: .88; }
+  76% { transform: translate(1px,-1px); opacity: .56; }
+}
+
+.adrian-mail-fragment {
+  display: inline-block;
+}
+
+body.adrian-mail-awaiting-file .adrian-mail-fragment {
+  color: #ffe79a !important;
+  font-weight: 900;
+  letter-spacing: .08em;
+  padding: 1px 5px;
+  border-left: 2px solid rgba(244,207,101,.88);
+  background: rgba(244,207,101,.095);
+  text-shadow:
+    2px 0 rgba(238,129,118,.48),
+    -2px 0 rgba(120,184,232,.40),
+    0 0 10px rgba(244,207,101,.22);
+  animation: adrianMailFragmentGlitch 1.35s steps(2,end) infinite;
+}
+
+@keyframes adrianMailFragmentGlitch {
+  0%,49%,59%,100% { transform: translate(0,0); opacity: 1; }
+  51% { transform: translate(3px,0); opacity: .36; }
+  54% { transform: translate(-2px,1px); opacity: .90; }
+  57% { transform: translate(1px,-1px); opacity: .58; }
+}
+
+.adrian-mail-linked-status,
+.adrian-mail-next-hint {
+  color: #91e37d;
+  font-weight: 800;
+}
+
+body.adrian-mail-linked [data-open="trash"] {
+  animation: recycleArg4Tease 3.4s steps(2,end) infinite;
+}
+
+@keyframes recycleArg4Tease {
+  0%,82%,100% { transform: translate(0,0); filter: none; }
+  85% { transform: translate(1px,0); filter: brightness(1.2); }
+  88% { transform: translate(-1px,1px); }
+  91% { transform: translate(0,0); filter: brightness(1.08); }
+}
+
+.file-row--mail-relay {
+  border-color: rgba(228,189,112,.28);
+  background: rgba(228,189,112,.04);
+}
+
+
+/* ===== A.LAMO FIRST INTRODUCTION / UPDATE 22 ===== */
+
+.adrian-mail-greeting {
+  color: #f4cf65;
+  font-weight: 800;
+  letter-spacing: .025em;
+}
+
+.adrian-mail-greeting--owner {
+  color: #fff0a8;
+  font-size: 1.06em;
+  text-shadow: 0 0 10px rgba(244,207,101,.16);
+}

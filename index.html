@@ -321,7 +321,7 @@
           <span>LOCAL CACHE</span>
           <span id="mail-count">3 MESSAGES</span>
         </div>
-        <div class="os-window__content mail-list">
+        <div id="mail-list" class="os-window__content mail-list">
           <button class="mail-row" data-file="mail_shift">
             <span class="mail-row__flag">●</span>
             <span><b>SECURITY DESK</b><small>Пересменка / сектор C</small></span>
@@ -502,6 +502,15 @@
         </div>
       </section>
 
+      <button id="mail-notification" class="mail-notification is-hidden" type="button" aria-live="polite">
+        <span class="mail-notification__icon">✉</span>
+        <span class="mail-notification__body">
+          <b id="mail-notification-title">НОВОЕ СООБЩЕНИЕ</b>
+          <small id="mail-notification-text">FROM: A.LAMO</small>
+        </span>
+        <span class="mail-notification__open">OPEN</span>
+      </button>
+
       <div id="system-toast" class="system-toast is-hidden" role="status"></div>
 
       <footer class="taskbar">
@@ -516,6 +525,6 @@
     </main>
   </div>
 
-  <script src="./assets/app-arg-19.js"></script>
+  <script src="./assets/app-arg-22.js"></script>
 </body>
 </html>
