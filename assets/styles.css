@@ -6102,3 +6102,129 @@ body.arg7-crt-black .arg7-shutdown-overlay {
     font-size: 22px;
   }
 }
+
+
+/* =========================================================
+   ARG7 FINALE POLISH / UPDATE 39
+   ========================================================= */
+
+.arg7-composer--cinematic #arg7-compose-text {
+  display: none !important;
+}
+
+.arg7-cinematic-compose-body {
+  width: 100%;
+  min-height: 300px;
+  box-sizing: border-box;
+  padding: 18px 20px;
+  border: 0;
+  background:
+    linear-gradient(180deg, rgba(3,8,5,.98), rgba(1,4,2,.99));
+  color: #e5f0e9;
+  font-size: clamp(15px, 1.45vw, 19px);
+  line-height: 1.72;
+  letter-spacing: .015em;
+  white-space: pre-wrap;
+  overflow-y: auto;
+}
+
+.arg7-cinematic-compose-body p {
+  margin: 0 0 18px;
+}
+
+.arg7-cinematic-signature {
+  margin-top: 24px !important;
+  padding-top: 14px;
+  border-top: 1px solid rgba(244,207,101,.15);
+  color: #cfdcd4;
+}
+
+.arg7-flyn-name {
+  display: inline-block;
+  min-width: 10ch;
+  color: #f4cf65;
+  font-weight: 900;
+  letter-spacing: .045em;
+  text-shadow:
+    1px 0 rgba(238,129,118,.24),
+    -1px 0 rgba(120,184,232,.26);
+}
+
+.arg7-flyn-name.is-typing {
+  animation: arg7FlynTypingLag .58s steps(2,end) infinite;
+}
+
+.arg7-flyn-name.is-complete {
+  animation: arg7FlynAfterLag 2.4s steps(2,end) infinite;
+}
+
+.arg7-flyn-char {
+  display: inline-block;
+  min-width: .25em;
+}
+
+.arg7-flyn-char.is-glitching {
+  color: #ee8176;
+  opacity: .7;
+  transform: translateY(-1px);
+  filter: blur(.35px);
+}
+
+.arg7-flyn-char.is-set {
+  animation: arg7FlynCharSet .38s steps(2,end) both;
+}
+
+@keyframes arg7FlynCharSet {
+  0% {
+    opacity: .25;
+    transform: translateX(2px);
+    color: #ee8176;
+  }
+  45% {
+    opacity: .7;
+    transform: translateX(-1px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    color: #f4cf65;
+  }
+}
+
+@keyframes arg7FlynTypingLag {
+  0%, 68%, 100% {
+    transform: translate(0,0);
+    filter: none;
+  }
+  73% {
+    transform: translate(1px,0);
+    filter: brightness(1.24);
+  }
+  78% {
+    transform: translate(-1px,1px);
+    filter: blur(.25px);
+  }
+}
+
+@keyframes arg7FlynAfterLag {
+  0%, 87%, 100% {
+    transform: translate(0,0);
+    opacity: 1;
+  }
+  90% {
+    transform: translate(1px,0);
+    opacity: .72;
+  }
+  93% {
+    transform: translate(-1px,0);
+    opacity: .9;
+  }
+}
+
+@media(max-width:700px) {
+  .arg7-cinematic-compose-body {
+    min-height: 280px;
+    font-size: 15px;
+    padding: 16px;
+  }
+}
