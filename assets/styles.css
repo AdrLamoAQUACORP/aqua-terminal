@@ -930,7 +930,7 @@ button {
 }
 
 
-/* ===== AKWAOS V2 MODULES ===== */
+
 
 .security-summary {
   display: grid;
@@ -1209,7 +1209,7 @@ button {
 }
 
 
-/* ===== AKWAOS V3 VISUAL RETRO TUNE ===== */
+
 
 .desktop-icon span {
   display: block;
@@ -1267,9 +1267,9 @@ button {
 }
 
 
-/* ===== AKWAOS V4B — READABILITY ONLY ===== */
 
-/* Keep V3 window/icon appearance intact. Only improve text readability. */
+
+
 html,
 body {
   font-size: 15px;
@@ -1418,12 +1418,12 @@ body {
   font-weight: 700;
 }
 
-/* Restore a clean V3-style desktop. No photo/illustration. */
+
 .desktop::after {
   display: none !important;
 }
 
-/* Replace the old subtle AKWA watermark with a clearer AKWA OS mark. */
+
 .desktop__watermark {
   opacity: 0.105;
   z-index: 1;
@@ -1470,10 +1470,7 @@ body {
 }
 
 
-/* ==========================================================
-   AKWAOS — ALTERNATE THEME B
-   Original dark-green palette + differentiated window accents
-   ========================================================== */
+
 
 :root {
   --bg: #050a09;
@@ -1494,7 +1491,7 @@ body {
   --shadow: 0 18px 70px rgba(0, 0, 0, 0.55);
 }
 
-/* Restore original dark AKWA environment */
+
 html,
 body {
   background: #020504;
@@ -1543,7 +1540,7 @@ body {
   border-color: var(--accent);
 }
 
-/* Desktop */
+
 .desktop {
   background:
     radial-gradient(circle at 64% 32%, rgba(26, 115, 91, .13), transparent 27%),
@@ -1567,7 +1564,7 @@ body {
   color: rgba(155, 221, 200, .68);
 }
 
-/* Icons return to dark transparent desktop style */
+
 .desktop-icon {
   width: 102px;
   min-height: 94px;
@@ -1589,8 +1586,7 @@ body {
   filter: none;
 }
 
-/* Original SVGs may be dark from V3. Make them readable on dark background
-   without altering the actual icon files. */
+
 .desktop-icon img {
   filter:
     brightness(0)
@@ -1608,7 +1604,7 @@ body {
   background: transparent;
 }
 
-/* Status panel */
+
 .desktop-status {
   border: 1px solid var(--line);
   background: rgba(3, 11, 9, .68);
@@ -1617,7 +1613,7 @@ body {
   backdrop-filter: blur(4px);
 }
 
-/* Taskbar */
+
 .taskbar {
   border-top: 1px solid var(--line-strong);
   background: rgba(3, 10, 9, .95);
@@ -1639,7 +1635,7 @@ body {
   background: rgba(127,255,212,.04);
 }
 
-/* Base window style */
+
 .os-window {
   border: 1px solid var(--window-accent, var(--line-strong));
   background: rgba(5, 14, 12, .965);
@@ -1649,7 +1645,7 @@ body {
   color: var(--text);
 }
 
-/* Fallback for browsers without color-mix */
+
 @supports not (color: color-mix(in srgb, black, white)) {
   .os-window {
     box-shadow: 10px 16px 45px rgba(0,0,0,.55);
@@ -1695,62 +1691,60 @@ body {
   box-shadow: 0 0 8px var(--window-accent, var(--accent));
 }
 
-/* ----------------------------------------------------------
-   DIFFERENTIATED WINDOW ACCENTS
-   ---------------------------------------------------------- */
 
-/* Archive: cyan */
+
+
 [data-window="files"],
 [data-window="viewer"] {
   --window-accent: #7fffd4;
 }
 
-/* Terminal: bright green */
+
 [data-window="terminal"] {
   --window-accent: #91e37d;
 }
 
-/* Personnel: amber */
+
 [data-window="personnel"] {
   --window-accent: #e4bd70;
 }
 
-/* Research: muted violet */
+
 [data-window="research"] {
   --window-accent: #b49ae8;
 }
 
-/* Security: restrained red / coral */
+
 [data-window="security"] {
   --window-accent: #ee8176;
 }
 
-/* Mail: cold blue */
+
 [data-window="mail"] {
   --window-accent: #78b8e8;
 }
 
-/* System: steel */
+
 [data-window="system"] {
   --window-accent: #a6bac6;
 }
 
-/* Network: teal */
+
 [data-window="network"] {
   --window-accent: #62d6cf;
 }
 
-/* Game: orange */
+
 [data-window="game"] {
   --window-accent: #e7a76b;
 }
 
-/* Deleted: desaturated grey */
+
 [data-window="trash"] {
   --window-accent: #8e9895;
 }
 
-/* Content areas stay dark; accents only guide the eye */
+
 .os-window__content {
   color: var(--text);
 }
@@ -1778,7 +1772,7 @@ body {
   color: var(--text-dim);
 }
 
-/* Terminal remains recognizably dark even among other windows */
+
 .terminal-body {
   background:
     linear-gradient(rgba(0,0,0,.15), rgba(0,0,0,.15)),
@@ -1803,7 +1797,7 @@ body {
   color: var(--amber);
 }
 
-/* Cards / panels: preserve green base with subtle local accents */
+
 .research-grid article,
 .security-summary article,
 .calibration__score,
@@ -1814,7 +1808,7 @@ body {
   border: 1px solid rgba(127,255,212,.16);
 }
 
-/* Window-specific secondary highlights */
+
 [data-window="research"] .research-code {
   color: var(--violet);
 }
@@ -1841,7 +1835,7 @@ body {
   box-shadow: 0 0 10px rgba(231,167,107,.52);
 }
 
-/* Small controls */
+
 .mini-button {
   color: var(--text);
   border: 1px solid var(--line-strong);
@@ -1853,7 +1847,7 @@ body {
   background: rgba(127,255,212,.12);
 }
 
-/* Toasts */
+
 .system-toast {
   color: var(--text);
   border: 1px solid var(--line-strong);
@@ -1861,8 +1855,7 @@ body {
   box-shadow: var(--shadow);
 }
 
-/* Accent taskbar entries based on open app text isn't dependable,
-   so keep taskbar calm and let window headers carry the color distinction. */
+
 
 @media (max-width: 720px) {
   .desktop-icon {
@@ -1872,7 +1865,7 @@ body {
 }
 
 
-/* ===== PERSONNEL UPDATE 03 ===== */
+
 
 .file-row--glitch {
   position: relative;
@@ -1973,7 +1966,7 @@ body {
 
 
 
-/* ===== MAY WONDERS NO / PERSONNEL UPDATE 04 ===== */
+
 
 .file-row--may {
   position: relative;
@@ -2057,7 +2050,7 @@ body {
 }
 
 
-/* ===== ARG COMMAND FRAGMENTS / UPDATE 05 ===== */
+
 
 .arg-document {
   white-space: normal;
@@ -2136,7 +2129,7 @@ body {
 }
 
 
-/* ===== ARG STAGE 2 / UPDATE 06 ===== */
+
 
 .arg-fragment-glitch--stage2 {
   color: #fff0c6;
@@ -2184,7 +2177,7 @@ body {
 }
 
 
-/* ===== SELF-CONTAINED ARG HELP / UPDATE 07 ===== */
+
 
 .arg-reference {
   color: var(--text-dim);
@@ -2199,7 +2192,7 @@ body {
 }
 
 
-/* ===== OPEN GLITCH FIX / UPDATE 08 ===== */
+
 
 .arg-fragment-glitch--open {
   color: #f5ffe9;
@@ -2235,9 +2228,9 @@ body {
 }
 
 
-/* ===== ARG STAGE-AWARE HIGHLIGHTING / UPDATE 11 ===== */
 
-/* Все ARG-фрагменты по умолчанию выглядят как обычный текст. */
+
+
 .arg-clue-stage1,
 .arg-clue-stage2 {
   animation: none !important;
@@ -2258,7 +2251,7 @@ body {
   opacity: 0 !important;
 }
 
-/* ЭТАП 1: глючат только OPEN / A17 / PREVIOUS_SESSION / .LOG */
+
 body.arg-stage-1 .arg-clue-stage1 {
   position: relative;
   display: inline-block;
@@ -2275,7 +2268,7 @@ body.arg-stage-1 .arg-clue-stage1 {
     argFragmentBlink 4.4s steps(1,end) infinite !important;
 }
 
-/* OPEN остаётся чуть заметнее остальных подсказок первого этапа. */
+
 body.arg-stage-1 .arg-clue-stage1.arg-fragment-glitch--open {
   color: #f5ffe9 !important;
   background: rgba(145,227,125,.055) !important;
@@ -2294,7 +2287,7 @@ body.arg-stage-1 .arg-clue-stage1::after {
   animation: argFragmentGhostB 2.7s steps(2,end) infinite !important;
 }
 
-/* ЭТАП 2: первый набор погас, глючат только BIO / ID / .CHK */
+
 body.arg-stage-2 .arg-clue-stage2 {
   position: relative;
   display: inline-block;
@@ -2319,7 +2312,7 @@ body.arg-stage-2 .arg-clue-stage2::after {
   animation: argFragmentGhostB 2.0s steps(2,end) infinite !important;
 }
 
-/* После решения второго ARG никакие командные фрагменты больше не глючат. */
+
 body.arg-stage-complete .arg-clue-stage1,
 body.arg-stage-complete .arg-clue-stage2 {
   animation: none !important;
@@ -2328,9 +2321,7 @@ body.arg-stage-complete .arg-clue-stage2 {
 }
 
 
-/* =========================================================
-   ARG 3 / IXION REQUEST + DEFENSE SEQUENCE / UPDATE 12
-   ========================================================= */
+
 
 .arg3-only,
 .arg3-recovered-only {
@@ -2346,7 +2337,7 @@ body.arg-stage-complete .arg3-recovered-only {
   display: block;
 }
 
-/* Stage 3 clues are normal unless Stage 3 is active */
+
 .arg-clue-stage3 {
   animation: none !important;
   transform: none !important;
@@ -2398,7 +2389,7 @@ body.arg-stage-3 .arg-clue-stage3 {
   background: rgba(228,189,112,.035);
 }
 
-/* Pre-alarm chaos */
+
 body.arg3-prealarm #desktop {
   animation: arg3DesktopBreak .13s steps(2,end) infinite;
 }
@@ -2462,7 +2453,7 @@ body.arg3-prealarm #desktop {
   66% { transform: translate(-1px,1px); }
 }
 
-/* Full-screen purge challenge */
+
 .arg3-defense {
   position: fixed;
   inset: 0;
@@ -2676,7 +2667,7 @@ body.arg3-defense-failed .arg3-defense {
 }
 
 
-/* ===== ADRIAN RECOVERY NOTE / UPDATE 13 ===== */
+
 
 .arg3-adrian-hint {
   margin-top: 14px;
@@ -2721,11 +2712,9 @@ body.arg3-defense-failed .arg3-defense {
 }
 
 
-/* =========================================================
-   ARG 3 HACKING MINIGAME / UPDATE 14
-   ========================================================= */
 
-/* Error windows appear as a centered cascade instead of scattered popups. */
+
+
 .arg3-error-layer--active {
   display: block;
 }
@@ -2807,7 +2796,7 @@ body.arg3-prealarm-account::after {
   88% { transform: translate(0,0); }
 }
 
-/* Adrian's message is explicitly yellow and appears as a recovered hack note. */
+
 .arg3-adrian-hint {
   opacity: 0;
   transform: translateY(8px);
@@ -2832,7 +2821,7 @@ body.arg3-prealarm-account::after {
   text-shadow: 1px 0 rgba(244,207,101,.12);
 }
 
-/* During the pre-alarm, flash a yellow Adrian note before the game screen. */
+
 body.arg3-prealarm-adrian #arg3-error-layer::after {
   content: "⚠ ПОДСКАЗКА ОТ ADRIAN LAMO // Я выведу команды прямо на экран. Переписывай их в поле ниже как можно быстрее. Каждая правильная команда откатывает удаление данных назад.";
   position: fixed;
@@ -2859,7 +2848,7 @@ body.arg3-prealarm-adrian #arg3-error-layer::after {
   to { opacity: 1; transform: translate(-50%, 0); }
 }
 
-/* More "hacking game" atmosphere in the command area. */
+
 .arg3-command-box {
   position: relative;
   overflow: hidden;
@@ -2883,9 +2872,7 @@ body.arg3-prealarm-adrian #arg3-error-layer::after {
 }
 
 
-/* =========================================================
-   ARG 3 DYNAMIC PURGE + CINEMATIC TRANSITION / UPDATE 15
-   ========================================================= */
+
 
 body.arg3-prealarm-transition #arg3-error-layer {
   animation: arg3ErrorLayerCollapse .72s steps(3,end) forwards;
@@ -2927,7 +2914,7 @@ body.arg3-prealarm-transition #desktop {
   }
 }
 
-/* DATA PURGE reacts continuously; player must drive it all the way to 0. */
+
 .arg3-purge__fill {
   transition: height .18s linear, filter .18s ease;
 }
@@ -2945,16 +2932,14 @@ body.arg3-prealarm-transition #desktop {
   pointer-events: none;
 }
 
-/* Slight emphasis that commands are not a fixed sequence. */
+
 .arg3-command-box__instruction::after {
   content: " // COMMAND STREAM ACTIVE";
   color: rgba(244,207,101,.62);
 }
 
 
-/* =========================================================
-   ARG3 HINT VISIBILITY + LOWER MUSIC / UPDATE 17
-   ========================================================= */
+
 
 .arg3-adrian-hint {
   margin-top: 18px !important;
@@ -3006,7 +2991,7 @@ body.arg3-prealarm-transition #desktop {
   }
 }
 
-/* Предварительная подсказка перед мини-игрой тоже заметнее */
+
 body.arg3-prealarm-adrian #arg3-error-layer::after {
   border: 2px solid #f4cf65 !important;
   border-left-width: 6px !important;
@@ -3021,11 +3006,9 @@ body.arg3-prealarm-adrian #arg3-error-layer::after {
 }
 
 
-/* =========================================================
-   ARG3 COPY PROTECTION / UPDATE 18
-   ========================================================= */
 
-/* Во время ARG3 служебный текст нельзя выделить мышью. */
+
+
 body.arg-stage-3 .ixion-personnel-record,
 body.arg-stage-3-ready .ixion-personnel-record,
 body.arg3-prealarm .arg3-error-layer,
@@ -3035,14 +3018,14 @@ body.arg3-defense-active .arg3-defense {
   -webkit-touch-callout: none !important;
 }
 
-/* Поле ввода остаётся полностью рабочим для набора команд. */
+
 body.arg3-defense-active #arg3-defense-input {
   -webkit-user-select: text !important;
   user-select: text !important;
   -webkit-touch-callout: default !important;
 }
 
-/* Визуальный курсор у невыделяемого текста не намекает на возможность копирования. */
+
 body.arg3-defense-active .arg3-command-box__prompt,
 body.arg3-defense-active .arg3-adrian-hint,
 body.arg3-prealarm .arg3-error-window,
@@ -3052,11 +3035,9 @@ body.arg-stage-3-ready .arg3-recovered-only {
 }
 
 
-/* =========================================================
-   ARG STAGED HIGHLIGHT — HARD RESTORE / UPDATE 19
-   ========================================================= */
 
-/* По умолчанию все подсказки выглядят как обычный текст. */
+
+
 body .arg-clue-stage1,
 body .arg-clue-stage2,
 body .arg-clue-stage3 {
@@ -3086,7 +3067,7 @@ body .arg-clue-stage3::after {
   animation: none !important;
 }
 
-/* ARG 1 — OPEN / A17 / PREVIOUS_SESSION / .LOG */
+
 body[data-arg-stage="1"] .arg-clue-stage1 {
   color: #d9fff0 !important;
   font-weight: 800 !important;
@@ -3115,7 +3096,7 @@ body[data-arg-stage="1"] .arg-clue-stage1.arg-fragment-glitch--open {
     akwaArgGlow 2.1s ease-in-out infinite !important;
 }
 
-/* ARG 2 — BIO / AQ-S17-441 / .CHK */
+
 body[data-arg-stage="2"] .arg-clue-stage2 {
   color: #fff0b8 !important;
   font-weight: 800 !important;
@@ -3135,7 +3116,7 @@ body[data-arg-stage="2"] .arg-clue-stage2 {
     akwaArgGlow 2.45s ease-in-out infinite !important;
 }
 
-/* ARG 3 — ECHO / SDE / IXION.REQ */
+
 body[data-arg-stage="3"] .arg-clue-stage3 {
   color: #ffe59b !important;
   font-weight: 900 !important;
@@ -3155,7 +3136,7 @@ body[data-arg-stage="3"] .arg-clue-stage3 {
     akwaArgGlow 2.15s ease-in-out infinite !important;
 }
 
-/* После решения текущего этапа прежние подсказки гарантированно гаснут. */
+
 body[data-arg-stage="2"] .arg-clue-stage1,
 body[data-arg-stage="3"] .arg-clue-stage1,
 body[data-arg-stage="3"] .arg-clue-stage2,
@@ -3173,7 +3154,7 @@ body[data-arg-stage="complete"] .arg-clue-stage3 {
   color: inherit !important;
 }
 
-/* Нерегулярный системный glitch */
+
 @keyframes akwaArgStage1Glitch {
   0%, 61%, 68%, 100% { transform: translate(0,0); opacity: 1; }
   62% { transform: translate(2px,0); opacity: .48; }
@@ -3208,9 +3189,7 @@ body[data-arg-stage="complete"] .arg-clue-stage3 {
 }
 
 
-/* =========================================================
-   A.LAMO MAIL + NEW MESSAGE NOTIFICATION / UPDATE 21
-   ========================================================= */
+
 
 .mail-notification {
   position: fixed;
@@ -3394,7 +3373,7 @@ body.adrian-mail-linked [data-open="trash"] {
 }
 
 
-/* ===== A.LAMO FIRST INTRODUCTION / UPDATE 22 ===== */
+
 
 .adrian-mail-greeting {
   color: #f4cf65;
@@ -3409,9 +3388,7 @@ body.adrian-mail-linked [data-open="trash"] {
 }
 
 
-/* =========================================================
-   ARG4 / RECYCLE SHADOW INDEX / UPDATE 23
-   ========================================================= */
+
 
 body.arg4-recycle-ready [data-open="trash"] {
   animation:
@@ -3552,9 +3529,7 @@ body.arg4-sec-c-ready [data-open="security"] {
 }
 
 
-/* =========================================================
-   ARG5 / SECURITY ROUTING MATRIX / UPDATE 24
-   ========================================================= */
+
 
 body.arg5-ready [data-open="security"] {
   animation:
@@ -4165,9 +4140,7 @@ body.arg5-failed .arg5-routing {
 }
 
 
-/* =========================================================
-   ARG6 / ISAAC AZIM / ORV-04 SERVICE SESSION / UPDATE 25
-   ========================================================= */
+
 
 .arg6-orv-entry {
   width: 100%;
@@ -4625,9 +4598,7 @@ body.arg6-failed .arg6-orv {
 }
 
 
-/* =========================================================
-   ARG6 / A.LAMO PRIVATE LINK & SECURITY INTERCEPT / UPDATE 27
-   ========================================================= */
+
 
 .arg6-isaac-entry {
   width: 100%;
@@ -5070,9 +5041,7 @@ body.arg6-defense-failed .arg6-adrian-defense {
 }
 
 
-/* =========================================================
-   ARG6 AIM GAME / SECURITY HOLES / UPDATE 29
-   ========================================================= */
+
 
 .arg6-aim-defense {
   background:
@@ -5442,9 +5411,7 @@ body.arg6-defense-failed .arg6-aim-defense {
 }
 
 
-/* =========================================================
-   ARG7 / MAIL EPILOGUE / UPDATE 30
-   ========================================================= */
+
 
 .arg7-mail-toolbar {
   display:flex;
@@ -5709,9 +5676,7 @@ body.arg6-defense-failed .arg6-aim-defense {
 }
 
 
-/* =========================================================
-   ISAAC EASTER EGG + GLOBAL MAIL NOTIFICATION / UPDATE 34
-   ========================================================= */
+
 
 .arg6-easter-button {
   width: 100%;
@@ -5776,7 +5741,7 @@ body.arg6-defense-failed .arg6-aim-defense {
   color: #ffe799 !important;
 }
 
-/* Force incoming mail above every desktop window and ARG overlay. */
+
 body > .mail-notification,
 .mail-notification {
   position: fixed !important;
@@ -5843,9 +5808,7 @@ body > .mail-notification .mail-notification__open {
 }
 
 
-/* =========================================================
-   ARG7 CINEMATIC FINALE / UPDATE 37
-   ========================================================= */
+
 
 .arg7-cinematic-overlay {
   position: fixed;
@@ -6104,9 +6067,7 @@ body.arg7-crt-black .arg7-shutdown-overlay {
 }
 
 
-/* =========================================================
-   ARG7 FINALE POLISH / UPDATE 39
-   ========================================================= */
+
 
 .arg7-composer--cinematic #arg7-compose-text {
   display: none !important;
