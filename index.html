@@ -319,7 +319,10 @@
         </header>
         <div class="os-window__toolbar">
           <span>LOCAL CACHE</span>
-          <span id="mail-count">3 MESSAGES</span>
+          <div class="arg7-mail-toolbar">
+            <span id="mail-count">3 MESSAGES</span>
+            <button id="arg7-compose-button" class="arg7-compose-button is-hidden" type="button">ОТПРАВИТЬ СООБЩЕНИЕ</button>
+          </div>
         </div>
         <div id="mail-list" class="os-window__content mail-list">
           <button class="mail-row" data-file="mail_shift">
@@ -337,6 +340,32 @@
             <span><b>SYSTEM SERVICE</b><small>Проверка профиля AQ-S17-441</small></span>
             <time>03:09</time>
           </button>
+        </div>
+      </section>
+
+      <section id="arg7-composer" class="arg7-composer is-hidden">
+        <div class="arg7-composer__window">
+          <header>
+            <div>
+              <span>AKWA INTERNAL MAIL</span>
+              <b>NEW MESSAGE</b>
+            </div>
+            <button id="arg7-compose-close" type="button">×</button>
+          </header>
+
+          <div class="arg7-composer__meta">
+            <label>TO:</label>
+            <strong>A.LAMO</strong>
+            <label>ROUTE:</label>
+            <span>LOCAL RELAY</span>
+          </div>
+
+          <textarea id="arg7-compose-text" maxlength="800" placeholder="Введите сообщение..."></textarea>
+
+          <div class="arg7-composer__footer">
+            <span id="arg7-compose-status">READY</span>
+            <button id="arg7-compose-send" type="button">SEND</button>
+          </div>
         </div>
       </section>
 
@@ -979,6 +1008,6 @@
     </main>
   </div>
 
-  <script src="./assets/app-arg-29.js"></script>
+  <script src="./assets/app-arg-30.js"></script>
 </body>
 </html>
