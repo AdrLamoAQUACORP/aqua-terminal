@@ -878,91 +878,76 @@
           <div class="arg6-blackout__cursor">_</div>
         </div>
 
-        <section id="arg6-adrian-defense" class="arg6-adrian-defense is-hidden">
-          <header class="arg6-adrian-defense__header">
+        <section id="arg6-adrian-defense" class="arg6-adrian-defense arg6-aim-defense is-hidden">
+          <header class="arg6-aim-header">
             <div>
               <span>AKWAOS SECURITY WATCHDOG</span>
               <h2>SUSPICIOUS ACTIVITY DETECTED</h2>
             </div>
-            <div id="arg6-adrian-countdown" class="arg6-adrian-countdown">01:00</div>
+
+            <div class="arg6-aim-stats">
+              <div><span>TIME</span><b id="arg6-aim-time">00:45</b></div>
+              <div><span>REAL HOLES</span><b id="arg6-aim-score">0 / 24</b></div>
+              <div><span>ERRORS</span><b id="arg6-aim-errors">0 / 5</b></div>
+            </div>
           </header>
 
-          <div class="arg6-adrian-defense__layout">
-            <aside class="arg6-adrian-defense__controls">
+          <section class="arg6-aim-hint">
+            <div class="arg6-aim-hint__speaker">A.LAMO // LIVE RELAY</div>
+            <div id="arg6-aim-hint-text" class="arg6-aim-hint__text">
+              ЖМИ ТОЛЬКО НА НАСТОЯЩИЕ ДЫРЫ — У НИХ ДВА КОЛЬЦА.
+              ОДИНАРНОЕ КОЛЬЦО — ЛОВУШКА WATCHDOG.
+            </div>
+            <div class="arg6-aim-hint__sub">
+              Настоящая дыра закроется сама, если не успеть. Не кликай по ловушкам.
+            </div>
+          </section>
+
+          <main class="arg6-aim-layout">
+            <aside class="arg6-aim-side">
               <div class="arg6-defense-card">
                 <span>ACCOUNT</span>
                 <b>AQ-S17-441</b>
                 <small>SECURITY FLAG: ACTIVE</small>
               </div>
 
-              <div class="arg6-defense-meter">
-                <div><span>SECURITY LOCK</span><b id="arg6-security-lock-value">28%</b></div>
-                <div class="arg6-defense-meter__track arg6-defense-meter__track--danger">
-                  <i id="arg6-security-lock-fill"></i>
+              <div class="arg6-aim-progress">
+                <span>LINK STABILITY</span>
+                <div><i id="arg6-aim-link-fill"></i></div>
+                <b id="arg6-aim-link-value">100%</b>
+              </div>
+
+              <div class="arg6-aim-legend">
+                <div>
+                  <span class="arg6-legend-hole arg6-legend-hole--real"></span>
+                  <p><b>REAL HOLE</b><small>двойное кольцо</small></p>
+                </div>
+                <div>
+                  <span class="arg6-legend-hole arg6-legend-hole--fake"></span>
+                  <p><b>WATCHDOG DECOY</b><small>одинарное кольцо</small></p>
                 </div>
               </div>
 
-              <div class="arg6-defense-meter">
-                <div><span>A.LAMO LINK</span><b id="arg6-adrian-link-value">72%</b></div>
-                <div class="arg6-defense-meter__track arg6-defense-meter__track--link">
-                  <i id="arg6-adrian-link-fill"></i>
-                </div>
-              </div>
-
-              <button id="arg6-mask-session" class="arg6-defense-action" type="button">MASK SESSION</button>
-              <button id="arg6-relay-session" class="arg6-defense-action" type="button">RELAY LINK</button>
-
-              <div id="arg6-action-cooldown" class="arg6-action-cooldown">ACTIONS READY</div>
-            </aside>
-
-            <main class="arg6-adrian-defense__routes">
-              <div class="arg6-routes-title">LIVE SECURITY ROUTES</div>
-
-              <div class="arg6-route-grid">
-                <button class="arg6-route-node is-safe" data-arg6-route="A17" type="button">
-                  <b>A17</b><small>LOCAL LOOP</small>
-                </button>
-                <button class="arg6-route-node" data-arg6-route="MAIL" type="button">
-                  <b>MAIL</b><small>RELAY</small>
-                </button>
-                <button class="arg6-route-node is-danger" data-arg6-route="WATCH" type="button">
-                  <b>WATCHDOG</b><small>TRACE</small>
-                </button>
-                <button class="arg6-route-node" data-arg6-route="ARCH" type="button">
-                  <b>ARCH-2</b><small>CACHE MASK</small>
-                </button>
-                <button class="arg6-route-node is-danger-soft" data-arg6-route="SEC" type="button">
-                  <b>SEC-C</b><small>HOT ROUTE</small>
-                </button>
-                <button class="arg6-route-node is-target" data-arg6-route="ALAMO" type="button">
-                  <b>A.LAMO</b><small>HIDDEN LINK</small>
-                </button>
-              </div>
-
-              <div id="arg6-route-status" class="arg6-route-status">KEEP A.LAMO LINK ALIVE</div>
-
-              <div class="arg6-sweep">
-                <span>WATCHDOG SWEEP</span>
-                <div><i id="arg6-sweep-marker"></i></div>
-              </div>
-            </main>
-
-            <aside class="arg6-adrian-defense__chat">
-              <div class="arg6-adrian-chat__head">A.LAMO // LIVE RELAY</div>
-              <div id="arg6-adrian-live-log" class="arg6-adrian-live-log">
-                <p>&gt; Они увидели переход.</p>
-                <p>&gt; Не закрывай окно.</p>
-                <p>&gt; Мне нужна минута.</p>
+              <div class="arg6-aim-stage">
+                <span>THREAT LEVEL</span>
+                <b id="arg6-aim-level">1</b>
+                <small id="arg6-aim-stage-text">SLOW / SINGLE TARGETS</small>
               </div>
             </aside>
-          </div>
+
+            <section id="arg6-aim-arena" class="arg6-aim-arena">
+              <div class="arg6-aim-arena__grid"></div>
+              <div class="arg6-aim-arena__label">A17 // SECURITY SURFACE</div>
+              <div id="arg6-aim-center-message" class="arg6-aim-center-message is-hidden"></div>
+            </section>
+          </main>
 
           <section id="arg6-defense-result" class="arg6-defense-result is-hidden">
             <div class="arg6-defense-result__title">LINK PRESERVED</div>
             <div class="arg6-defense-result__subtitle">A.LAMO SESSION REMAINS ACTIVE</div>
             <div class="arg6-defense-result__message">
               <p>&gt; Есть.</p>
-              <p>&gt; Я забрал копию.</p>
+              <p>&gt; Копия у меня.</p>
               <p>&gt; Дальше не открывай ничего сам.</p>
               <p>&gt; Я свяжусь с тобой.</p>
             </div>
@@ -994,6 +979,6 @@
     </main>
   </div>
 
-  <script src="./assets/app-arg-27.js"></script>
+  <script src="./assets/app-arg-29.js"></script>
 </body>
 </html>
